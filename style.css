@@ -1,37 +1,40 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   background: #000;
   color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  height: 100vh;
+  overflow: hidden;
 }
 
-/* Modal */
 .modal {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.95);
+  background: #000; /* убрали размытости */
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
+  padding: 20px;
+  box-sizing: border-box;
+  z-index: 1000;
 }
 
 .modal-content {
-  width: 90vw;
-  max-width: 350px;
+  width: 90%;
+  max-width: 360px;
   background: #111;
-  padding: 20px;
-  border-radius: 16px;
+  padding: 24px 28px;
+  border-radius: 18px;
   text-align: center;
-  box-sizing: border-box;
+  font-size: 16px;
+  color: #fff;
   border: 2px solid #0af;
-  box-shadow: 0 0 15px #0af;
+  box-shadow: 0 0 18px #0af;
 }
 
 .modal-content h2 {
-  margin-top: 0;
-  margin-bottom: 12px;
-  font-size: 18px;
+  font-size: 22px;
+  margin-bottom: 20px;
   color: #0af;
 }
 
@@ -39,26 +42,9 @@ body {
   width: 26px;
   height: 26px;
   vertical-align: middle;
-  margin: 0 4px;
-  filter: brightness(1.2);
+  margin: 0 6px;
 }
 
-/* App Interface */
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background: #111;
-  display: flex;
-  justify-content: space-around;
-  padding: 10px 0;
-  border-top: 1px solid #333;
+.hidden {
+  display: none;
 }
-
-.bottom-nav button {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 14px;
-}
-
