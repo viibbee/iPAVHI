@@ -7,29 +7,41 @@ body {
   overflow: hidden;
 }
 
-/* Специальный фон и стиль кнопок в standalone режиме */
-body.standalone {
-  background: linear-gradient(135deg, #0af, #001);
-}
-
-/* Спец-дизайн кнопок */
-body.standalone .nav-btn {
-  background: #0af;
+/* Light theme */
+body.light {
+  background: #fff;
   color: #000;
-  border-radius: 12px;
-  margin: 0 4px;
-  font-size: 15px;
-  font-weight: 600;
-  box-shadow: 0 4px 10px rgba(0, 170, 255, 0.3);
-  transition: transform 0.2s ease;
+}
+body.light .bottom-nav {
+  background: rgba(255, 255, 255, 0.8);
+  color: #000;
 }
 
-body.standalone .nav-btn:hover {
-  transform: scale(1.1);
-  background: #00cfff;
+/* Splash screen */
+.splash-screen {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: hideSplash 1s 1.8s forwards;
+}
+@keyframes hideSplash {
+  to { opacity: 0; visibility: hidden; }
+}
+.splash-title {
+  font-size: 32px;
+  color: #0af;
+  animation: splashFade 1.5s ease-in-out;
+}
+@keyframes splashFade {
+  0% { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
 }
 
-/* Модальное окно инструкции */
+/* Modal */
 .modal {
   position: fixed;
   inset: 0;
@@ -41,7 +53,6 @@ body.standalone .nav-btn:hover {
   box-sizing: border-box;
   z-index: 1000;
 }
-
 .modal-content {
   width: 90%;
   max-width: 360px;
@@ -54,13 +65,11 @@ body.standalone .nav-btn:hover {
   border: 2px solid #0af;
   box-shadow: 0 0 18px #0af;
 }
-
 .modal-content h2 {
   font-size: 22px;
   margin-bottom: 20px;
   color: #0af;
 }
-
 .icon-img {
   width: 26px;
   height: 26px;
@@ -68,12 +77,12 @@ body.standalone .nav-btn:hover {
   margin: 0 6px;
 }
 
-/* Скрытие */
+/* Hide class */
 .hidden {
   display: none !important;
 }
 
-/* Нижняя навигационная панель */
+/* Bottom nav */
 .bottom-nav {
   position: fixed;
   bottom: 40px;
@@ -81,7 +90,8 @@ body.standalone .nav-btn:hover {
   max-width: 420px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #111;
+  background: rgba(17, 17, 17, 0.6);
+  backdrop-filter: blur(10px);
   display: flex;
   justify-content: space-around;
   padding: 12px 0;
@@ -89,7 +99,6 @@ body.standalone .nav-btn:hover {
   box-shadow: 0 0 18px #0af;
   z-index: 999;
 }
-
 .nav-btn {
   flex: 1;
   margin: 0 8px;
@@ -102,9 +111,21 @@ body.standalone .nav-btn:hover {
   transition: color 0.3s ease;
   padding: 8px 0;
 }
-
 .nav-btn:hover,
 .nav-btn:focus {
   color: #4fd1ff;
   outline: none;
+}
+
+/* Animations */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
