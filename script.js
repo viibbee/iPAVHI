@@ -9,14 +9,13 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log("Detected standalone mode:", isStandalone);
 
   if (!isStandalone) {
+    // Показываем инструкцию по установке, прячем нижнюю панель
     installModal.classList.remove("hidden");
-    if (bottomNav) bottomNav.style.display = "none"; // прячем панель, если не standalone
+    if (bottomNav) bottomNav.classList.add("hidden");
   } else {
+    // Скрываем инструкцию, показываем нижнюю панель
     installModal.classList.add("hidden");
-    if (bottomNav) bottomNav.style.display = "flex"; // показываем панель, если standalone
+    if (bottomNav) bottomNav.classList.remove("hidden");
   }
-  
-  // Временно для отладки: всегда показывать панель (удалить после проверки)
-  // if (bottomNav) bottomNav.style.display = "flex";
 });
 
