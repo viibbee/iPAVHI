@@ -53,3 +53,38 @@ body {
 .hidden {
   display: none;
 }
+/* Панель внизу */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background: #111;
+  border-top: 1px solid #222;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 10000;
+  backdrop-filter: blur(12px);
+}
+
+/* Кнопки панели */
+.nav-btn {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 14px;
+  flex: 1;
+  text-align: center;
+  padding: 8px 0;
+  cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  transition: color 0.3s;
+}
+
+.nav-btn.active,
+.nav-btn:hover {
+  color: #0af; /* Активный цвет */
+  font-weight: 600;
+}
