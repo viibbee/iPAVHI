@@ -10,26 +10,30 @@ body {
 /* Полноэкранное затемнение */
 .modal {
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0; 
+  left: 0;
+  width: 100vw;      /* используем всю ширину окна */
+  height: 100vh;     /* используем всю высоту окна */
   background: rgba(0, 0, 0, 0.9);
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center;  /* центр по горизонтали */
   z-index: 9999;
-  padding: 20px;
+  padding: 0;               /* убираем паддинги, чтобы не сдвигать */
+  box-sizing: border-box;   /* на всякий случай */
 }
 
-/* Контейнер */
 .modal-content {
   background: #1a1a1a;
   border-radius: 20px;
   padding: 30px 24px;
   max-width: 400px;
-  width: 100%;
+  width: 90vw;              /* адаптивная ширина для маленьких экранов */
   text-align: center;
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.05);
+  box-sizing: border-box;   /* чтобы padding не влиял на ширину */
+  margin: 0 auto;           /* дополнительно центрируем */
 }
 
 /* Заголовок */
