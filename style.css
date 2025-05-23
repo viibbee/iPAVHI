@@ -129,3 +129,41 @@ body.light .bottom-nav {
     transform: translateY(0);
   }
 }
+
+
+/* Кнопка смены темы - перемещена над панелью */
+.theme-toggle {
+  position: fixed;
+  right: 20px;
+  bottom: 100px;
+  z-index: 999;
+  background: rgba(0, 170, 255, 0.2);
+  border: 1px solid #0af;
+  backdrop-filter: blur(8px);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 12px rgba(0, 170, 255, 0.4);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1) rotate(20deg);
+  box-shadow: 0 0 16px rgba(0, 170, 255, 0.6);
+}
+
+.theme-toggle svg {
+  width: 24px;
+  height: 24px;
+  fill: #0af;
+  transition: transform 0.3s ease;
+}
+
+body.dark .theme-toggle svg {
+  fill: #ffb400;
+}
+
