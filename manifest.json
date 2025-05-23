@@ -1,13 +1,13 @@
 {
-  "name": "iPAVHI",
-  "short_name": "iPAVHI",
-  "start_url": "index.html",
+  "name": "Game Catalog",
+  "short_name": "Games",
+  "start_url": ".",
   "display": "standalone",
   "background_color": "#000000",
-  "theme_color": "#000000",
+  "theme_color": "#0af",
   "icons": [
     {
-      "src": "assets/icons/icon-192.png",
+      "src": "homescreen-icon.png",
       "sizes": "192x192",
       "type": "image/png"
     }
