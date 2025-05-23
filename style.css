@@ -7,6 +7,28 @@ body {
   overflow: hidden;
 }
 
+/* Специальный фон и стиль кнопок в standalone режиме */
+body.standalone {
+  background: linear-gradient(135deg, #0af, #001);
+}
+
+/* Спец-дизайн кнопок */
+body.standalone .nav-btn {
+  background: #0af;
+  color: #000;
+  border-radius: 12px;
+  margin: 0 4px;
+  font-size: 15px;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(0, 170, 255, 0.3);
+  transition: transform 0.2s ease;
+}
+
+body.standalone .nav-btn:hover {
+  transform: scale(1.1);
+  background: #00cfff;
+}
+
 /* Модальное окно инструкции */
 .modal {
   position: fixed;
@@ -46,7 +68,7 @@ body {
   margin: 0 6px;
 }
 
-/* Скрытие элементов */
+/* Скрытие */
 .hidden {
   display: none !important;
 }
@@ -68,7 +90,6 @@ body {
   z-index: 999;
 }
 
-/* Кнопки навигации */
 .nav-btn {
   flex: 1;
   margin: 0 8px;
@@ -87,4 +108,3 @@ body {
   color: #4fd1ff;
   outline: none;
 }
-
