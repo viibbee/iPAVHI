@@ -28,3 +28,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+
+  // Переключение темы
+  const themeToggle = document.querySelector(".theme-toggle");
+  themeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    window.navigator.vibrate?.(30);
+  });
+
