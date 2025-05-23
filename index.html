@@ -1,59 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>Game Catalog</title>
-<link rel="stylesheet" href="style.css" />
-<link rel="manifest" href="manifest.json" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Game Catalog</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
 </head>
 <body>
 
-<!-- Модальное окно с инструкцией -->
-<div id="installModal" class="modal" style="display:none;">
+<!-- Окно с инструкцией Add to Home Screen -->
+<div id="install-modal" class="modal hidden">
   <div class="modal-content">
     <h2>Install this App</h2>
-    <p>
-      1. Tap the
-      <img src="share-icon.png" alt="Share icon" class="icon-img" />
-      button in the toolbar.
-    </p>
-    <p>
-      2. Select
-      <img src="homescreen-icon.png" alt="Add to home screen icon" class="icon-img" />
-      Add to Home Screen from the menu that pops up.
-    </p>
-    <p>
-      An icon will be added to your home screen for quick access.
-    </p>
+    <p><img src="share-icon.png" class="icon-img" alt="Share icon" /> Tap the button in the toolbar.</p>
+    <p>Then select <strong>Add to Home Screen</strong> from the menu that pops up.</p>
+    <p>An icon will be added to your home screen for quick access.</p>
   </div>
 </div>
 
+<!-- Каталог игр -->
 <div id="catalog" class="hidden">
-  <h1 class="catalog-title">Games Catalog</h1>
-  <div class="game-list">
+  <header class="catalog-header">
+    <h1>Games Catalog</h1>
+  </header>
+  <main class="game-list">
     <div class="game-card" data-download="https://example.com/game1.ipa">
-      <img src="game1-icon.png" alt="Game 1" class="game-icon" />
+      <img src="game1-icon.png" alt="Game One" class="game-icon" />
       <div class="game-info">
-        <h2 class="game-title">Game One</h2>
-        <p class="game-description">Exciting adventure game with stunning graphics.</p>
+        <h2>Game One</h2>
+        <p>Exciting adventure game with stunning graphics.</p>
         <button class="download-button">Download</button>
       </div>
     </div>
     <div class="game-card" data-download="https://example.com/game2.ipa">
-      <img src="game2-icon.png" alt="Game 2" class="game-icon" />
+      <img src="game2-icon.png" alt="Game Two" class="game-icon" />
       <div class="game-info">
-        <h2 class="game-title">Game Two</h2>
-        <p class="game-description">Puzzle game to challenge your mind.</p>
+        <h2>Game Two</h2>
+        <p>Puzzle game to challenge your mind.</p>
         <button class="download-button">Download</button>
       </div>
     </div>
-    <!-- Добавь остальные игры аналогично -->
-  </div>
+  </main>
 </div>
-
 
 <script src="script.js"></script>
 </body>
 </html>
+
 
