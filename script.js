@@ -4,12 +4,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const bottomNavContainer = document.getElementById("bottom-nav-container");
 
   if (!isStandalone) {
-    installModal.classList.remove("hidden");
-    bottomNavContainer.classList.add("hidden");
+    installModal.classList.remove("hidden");  // Показываем инструкцию
+    bottomNavContainer.classList.add("hidden"); // Скрываем нижнюю панель
   } else {
-    installModal.classList.add("hidden");
-    bottomNavContainer.classList.remove("hidden");
+    installModal.classList.add("hidden");     // Скрываем инструкцию
+    bottomNavContainer.classList.remove("hidden"); // Показываем нижнюю панель
   }
+});
 
   // Навигация по кнопкам как раньше
   const buttons = document.querySelectorAll('.nav-btn');
