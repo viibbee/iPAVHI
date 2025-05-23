@@ -1,17 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
   const installModal = document.getElementById("install-modal");
-  const bottomNav = document.getElementById("bottom-nav-container");
+  const bottomNav = document.querySelector(".bottom-nav");
 
-  console.log("isStandalone =", isStandalone);
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
 
-  if (isStandalone) {
-    // В standalone — скрываем инструкцию, показываем нижнюю панель
-    installModal.classList.add("hidden");
-    bottomNav.classList.remove("hidden");
-  } else {
-    // В браузере — показываем инструкцию, скрываем нижнюю панель
+  console.log("window.navigator.standalone =", window.navigator.standalone);
+  console.log("window.matchMedia('(display-mode: standalone)').matches =", window.matchMedia('(display-mode: standalone)').matches);
+  console.log("Detected standalone mode:", isStandalone);
+
+  if (!isStandalone) {
     installModal.classList.remove("hidden");
-    bottomNav.classList.add("hidden");
+    if (bottomNav) bottomNav.style.display = "none"; // прячем панель, если не standalone
+  } else {
+    installModal.classList.add("hidden");
+    if (bottomNav) bottomNav.style.display = "flex"; // показываем панель, если standalone
   }
+  
+  // Временно для отладки: всегда показывать панель (удалить после проверки)
+  // if (bottomNav) bottomNav.style.display = "flex";
 });
+
