@@ -52,7 +52,7 @@ body {
 /* Стиль для панели в standalone */
 .bottom-nav {
   position: fixed;
-  bottom: 20px; /* ⬆️ Поднимаем на 20px */
+  bottom: 30px; /* ⬆️ Поднимаем на 20px */
   width: 100%;
   background-color: #111;
   display: flex;
