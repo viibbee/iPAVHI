@@ -2,33 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>iPASTORE</title>
-  <link rel="manifest" href="manifest.json" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Install App</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="apple-touch-icon" href="IMG_5152.png" />
-  <script defer src="script.js"></script>
+  <link rel="manifest" href="manifest.json" />
 </head>
 <body>
-  <div id="installModal" class="modal">
-    <div class="modal-content">
-      <h2>Install this App</h2>
-      <p><img class="icon-img" src="share-icon.png" alt="Share" /> Tap the <strong>homescreen-icon.png</strong> button in the toolbar.</p>
-      <p>Then select <strong>Add to Home Screen</strong> <img class="icon-img" src="homescreen-icon.png" alt="Add" /> from the menu that pops up.</p>
-      <p>An icon will be added to your home screen for quick access.</p>
-    </div>
-  </div>
 
-  <div id="appInterface" style="display: none;">
-    <div class="app-content">
-      <!-- Здесь будет содержимое приложения -->
-    </div>
-    <nav class="bottom-nav">
-      <button>Games</button>
-      <button>Apps</button>
-      <button>Search</button>
-      <button>More</button>
-    </nav>
+<!-- Add to Home Screen инструкция -->
+<div id="install-modal" class="modal hidden">
+  <div class="modal-content">
+    <h2>Install this App</h2>
+    <p>
+      <img src="homescreen-icon.png" class="icon-img" alt="Homescreen icon" />
+      Tap the button in the toolbar.
+    </p>
+    <p>
+      Then select <strong>Add to Home Screen</strong>
+      <img src="share-icon.png" class="icon-img" alt="Share icon" /> from the menu that pops up.
+    </p>
+    <p>An icon will be added to your home screen for quick access.</p>
   </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
