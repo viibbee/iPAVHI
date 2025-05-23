@@ -1,16 +1,11 @@
-/* Общие стили */
-body, html {
-  height: 100%;
+body {
   margin: 0;
-  padding: 0 0 56px 0; /* padding-bottom чтобы не перекрывала панель */
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   background: #000;
   color: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  position: relative;
-  overflow-x: hidden;
 }
 
-/* Модальное окно подсказки */
+/* Modal */
 .modal {
   position: fixed;
   inset: 0;
@@ -19,23 +14,18 @@ body, html {
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  animation: fadeIn 0.4s ease-out forwards;
 }
 
 .modal-content {
   width: 90vw;
   max-width: 350px;
   background: #111;
-  color: #fff;
   padding: 20px;
   border-radius: 16px;
   text-align: center;
   box-sizing: border-box;
-  box-shadow: 0 0 12px #0af;
-  font-size: 15px;
-  opacity: 0;
-  transform: scale(0.95);
-  animation: popIn 0.4s ease-out 0.1s forwards;
+  border: 2px solid #0af;
+  box-shadow: 0 0 15px #0af;
 }
 
 .modal-content h2 {
@@ -46,71 +36,29 @@ body, html {
 }
 
 .icon-img {
-  width: 30px;
-  height: 30px;
+  width: 26px;
+  height: 26px;
   vertical-align: middle;
-  margin: 0 6px;
+  margin: 0 4px;
   filter: brightness(1.2);
 }
 
-/* Анимации */
-@keyframes fadeIn {
-  from { background: rgba(0, 0, 0, 0); }
-  to { background: rgba(0, 0, 0, 0.95); }
-}
-
-@keyframes popIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Нижняя навигационная панель */
+/* App Interface */
 .bottom-nav {
   position: fixed;
   bottom: 0;
-  left: 0;
-  right: 0;
-  height: 56px;
+  width: 100%;
   background: #111;
-  border-top: 1px solid #222;
   display: flex;
   justify-content: space-around;
-  align-items: center;
-  z-index: 10000;
-  backdrop-filter: blur(12px);
+  padding: 10px 0;
+  border-top: 1px solid #333;
 }
 
-/* Кнопки панели */
-.nav-btn {
+.bottom-nav button {
   background: none;
   border: none;
-  color: #888;
+  color: white;
   font-size: 14px;
-  flex: 1;
-  text-align: center;
-  padding: 8px 0;
-  cursor: pointer;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  transition: color 0.3s;
 }
 
-.nav-btn.active,
-.nav-btn:hover {
-  color: #0af;
-  font-weight: 600;
-}
-
-/* Основной контент для демонстрации */
-main#mainContent {
-  padding: 20px;
-  font-size: 16px;
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: center;
-}
