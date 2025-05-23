@@ -1,11 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
   const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
   const installModal = document.getElementById("install-modal");
+  const bottomNavContainer = document.getElementById("bottom-nav-container");
 
   if (!isStandalone) {
     installModal.classList.remove("hidden");
+    bottomNavContainer.classList.add("hidden");
+  } else {
+    installModal.classList.add("hidden");
+    bottomNavContainer.classList.remove("hidden");
   }
 
+  // Навигация по кнопкам как раньше
   const buttons = document.querySelectorAll('.nav-btn');
   let currentTab = 'games';
 
@@ -13,12 +19,10 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.addEventListener('click', () => {
       if(btn.dataset.tab === currentTab) return;
 
-      // Снимаем активность со всех
       buttons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       currentTab = btn.dataset.tab;
 
-      // Меняем содержимое (пример)
       showTabContent(currentTab);
     });
   });
@@ -26,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function showTabContent(tab) {
     const content = document.getElementById('content');
     if(!content) return;
-    // Анимация исчезновения
+
     content.style.opacity = 0;
 
     setTimeout(() => {
@@ -44,12 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
           content.innerHTML = '<h2>More</h2><p>Дополнительные опции...</p>';
           break;
       }
-      // Плавное появление
       content.style.opacity = 1;
     }, 300);
   }
 
-  // Инициализируем содержимое
   showTabContent(currentTab);
 });
-
