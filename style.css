@@ -10,7 +10,7 @@ body {
 .modal {
   position: fixed;
   inset: 0;
-  background: #000; /* убрали размытости */
+  background: #000;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,4 +47,24 @@ body {
 
 .hidden {
   display: none;
+}
+
+/* Стиль для панели в standalone */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #111;
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid #333;
+  padding: 12px 0;
+  z-index: 500;
+}
+
+.bottom-nav button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 14px;
 }
