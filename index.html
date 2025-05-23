@@ -7,16 +7,29 @@
   <title>Install App</title>
 </head>
 <body>
-  <div class="modal">
+  <!-- Модальное окно с инструкцией Add to Home Screen -->
+  <div id="installModal" class="modal">
     <div class="modal-content">
       <h2>Install this App</h2>
       <p>
-  1. Tap the <img src="homescreen-icon.png" class="icon-img" alt="add icon"> button in the toolbar.
-</p>
-<p>
-  2. Select <img src="share-icon.png" class="icon-img" alt="share icon"> <strong>Add to Home Screen</strong> from the menu that pops up.
-</p>
-      <p>An icon will be added to your home screen for quick access.</p>
+        1. Tap the <img src="homescreen-icon.png" class="icon-img" alt="add icon"> button in the toolbar.
+      </p>
+      <p>
+        2. Select <img src="share-icon.png" class="icon-img" alt="share icon"> <strong>Add to Home Screen</strong> from the menu that pops up.
+      </p>
+      <p class="note">
+        An icon will be added to your home screen for quick access.
+      </p>
+    </div>
+  </div>
+
+  <!-- Каталог игр (по умолчанию скрыт, показываем только если добавлен на главный экран) -->
+  <div id="gameCatalog" class="catalog hidden">
+    <header class="catalog-header">
+      <h1>Game Catalog</h1>
+    </header>
+    <div class="game-list">
+      <!-- Карточки игр добавим через JS -->
     </div>
   </div>
 
