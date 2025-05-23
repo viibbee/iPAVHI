@@ -1,31 +1,29 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Проверка, запущено ли приложение из главного экрана (standalone mode)
-  const isStandalone = window.matchMedia('(display-mode: standalone)').matches
-    || window.navigator.standalone === true; // для iOS
-
-  const installModal = document.getElementById('installModal');
-  const catalog = document.getElementById('catalog');
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  const installModal = document.getElementById("install-modal");
+  const catalog = document.getElementById("catalog");
 
   if (isStandalone) {
-    // Если сайт открыт с главного экрана, показываем каталог и скрываем окно установки
-    installModal.style.display = 'none';
-    catalog.classList.remove('hidden');
+    // Запуск из добавленного приложения - показываем каталог
+    installModal.classList.add("hidden");
+    catalog.classList.remove("hidden");
   } else {
-    // Если открыт в браузере, показываем инструкцию по добавлению
-    installModal.style.display = 'flex';
-    catalog.classList.add('hidden');
+    // Обычный браузер - показываем окно с инструкцией Add to Home Screen
+    installModal.classList.remove("hidden");
+    catalog.classList.add("hidden");
   }
 
-  // Обработчик кликов в каталоге игр
-  catalog.addEventListener('click', e => {
-    if (e.target.classList.contains('download-button')) {
-      const card = e.target.closest('.game-card');
+  // Обработка нажатия кнопки Download
+  document.querySelectorAll(".download-button").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const card = e.target.closest(".game-card");
       if (!card) return;
-      const url = card.getAttribute('data-download');
+      const url = card.getAttribute("data-download");
       if (url) {
-        window.open(url, '_blank');
+        window.open(url, "_blank");
       }
-    }
+    });
   });
 });
 
