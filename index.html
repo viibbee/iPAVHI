@@ -1,38 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <link rel="stylesheet" href="style.css" />
-  <title>Install App</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Game Catalog</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="manifest" href="manifest.json" />
 </head>
 <body>
-  <!-- Модальное окно с инструкцией Add to Home Screen -->
-  <div id="installModal" class="modal">
-    <div class="modal-content">
-      <h2>Install this App</h2>
-      <p>
-        1. Tap the <img src="homescreen-icon.png" class="icon-img" alt="add icon"> button in the toolbar.
-      </p>
-      <p>
-        2. Select <img src="share-icon.png" class="icon-img" alt="share icon"> <strong>Add to Home Screen</strong> from the menu that pops up.
-      </p>
-      <p class="note">
-        An icon will be added to your home screen for quick access.
-      </p>
-    </div>
-  </div>
 
-  <!-- Каталог игр (по умолчанию скрыт, показываем только если добавлен на главный экран) -->
-  <div id="gameCatalog" class="catalog hidden">
-    <header class="catalog-header">
-      <h1>Game Catalog</h1>
-    </header>
-    <div class="game-list">
-      <!-- Карточки игр добавим через JS -->
-    </div>
+<!-- Модальное окно с инструкцией -->
+<div id="installModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <h2>Install this App</h2>
+    <p>
+      1. Tap the
+      <img src="share-icon.png" alt="Share icon" class="icon-img" />
+      button in the toolbar.
+    </p>
+    <p>
+      2. Select
+      <img src="homescreen-icon.png" alt="Add to home screen icon" class="icon-img" />
+      Add to Home Screen from the menu that pops up.
+    </p>
+    <p>
+      An icon will be added to your home screen for quick access.
+    </p>
   </div>
+</div>
 
-  <script src="script.js"></script>
+<!-- Каталог игр -->
+<div id="catalog" class="catalog hidden">
+  <div class="catalog-header">Game Catalog</div>
+  <div class="game-list">
+    <div class="game-card" data-download="https://example.com/game1.apk">
+      <img src="https://via.placeholder.com/64" alt="Game 1" class="game-icon" />
+      <div class="game-info">
+        <h3 class="game-title">Awesome Game 1</h3>
+        <p class="game-desc">An exciting adventure game with stunning graphics.</p>
+      </div>
+      <button class="download-button">Download</button>
+    </div>
+    <div class="game-card" data-download="https://example.com/game2.apk">
+      <img src="https://via.placeholder.com/64" alt="Game 2" class="game-icon" />
+      <div class="game-info">
+        <h3 class="game-title">Puzzle Master</h3>
+        <p class="game-desc">Challenge your brain with intricate puzzles.</p>
+      </div>
+      <button class="download-button">Download</button>
+    </div>
+    <!-- Добавляй еще игры по аналогии -->
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
+
