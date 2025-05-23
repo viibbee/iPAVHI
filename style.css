@@ -28,8 +28,8 @@ body {
   text-align: center;
   font-size: 16px;
   color: #fff;
-  border: 2px solid #0af;
-  box-shadow: 0 0 18px #0af;
+  border: 2px solid #0af; /* голубой контур */
+  box-shadow: 0 0 12px #0af, 0 0 24px rgba(0, 170, 255, 0.4); /* мягкое голубое свечение */
 }
 
 .modal-content h2 {
