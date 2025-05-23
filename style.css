@@ -51,20 +51,20 @@ body {
 
 .bottom-nav {
   position: fixed;
-  bottom: 50px; /* чуть выше */
-  width: 100%;
-  max-width: 420px;
+  bottom: 50px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(15, 15, 15, 0.85);
-  backdrop-filter: blur(12px);
-  border-radius: 30px;
+  width: 90%;
+  max-width: 420px;
+  background: rgba(20, 30, 45, 0.85);
+  backdrop-filter: saturate(180%) blur(15px);
+  border-radius: 28px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   padding: 14px 0;
-  box-shadow: 0 8px 20px rgba(0, 170, 255, 0.25);
-  z-index: 10000;
+  box-shadow: 0 4px 10px rgba(0, 128, 255, 0.15);
   user-select: none;
+  z-index: 10000;
 }
 
 .bottom-nav button {
@@ -72,30 +72,28 @@ body {
   border: none;
   color: #a0cfff;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 17px;
   display: flex;
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  transition: color 0.3s ease, transform 0.15s ease;
-  padding: 6px 10px;
-  border-radius: 20px;
+  padding: 10px 16px;
+  border-radius: 22px;
+  transition: color 0.25s ease, background-color 0.25s ease, transform 0.15s ease;
 }
 
 .bottom-nav button:active {
-  transform: scale(0.92);
+  transform: scale(0.93);
+  background-color: rgba(0, 170, 255, 0.15);
+  color: #0099ff;
 }
 
-.bottom-nav button:hover,
-.bottom-nav button.active {
+.bottom-nav button:hover {
   color: #00aaff;
-  text-shadow: 0 0 8px #00aaff;
 }
 
-.bottom-nav button svg {
-  width: 24px;
-  height: 24px;
-  margin-bottom: 4px;
-  fill: currentColor;
-  transition: fill 0.3s ease;
+.bottom-nav button.active {
+  background-color: #0088ff;
+  color: #fff;
+  box-shadow: 0 0 8px #00aaff;
 }
