@@ -49,38 +49,53 @@ body {
   display: none;
 }
 
-/* Стиль для панели в standalone */
 .bottom-nav {
   position: fixed;
-  bottom: 40px; /* ⬆️ Поднимаем на 20px */
+  bottom: 50px; /* чуть выше */
   width: 100%;
-  background-color: #111;
+  max-width: 420px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 15, 15, 0.85);
+  backdrop-filter: blur(12px);
+  border-radius: 30px;
   display: flex;
   justify-content: space-around;
-  padding: 12px 0;
-  border-radius: 20px;
-  margin: 0 auto;
-  max-width: 420px;
-  left: 0;
-  right: 0;
-  box-shadow: 0 0 18px #0af;
+  padding: 14px 0;
+  box-shadow: 0 8px 20px rgba(0, 170, 255, 0.25);
+  z-index: 10000;
+  user-select: none;
 }
 
 .bottom-nav button {
-  background: none;
+  background: transparent;
   border: none;
-  color: #ccc;
-  font-size: 14px;
+  color: #a0cfff;
+  font-weight: 600;
+  font-size: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-}
-
-.bottom-nav button.active {
-  color: #0af;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.15s ease;
+  padding: 6px 10px;
+  border-radius: 20px;
 }
 
 .bottom-nav button:active {
-  transform: scale(0.95);
+  transform: scale(0.92);
+}
+
+.bottom-nav button:hover,
+.bottom-nav button.active {
+  color: #00aaff;
+  text-shadow: 0 0 8px #00aaff;
+}
+
+.bottom-nav button svg {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 4px;
+  fill: currentColor;
+  transition: fill 0.3s ease;
 }
