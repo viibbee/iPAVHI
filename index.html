@@ -9,23 +9,7 @@
 </head>
 <body>
 
-<!-- 🌟 Экран приветствия -->
-<div id="start-screen" class="start-screen">
-  <div class="start-wrapper">
-    <h1 class="welcome-title">Welcome to iPASTORE</h1>
-    <p class="welcome-subtitle">Your Store for iOS Apps & Games</p>
-  </div>
-</div>
-
-<!-- 🧭 Нижняя панель (будет только в standalone) -->
-<div class="bottom-nav hidden">
-  <button class="nav-btn">Games</button>
-  <button class="nav-btn">Apps</button>
-  <button class="nav-btn">Search</button>
-  <button class="nav-btn">More</button>
-</div>
-
-<!-- 🧾 Окно установки -->
+<!-- Add to Home Screen инструкция -->
 <div id="install-modal" class="modal hidden">
   <div class="modal-content">
     <h2>Install this App</h2>
@@ -39,6 +23,14 @@
     </p>
     <p>An icon will be added to your home screen for quick access.</p>
   </div>
+</div>
+
+<!-- Нижняя панель (для standalone режима) -->
+<div class="bottom-nav hidden">
+  <button class="nav-btn">Games</button>
+  <button class="nav-btn">Apps</button>
+  <button class="nav-btn">Search</button>
+  <button class="nav-btn">More</button>
 </div>
 
 <script src="script.js"></script>
