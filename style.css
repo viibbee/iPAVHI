@@ -38,18 +38,3 @@ body {
   line-height: 1.5;
 }
 
-button#close-btn {
-  margin-top: 15px;
-  background: #0af;
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  font-size: 16px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-button#close-btn:hover {
-  background: #09c;
-}
