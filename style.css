@@ -3,39 +3,41 @@ html, body {
   padding: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden; /* если нужно */
+  overflow: hidden;
+  background-color: #0c0c0c;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #fff;
+  -webkit-text-size-adjust: 100%; /* фикс масштабирования iOS */
 }
 
-/* Полноэкранное затемнение */
 .modal {
   position: fixed;
   top: 0; 
   left: 0;
-  width: 100vw;      /* используем всю ширину окна */
-  height: 100vh;     /* используем всю высоту окна */
+  width: 100vw;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.9);
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: center;  /* центр по горизонтали */
+  padding: 0;
+  box-sizing: border-box;
   z-index: 9999;
-  padding: 0;               /* убираем паддинги, чтобы не сдвигать */
-  box-sizing: border-box;   /* на всякий случай */
 }
 
 .modal-content {
   background: #1a1a1a;
   border-radius: 20px;
-  padding: 30px 24px;
+  padding: 30px 20px;
+  width: 90vw;       /* занимает 90% ширины экрана */
   max-width: 400px;
-  width: 90vw;              /* адаптивная ширина для маленьких экранов */
+  box-sizing: border-box;
   text-align: center;
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  box-sizing: border-box;   /* чтобы padding не влиял на ширину */
-  margin: 0 auto;           /* дополнительно центрируем */
+  margin: 0;
 }
 
-/* Заголовок */
 .modal-content h2 {
   margin-top: 0;
   font-size: 22px;
@@ -43,7 +45,6 @@ html, body {
   letter-spacing: 0.5px;
 }
 
-/* Описание */
 .modal-content p {
   margin: 12px 0;
   line-height: 1.5;
@@ -51,7 +52,6 @@ html, body {
   color: #ccc;
 }
 
-/* Маленький значок */
 .modal-content .icon {
   display: inline-block;
   background: #0af;
@@ -61,5 +61,3 @@ html, body {
   border-radius: 6px;
   margin: 0 4px;
 }
-
-
