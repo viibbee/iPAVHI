@@ -4,8 +4,77 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Install App</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="manifest" href="manifest.json" />
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .hidden {
+      display: none !important;
+    }
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
+      z-index: 1000;
+    }
+    .modal-content {
+      width: 90%;
+      max-width: 360px;
+      background: #111;
+      padding: 24px 28px;
+      border-radius: 18px;
+      text-align: center;
+      font-size: 16px;
+      color: #fff;
+      border: 2px solid #0af;
+      box-shadow: 0 0 18px #0af;
+    }
+    .modal-content h2 {
+      font-size: 22px;
+      margin-bottom: 20px;
+      color: #0af;
+    }
+    .icon-img {
+      width: 26px;
+      height: 26px;
+      vertical-align: middle;
+      margin: 0 6px;
+    }
+    .bottom-nav {
+      position: fixed;
+      bottom: 40px;
+      width: 100%;
+      background-color: #111;
+      display: flex;
+      justify-content: space-around;
+      padding: 12px 0;
+      border-radius: 20px;
+      margin: 0 auto;
+      max-width: 420px;
+      left: 0;
+      right: 0;
+      box-shadow: 0 0 18px #0af;
+      z-index: 1100;
+    }
+    .bottom-nav button {
+      background: none;
+      border: none;
+      color: #0af;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
 
@@ -27,7 +96,6 @@
 
 <!-- Нижняя панель с кнопками -->
 <div id="bottom-nav-container" class="hidden">
-  <!-- сюда кнопки, которые показываем в standalone -->
   <nav class="bottom-nav">
     <button>Games</button>
     <button>Apps</button>
@@ -35,3 +103,25 @@
     <button>More</button>
   </nav>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  const installModal = document.getElementById("install-modal");
+  const bottomNav = document.getElementById("bottom-nav-container");
+
+  console.log("isStandalone =", isStandalone);
+
+  if (isStandalone) {
+    installModal.classList.add("hidden");
+    bottomNav.classList.remove("hidden");
+  } else {
+    installModal.classList.remove("hidden");
+    bottomNav.classList.add("hidden");
+  }
+});
+</script>
+
+</body>
+</html>
+
