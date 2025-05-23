@@ -6,6 +6,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // Показываем окно добавления на главный экран
     installModal.classList.remove("hidden");
   }
+const navButtons = document.querySelectorAll('.nav-btn');
+
+navButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    navButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    // TODO: Здесь можно добавить логику смены контента под кнопками
+  });
 });
 
 
