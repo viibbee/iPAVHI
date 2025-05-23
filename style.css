@@ -52,14 +52,18 @@ body {
 /* Стиль для панели в standalone */
 .bottom-nav {
   position: fixed;
-  bottom: 0;
+  bottom: 20px; /* ⬆️ Поднимаем на 20px */
   width: 100%;
-  background: #111;
+  background-color: #111;
   display: flex;
   justify-content: space-around;
-  border-top: 1px solid #333;
   padding: 12px 0;
-  z-index: 500;
+  border-radius: 20px;
+  margin: 0 auto;
+  max-width: 420px;
+  left: 0;
+  right: 0;
+  box-shadow: 0 0 18px #0af;
 }
 
 .bottom-nav button {
