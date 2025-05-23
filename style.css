@@ -1,19 +1,29 @@
-html, body {
+/* Сброс */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+}
+
+html, body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; /* чтоб не было скролла */
   background-color: #0c0c0c;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   color: #fff;
-  -webkit-text-size-adjust: 100%; /* фикс масштабирования iOS */
+  -webkit-text-size-adjust: 100%;
+  -webkit-overflow-scrolling: touch;
+  position: fixed; /* чтобы исключить сдвиги */
+  top: 0; left: 0;
 }
 
+/* Модалка */
 .modal {
   position: fixed;
-  top: 0; 
-  left: 0;
+  top: 0; left: 0;
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.9);
@@ -23,28 +33,31 @@ html, body {
   padding: 0;
   box-sizing: border-box;
   z-index: 9999;
+  text-align: center;
 }
 
+/* Контейнер */
 .modal-content {
   background: #1a1a1a;
   border-radius: 20px;
   padding: 30px 20px;
-  width: 90vw;       /* занимает 90% ширины экрана */
+  width: 90vw;
   max-width: 400px;
   box-sizing: border-box;
-  text-align: center;
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  margin: 0;
+  margin: 0 auto;
 }
 
+/* Заголовок */
 .modal-content h2 {
-  margin-top: 0;
   font-size: 22px;
   color: #0af;
   letter-spacing: 0.5px;
+  margin-bottom: 16px;
 }
 
+/* Параграфы */
 .modal-content p {
   margin: 12px 0;
   line-height: 1.5;
@@ -52,6 +65,7 @@ html, body {
   color: #ccc;
 }
 
+/* Иконка */
 .modal-content .icon {
   display: inline-block;
   background: #0af;
