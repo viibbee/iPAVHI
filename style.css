@@ -1,32 +1,22 @@
-/* Сброс */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+html, body {
   margin: 0;
   padding: 0;
-}
-
-html, body {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden; /* чтоб не было скролла */
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   background-color: #0c0c0c;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   color: #fff;
   -webkit-text-size-adjust: 100%;
-  -webkit-overflow-scrolling: touch;
-  position: fixed; /* чтобы исключить сдвиги */
-  top: 0; left: 0;
 }
 
-/* Модалка */
 .modal {
   position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.9);
+  top: 0; 
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,12 +26,11 @@ html, body {
   text-align: center;
 }
 
-/* Контейнер */
 .modal-content {
   background: #1a1a1a;
   border-radius: 20px;
   padding: 30px 20px;
-  width: 90vw;
+  width: 90%;
   max-width: 400px;
   box-sizing: border-box;
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
@@ -49,29 +38,3 @@ html, body {
   margin: 0 auto;
 }
 
-/* Заголовок */
-.modal-content h2 {
-  font-size: 22px;
-  color: #0af;
-  letter-spacing: 0.5px;
-  margin-bottom: 16px;
-}
-
-/* Параграфы */
-.modal-content p {
-  margin: 12px 0;
-  line-height: 1.5;
-  font-size: 15px;
-  color: #ccc;
-}
-
-/* Иконка */
-.modal-content .icon {
-  display: inline-block;
-  background: #0af;
-  color: #fff;
-  font-size: 14px;
-  padding: 3px 6px;
-  border-radius: 6px;
-  margin: 0 4px;
-}
