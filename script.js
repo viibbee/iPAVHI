@@ -1,33 +1,20 @@
-const games = [
-  {
-    name: "Super Runner",
-    icon: "assets/icons/runner.png",
-    downloadLink: "https://example.com/super-runner.ipa"
-  },
-  {
-    name: "Puzzle Pro",
-    icon: "assets/icons/puzzle.png",
-    downloadLink: "https://example.com/puzzle-pro.ipa"
+function isInStandaloneMode() {
+  return (window.matchMedia('(display-mode: standalone)').matches) || (window.navigator.standalone === true);
+}
+
+window.onload = () => {
+  const modal = document.getElementById('a2hs-modal');
+  const catalog = document.getElementById('catalog');
+  const closeBtn = document.getElementById('close-btn');
+
+  if (!isInStandaloneMode()) {
+    modal.style.display = 'flex';
+  } else {
+    catalog.style.display = 'block';
   }
-];
 
-const catalog = document.getElementById("catalog");
-const modal = document.getElementById("modal");
-const modalIcon = document.getElementById("modal-icon");
-const downloadBtn = document.getElementById("download-btn");
-
-games.forEach(game => {
-  const div = document.createElement("div");
-  div.className = "game";
-  div.innerText = game.name;
-  div.onclick = () => {
-    modal.classList.remove("hidden");
-    modalIcon.src = game.icon;
-    downloadBtn.onclick = () => window.open(game.downloadLink, "_blank");
+  closeBtn.onclick = () => {
+    modal.style.display = 'none';
+    catalog.style.display = 'block';
   };
-  catalog.appendChild(div);
-});
-
-modal.onclick = () => {
-  modal.classList.add("hidden");
 };
