@@ -5,7 +5,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const bottomNav = document.querySelector('.bottom-nav');
 
   if (isStandalone) {
-    // 🔹 Создаём приветственный экран
+    // Приветственный экран
     const startScreen = document.createElement('div');
     startScreen.className = 'start-screen';
     startScreen.innerHTML = `
@@ -16,14 +16,12 @@ window.addEventListener('DOMContentLoaded', () => {
     `;
     document.body.appendChild(startScreen);
 
-    // Показываем панель после исчезновения приветствия
+    // Показать панель через 2.5 сек
     setTimeout(() => {
       startScreen.remove();
       bottomNav.classList.remove('hidden');
     }, 2500);
-
   } else {
-    // Показываем только инструкцию в браузере
     installModal.classList.remove('hidden');
   }
 });
