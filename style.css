@@ -9,18 +9,22 @@ body {
 
 .modal {
   position: fixed;
-  inset: 0;
-  background: #000; /* убрали размытости */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  z-index: 9999;
+  padding: 16px;
   box-sizing: border-box;
-  z-index: 1000;
+  animation: fadeIn 0.4s ease-out forwards;
 }
 
 .modal-content {
-  width: 90%;
+  width: 100%;
   max-width: 360px;
   background: #111;
   padding: 24px 28px;
@@ -28,8 +32,9 @@ body {
   text-align: center;
   font-size: 16px;
   color: #fff;
-  border: 2px solid #0af; /* голубой контур */
-  box-shadow: 0 0 12px #0af, 0 0 24px rgba(0, 170, 255, 0.4); /* мягкое голубое свечение */
+  border: 2px solid #0af;
+  box-shadow: 0 0 12px #0af, 0 0 24px rgba(0, 170, 255, 0.4);
+  box-sizing: border-box;
 }
 
 .modal-content h2 {
