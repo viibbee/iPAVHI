@@ -7,6 +7,7 @@ body {
   overflow: hidden;
 }
 
+/* Модальное окно инструкции */
 .modal {
   position: fixed;
   inset: 0;
@@ -45,13 +46,15 @@ body {
   margin: 0 6px;
 }
 
+/* Скрытие элементов */
 .hidden {
   display: none !important;
 }
 
+/* Нижняя навигационная панель */
 .bottom-nav {
   position: fixed;
-  bottom: 40px; /* Поднято */
+  bottom: 40px;
   width: 100%;
   max-width: 420px;
   left: 50%;
@@ -62,31 +65,25 @@ body {
   padding: 12px 0;
   border-radius: 20px;
   box-shadow: 0 0 18px #0af;
-  z-index: 10000;
+  z-index: 999;
 }
 
+/* Кнопки навигации */
 .nav-btn {
-  background: none;
+  flex: 1;
+  margin: 0 8px;
+  background: transparent;
   border: none;
-  color: #888;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 12px;
-  cursor: pointer;
-  padding: 4px 8px;
-  transition: color 0.3s ease;
-}
-
-.nav-btn .nav-icon {
-  width: 24px;
-  height: 24px;
-  margin-bottom: 4px;
-  stroke: currentColor;
-  fill: currentColor;
-}
-
-.nav-btn.active,
-.nav-btn:hover {
   color: #0af;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  padding: 8px 0;
+}
+
+.nav-btn:hover,
+.nav-btn:focus {
+  color: #4fd1ff;
+  outline: none;
 }
