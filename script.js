@@ -8,21 +8,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const installModal = document.getElementById("install-modal");
   const bottomNav = document.querySelector(".bottom-nav");
   const gameIcon = document.getElementById("game-icon");
-  const iconModal = document.getElementById("icon-modal");
-  const installBtn = document.getElementById("install-btn");
 
   if (!isStandalone) {
-    // Обычный Safari режим — показываем подсказку установки, скрываем навигацию и иконку
+    // Safari обычный режим
     installModal.classList.remove("hidden");
     bottomNav.classList.add("hidden");
     gameIcon.classList.add("hidden");
   } else {
-    // Запуск из home screen — показываем нижнюю навигацию и иконку
+    // Запуск из home screen
     installModal.classList.add("hidden");
     bottomNav.classList.remove("hidden");
     gameIcon.classList.remove("hidden");
 
-    // Создаём кнопки навигации
     const buttons = [
       { label: "🎮", title: "Games" },
       { label: "📱", title: "Apps" },
@@ -30,53 +27,29 @@ document.addEventListener("DOMContentLoaded", () => {
       { label: "⋯", title: "More" }
     ];
 
-    bottomNav.innerHTML = ""; // очистка на всякий случай
-
     buttons.forEach(({ label, title }) => {
       const btn = document.createElement("button");
       btn.className = "nav-btn";
       btn.title = title;
-      btn.ariaLabel = title;
       btn.textContent = label;
-      btn.type = "button";
       btn.addEventListener("click", () => {
         if (navigator.vibrate) navigator.vibrate(30);
-        console.log(`Clicked ${title}`);
+        console.log(Clicked ${title});
       });
       bottomNav.appendChild(btn);
     });
   }
 
-  // Обработчик кнопки Install (открыть ссылку)
-  if (installBtn) {
-    installBtn.addEventListener("click", () => {
-      window.open("https://signipa.org/Jqj8oB8J", "_blank");
-    });
-  }
+  // Обработка модалки
+  const iconModal = document.getElementById("icon-modal");
+  const openIconModal = document.getElementById("open-icon-modal");
 
-  // Открытие модалки с иконкой при клике и по клавише Enter/Space (доступность)
-  function openIconModal() {
+  openIconModal.addEventListener("click", () => {
     iconModal.classList.remove("hidden");
-    iconModal.focus();
-  }
-
-  gameIcon.addEventListener("click", openIconModal);
-  gameIcon.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
-      e.preventDefault();
-      openIconModal();
-    }
   });
 
-  // Закрытие модалки кликом по фону и клавишей Escape
   window.addEventListener("click", (e) => {
     if (e.target === iconModal) {
-      iconModal.classList.add("hidden");
-    }
-  });
-
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && !iconModal.classList.contains("hidden")) {
       iconModal.classList.add("hidden");
     }
   });
