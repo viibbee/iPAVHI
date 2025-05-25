@@ -63,5 +63,22 @@ document.addEventListener("DOMContentLoaded", () => {
       if (navigator.vibrate) navigator.vibrate(30);
     });
   }
+
+  // Обработка открытия модального окна по клику на иконку
+  const iconModal = document.getElementById("icon-modal");
+  const openIconModal = document.getElementById("open-icon-modal");
+
+  if (openIconModal && iconModal) {
+    openIconModal.addEventListener("click", () => {
+      iconModal.classList.remove("hidden");
+    });
+
+    // Закрытие окна при клике вне содержимого
+    window.addEventListener("click", (e) => {
+      if (e.target === iconModal) {
+        iconModal.classList.add("hidden");
+      }
+    });
+  }
 });
 
