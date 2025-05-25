@@ -1,7 +1,7 @@
 {
   "name": "iPASTORE",
   "short_name": "iPASTORE",
-  "start_url": "/iPAVHI/",
+   "start_url": "/iPAVHI/",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#000000",
