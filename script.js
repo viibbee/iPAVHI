@@ -9,16 +9,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const bottomNav = document.querySelector(".bottom-nav");
   const gameIcon = document.getElementById("game-icon");
 
-  if (!isStandalone) {
-    // Safari обычный режим
-    installModal.classList.remove("hidden");
-    bottomNav.classList.add("hidden");
-    gameIcon.classList.add("hidden");
-  } else {
-    // Запуск из home screen
-    installModal.classList.add("hidden");
-    bottomNav.classList.remove("hidden");
-    gameIcon.classList.remove("hidden");
+ if (!isStandalone) {
+  // Safari обычный режим
+  // Не показываем окно установки
+  installModal.classList.add("hidden");
+  bottomNav.classList.add("hidden");
+  gameIcon.classList.add("hidden");
+} else {
+  // Запуск из home screen
+  installModal.classList.add("hidden");
+  bottomNav.classList.remove("hidden");
+  gameIcon.classList.remove("hidden");
+
+  // ...добавление кнопок в нижнюю панель
+}
 
     const buttons = [
       { label: "🎮", title: "Games" },
