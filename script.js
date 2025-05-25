@@ -1,28 +1,24 @@
-// Обработчик кнопки "Обновить сайт"
 document.getElementById('refresh-btn').addEventListener('click', () => {
   location.reload();
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+
   const installModal = document.getElementById("install-modal");
   const bottomNav = document.querySelector(".bottom-nav");
   const gameIcon = document.getElementById("game-icon");
 
-  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-
-  // Если сайт открыт не как приложение (не установлен на главный экран)
   if (!isStandalone) {
+    // Safari обычный режим
     installModal.classList.remove("hidden");
     bottomNav.classList.add("hidden");
     gameIcon.classList.add("hidden");
   } else {
-    // Если открыт как PWA (установленное приложение)
+    // Запуск из home screen
     installModal.classList.add("hidden");
     bottomNav.classList.remove("hidden");
     gameIcon.classList.remove("hidden");
-
-    // Очищаем нижнюю навигацию и создаём кнопки
-    bottomNav.innerHTML = "";
 
     const buttons = [
       { label: "🎮", title: "Games" },
@@ -31,54 +27,30 @@ document.addEventListener("DOMContentLoaded", () => {
       { label: "⋯", title: "More" }
     ];
 
-    buttons.forEach(({ label, title }, index) => {
-      const btn = document.createElement('button');
-      btn.className = 'nav-btn fade-in';
+    buttons.forEach(({ label, title }) => {
+      const btn = document.createElement("button");
+      btn.className = "nav-btn";
       btn.title = title;
       btn.textContent = label;
-      btn.style.animationDelay = `${0.1 * index}s`;
-      btn.addEventListener('click', () => {
+      btn.addEventListener("click", () => {
         if (navigator.vibrate) navigator.vibrate(30);
         console.log(`Clicked ${title}`);
-        // Здесь можно вставить навигацию на разные разделы
       });
       bottomNav.appendChild(btn);
     });
   }
 
-  // Эффект вибрации при клике по уже существующим кнопкам
-  document.querySelectorAll('.nav-btn').forEach((btn, index) => {
-    btn.classList.add('fade-in');
-    btn.style.animationDelay = `${0.1 * index}s`;
-    btn.addEventListener('click', () => {
-      if (navigator.vibrate) navigator.vibrate(30);
-    });
-  });
-
-  // Обработка переключателя темы, если он есть
-  const themeToggle = document.querySelector(".theme-toggle");
-  if (themeToggle) {
-    themeToggle.addEventListener("click", () => {
-      document.body.classList.toggle("light");
-      if (navigator.vibrate) navigator.vibrate(30);
-    });
-  }
-
-  // Обработка открытия модального окна по клику на иконку
+  // Обработка модалки
   const iconModal = document.getElementById("icon-modal");
   const openIconModal = document.getElementById("open-icon-modal");
 
-  if (openIconModal && iconModal) {
-    openIconModal.addEventListener("click", () => {
-      iconModal.classList.remove("hidden");
-    });
+  openIconModal.addEventListener("click", () => {
+    iconModal.classList.remove("hidden");
+  });
 
-    // Закрытие окна при клике вне содержимого
-    window.addEventListener("click", (e) => {
-      if (e.target === iconModal) {
-        iconModal.classList.add("hidden");
-      }
-    });
-  }
+  window.addEventListener("click", (e) => {
+    if (e.target === iconModal) {
+      iconModal.classList.add("hidden");
+    }
+  });
 });
-
