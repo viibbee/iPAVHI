@@ -10,15 +10,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
 
+  // Если сайт открыт не как приложение (не установлен на главный экран)
   if (!isStandalone) {
     installModal.classList.remove("hidden");
     bottomNav.classList.add("hidden");
     gameIcon.classList.add("hidden");
   } else {
+    // Если открыт как PWA (установленное приложение)
     installModal.classList.add("hidden");
     bottomNav.classList.remove("hidden");
     gameIcon.classList.remove("hidden");
 
+    // Очищаем нижнюю навигацию и создаём кнопки
     bottomNav.innerHTML = "";
 
     const buttons = [
@@ -37,12 +40,13 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.addEventListener('click', () => {
         if (navigator.vibrate) navigator.vibrate(30);
         console.log(`Clicked ${title}`);
+        // Здесь можно вставить навигацию на разные разделы
       });
       bottomNav.appendChild(btn);
     });
   }
 
-  // Вибрация при клике по кнопкам
+  // Эффект вибрации при клике по уже существующим кнопкам
   document.querySelectorAll('.nav-btn').forEach((btn, index) => {
     btn.classList.add('fade-in');
     btn.style.animationDelay = `${0.1 * index}s`;
@@ -51,12 +55,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Переключатель темы (если есть)
+  // Обработка переключателя темы, если он есть
   const themeToggle = document.querySelector(".theme-toggle");
   if (themeToggle) {
     themeToggle.addEventListener("click", () => {
       document.body.classList.toggle("light");
-      window.navigator.vibrate?.(30);
+      if (navigator.vibrate) navigator.vibrate(30);
     });
   }
 });
+
