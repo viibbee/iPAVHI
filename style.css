@@ -1,183 +1,82 @@
 body {
   margin: 0;
-  background: #000;
-  color: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  height: 100vh;
-  overflow: hidden;
+  background-color: #000;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  color: white;
 }
 
-/* Light theme */
-body.light {
-  background: #fff;
-  color: #000;
-}
-body.light .bottom-nav {
-  background: rgba(255, 255, 255, 0.8);
-  color: #000;
-}
-
-/* Splash screen */
-.splash-screen {
-  position: fixed;
-  inset: 0;
-  background: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-  animation: hideSplash 1s 1.8s forwards;
-}
-@keyframes hideSplash {
-  to { opacity: 0; visibility: hidden; }
-}
-.splash-title {
-  font-size: 32px;
-  color: #0af;
-  animation: splashFade 1.5s ease-in-out;
-}
-@keyframes splashFade {
-  0% { opacity: 0; transform: scale(0.8); }
-  100% { opacity: 1; transform: scale(1); }
-}
-
-/* Modal */
+/* Модальное окно */
 .modal {
   position: fixed;
   inset: 0;
-  background: #000;
+  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 20px;
-  box-sizing: border-box;
-  z-index: 1000;
+  justify-content: center;
+  z-index: 9999;
+}
+.modal.hidden {
+  display: none;
 }
 .modal-content {
-  width: 90%;
-  max-width: 360px;
-  background: #111;
-  padding: 24px 28px;
-  border-radius: 18px;
+  background-color: #111;
+  padding: 20px;
+  border-radius: 12px;
   text-align: center;
-  font-size: 16px;
-  color: #fff;
-  border: 2px solid #0af;
-  box-shadow: 0 0 18px #0af;
-}
-.modal-content h2 {
-  font-size: 22px;
-  margin-bottom: 20px;
-  color: #0af;
 }
 .icon-img {
-  width: 26px;
-  height: 26px;
-  vertical-align: middle;
-  margin: 0 6px;
+  width: 40px;
+  height: 40px;
+  margin-top: 10px;
 }
 
-/* Hide class */
-.hidden {
-  display: none !important;
+/* Приветственный экран */
+.start-screen {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, #0af, #000);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9998;
+}
+.start-wrapper {
+  text-align: center;
+}
+.welcome-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.welcome-subtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
 }
 
-/* Bottom nav — обновленная */
+/* Нижняя панель */
 .bottom-nav {
   position: fixed;
-  bottom: 60px; /* чуть выше */
+  bottom: 40px;
   width: 100%;
   max-width: 420px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: linear-gradient(90deg, #0af, #4fd1ff);
-  backdrop-filter: blur(20px);
-  border-radius: 24px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  background-color: #111;
   display: flex;
   justify-content: space-around;
-  padding: 14px 0;
-  box-shadow: 0 6px 20px rgba(0, 170, 255, 0.5);
-  z-index: 999;
-  user-select: none;
-}
-
-.nav-btn {
-  flex: 1;
-  margin: 0 10px;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 50%;
-  border: none;
-  color: #e0f7ff;
-  font-size: 24px;
-  font-weight: 700;
-  cursor: pointer;
   padding: 12px 0;
-  box-shadow: 0 3px 10px rgba(0, 170, 255, 0.4);
-  transition: background-color 0.25s ease, transform 0.2s ease, color 0.3s ease;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.nav-btn:hover,
-.nav-btn:focus {
-  background: rgba(255, 255, 255, 0.35);
-  color: #fff;
-  transform: scale(1.15);
-  outline: none;
-}
-
-.nav-btn:active {
-  background: rgba(255, 255, 255, 0.55);
-  transform: scale(0.95);
-}
-
-/* Анимация появления */
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.6s ease-out forwards;
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Кнопка смены темы - вынесена отдельно */
-.theme-toggle {
-  position: fixed;
-  right: 20px;
-  bottom: 100px;
+  border-radius: 20px;
+  box-shadow: 0 0 18px #0af;
   z-index: 999;
-  background: rgba(0, 170, 255, 0.2);
-  border: 1px solid #0af;
-  backdrop-filter: blur(8px);
-  border-radius: 50%;
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 12px rgba(0, 170, 255, 0.4);
+}
+.bottom-nav.hidden {
+  display: none;
+}
+.nav-btn {
+  background: none;
+  color: white;
+  border: none;
+  font-size: 1rem;
 }
 
-.theme-toggle:hover {
-  transform: scale(1.1) rotate(20deg);
-  box-shadow: 0 0 16px rgba(0, 170, 255, 0.6);
-}
-
-.theme-toggle svg {
-  width: 24px;
-  height: 24px;
-  fill: #0af;
-  transition: transform 0.3s ease;
-}
-
-body.dark .theme-toggle svg {
-  fill: #ffb400;
-}
