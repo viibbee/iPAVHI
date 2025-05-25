@@ -1,3 +1,8 @@
+// Обработчик кнопки "Обновить сайт"
+document.getElementById('refresh-btn').addEventListener('click', () => {
+  location.reload();
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   const installModal = document.getElementById("install-modal");
   const bottomNav = document.querySelector(".bottom-nav");
@@ -46,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Переключатель темы
+  // Переключатель темы (если есть)
   const themeToggle = document.querySelector(".theme-toggle");
   if (themeToggle) {
     themeToggle.addEventListener("click", () => {
