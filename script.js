@@ -1,27 +1,30 @@
 window.addEventListener('DOMContentLoaded', () => {
-  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  const isStandalone =
+    window.matchMedia('(display-mode: standalone)').matches ||
+    window.navigator.standalone === true;
 
-  const topBar = document.getElementById('top-bar');
   const installModal = document.getElementById('install-modal');
+  const appContent = document.getElementById('app-content');
+  const bottomBar = document.getElementById('bottom-bar');
   const gameModal = document.getElementById('game-modal');
+  const gameIcon = document.getElementById('main-game-icon');
 
   if (isStandalone) {
-    topBar.classList.remove('hidden');
+    installModal.classList.add('hidden');
+    appContent.classList.remove('hidden');
+    bottomBar.classList.remove('hidden');
 
-    document.getElementById('top-game-icon').addEventListener('click', () => {
+    // Клик по иконке игры
+    gameIcon.addEventListener('click', () => {
       gameModal.classList.remove('hidden');
     });
 
-    document.getElementById('install-btn').addEventListener('click', () => {
-      window.open('https://signipa.org/Jqj8oB8J', '_blank');
-    });
-
+    // Закрытие модалки по клику вне содержимого
     gameModal.addEventListener('click', (e) => {
-      if (e.target.id === 'game-modal') {
+      if (e.target === gameModal) {
         gameModal.classList.add('hidden');
       }
     });
-
   } else {
     installModal.classList.remove('hidden');
   }
