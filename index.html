@@ -9,7 +9,20 @@
 </head>
 <body>
 
-<!-- Add to Home Screen инструкция -->
+<!-- Верхняя панель с иконкой игры (будет показана только в standalone) -->
+<div id="top-bar" class="hidden">
+  <img src="IMG_5152.png" alt="Game Icon" id="top-game-icon" class="top-game-icon" />
+</div>
+
+<!-- Модальное окно с увеличенной иконкой и кнопкой Install -->
+<div id="game-modal" class="modal hidden">
+  <div class="modal-content">
+    <img src="IMG_5152.png" alt="Game Icon Large" class="game-icon-large" />
+    <button id="install-btn" class="install-button">Install</button>
+  </div>
+</div>
+
+<!-- Инструкция "Add to Home Screen" для обычного браузера -->
 <div id="install-modal" class="modal hidden">
   <div class="modal-content">
     <h2>Install this App</h2>
@@ -23,22 +36,6 @@
     </p>
     <p>An icon will be added to your home screen for quick access.</p>
   </div>
-</div>
-
-<!-- Модальное окно игры -->
-<div id="game-modal" class="modal hidden">
-  <div class="modal-content">
-    <img src="IMG_5152.png" alt="Game Icon" class="game-icon-large" />
-    <button id="install-btn" class="install-button">Install</button>
-  </div>
-</div>
-
-<!-- Нижняя панель (для standalone режима) -->
-<div class="bottom-nav hidden">
-  <button class="nav-btn">Games</button>
-  <button class="nav-btn">Apps</button>
-  <button class="nav-btn">Search</button>
-  <button class="nav-btn">More</button>
 </div>
 
 <script src="script.js"></script>
