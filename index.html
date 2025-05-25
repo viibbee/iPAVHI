@@ -6,120 +6,6 @@
   <title>iPASTORE</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="manifest" href="manifest.json" />
-  <style>
-    /* Вставил основные стили для панели и кнопок из предыдущего ответа */
-    .hidden { display: none !important; }
-
-    .bottom-nav {
-      position: fixed;
-      bottom: 60px;
-      width: 100%;
-      max-width: 420px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: linear-gradient(135deg, #0af, #4fd1ff);
-      backdrop-filter: blur(25px);
-      border-radius: 28px;
-      display: flex;
-      justify-content: space-around;
-      padding: 16px 0;
-      box-shadow:
-        0 8px 20px rgba(0, 170, 255, 0.5),
-        inset 0 0 10px rgba(255, 255, 255, 0.15);
-      z-index: 999;
-      user-select: none;
-      transition: background 0.3s ease;
-    }
-
-    .nav-btn {
-      flex: 1;
-      margin: 0 12px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
-      border: none;
-      color: #e0f7ff;
-      font-size: 0; /* Иконки SVG без текста */
-      cursor: pointer;
-      padding: 14px;
-      box-shadow: 0 5px 10px rgba(0, 170, 255, 0.3);
-      transition:
-        background-color 0.3s ease,
-        box-shadow 0.3s ease,
-        transform 0.2s ease,
-        filter 0.3s ease;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-    }
-
-    .nav-btn svg {
-      width: 28px;
-      height: 28px;
-      fill: #b3e5ff;
-      transition: fill 0.3s ease, filter 0.3s ease;
-      pointer-events: none;
-    }
-
-    .nav-btn:hover,
-    .nav-btn:focus {
-      background: rgba(255, 255, 255, 0.25);
-      box-shadow:
-        0 6px 14px rgba(0, 210, 255, 0.6),
-        0 0 8px rgba(0, 210, 255, 0.7);
-      transform: scale(1.1);
-      outline: none;
-    }
-
-    .nav-btn:hover svg,
-    .nav-btn:focus svg {
-      fill: #00c1ff;
-      filter: drop-shadow(0 0 4px #00c1ff);
-    }
-
-    .nav-btn.active {
-      background: #00aaff;
-      box-shadow:
-        0 8px 18px #00c1ff,
-        0 0 12px #00c1ff;
-      transform: scale(1.15);
-    }
-    .nav-btn.active svg {
-      fill: #ffffff;
-      filter: drop-shadow(0 0 6px #00e5ff);
-    }
-
-    .nav-btn::after {
-      content: attr(title);
-      position: absolute;
-      bottom: 56px;
-      left: 50%;
-      transform: translateX(-50%) translateY(10px);
-      background: rgba(0, 170, 255, 0.85);
-      color: white;
-      font-size: 12px;
-      font-weight: 600;
-      padding: 6px 10px;
-      border-radius: 14px;
-      opacity: 0;
-      pointer-events: none;
-      white-space: nowrap;
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      z-index: 1000;
-      user-select: none;
-      filter: drop-shadow(0 0 4px rgba(0,0,0,0.3));
-    }
-    .nav-btn:hover::after,
-    .nav-btn:focus::after {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    .nav-btn:active {
-      transform: scale(0.9);
-      box-shadow: 0 4px 8px #007acc;
-    }
-  </style>
 </head>
 <body>
 
@@ -139,7 +25,7 @@
   </div>
 </div>
 
-<!-- Нижняя панель (для standalone режима) -->
+<!-- Нижняя навигационная панель -->
 <div class="bottom-nav hidden" aria-label="Navigation"></div>
 
 <script src="script.js"></script>
