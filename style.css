@@ -79,4 +79,41 @@ body {
   border: none;
   font-size: 1rem;
 }
+/* Иконка игры на главном экране */
+.game-icon-wrapper {
+  margin-top: 1rem;
+}
+.game-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 16px;
+  box-shadow: 0 0 10px #0af;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+.game-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Большая иконка и кнопка Install */
+.game-icon-large {
+  width: 140px;
+  height: 140px;
+  border-radius: 30px;
+  margin-bottom: 20px;
+}
+.install-button {
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  background: #0af;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 0 10px #0af;
+  transition: background 0.3s;
+}
+.install-button:hover {
+  background: #09c;
+}
 
