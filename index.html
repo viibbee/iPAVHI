@@ -10,9 +10,18 @@
 <body>
 
 <!-- Иконка игры (вверху слева, только в standalone) -->
-<div id="game-icon" class="game-icon hidden">
-  <img src="https://raw.githubusercontent.com/viibbee/iPAVHI/main/photo_2025-05-25_11-33-04.jpg" alt="Game Icon" />
-<div class="game-label">Free Fire</div>
+<div id="game-icon" class="game-icon hidden" style="left: 12px; bottom: auto; top: 20px;">
+  <button id="open-icon-modal" style="all: unset; cursor: pointer;">
+    <img src="https://raw.githubusercontent.com/viibbee/iPAVHI/main/photo_2025-05-25_11-33-04.jpg" alt="Game Icon" />
+    <div class="game-label">Free Fire</div>
+  </button>
+</div>
+
+<!-- Модальное окно с увеличенной иконкой -->
+<div id="icon-modal" class="modal hidden">
+  <div class="modal-content icon-popup">
+    <img src="https://raw.githubusercontent.com/viibbee/iPAVHI/main/photo_2025-05-25_11-33-04.jpg" alt="Large Game Icon" />
+  </div>
 </div>
 
 <!-- Кнопка обновления сайта -->
