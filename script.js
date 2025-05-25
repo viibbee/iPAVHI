@@ -10,13 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     installModal.classList.add("hidden");
     bottomNav.classList.remove("hidden");
-
-    // Add theme toggle
-    const toggle = document.createElement("button");
-    toggle.textContent = "🌓";
-    toggle.className = "nav-btn fade-in";
-    toggle.onclick = () => document.body.classList.toggle("light");
-    bottomNav.appendChild(toggle);
   }
 
   // Vibrate on click
@@ -28,12 +21,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
-
-
-  // Переключение темы
-  const themeToggle = document.querySelector(".theme-toggle");
-  themeToggle.addEventListener("click", () => {
-    document.body.classList.toggle("dark");
-    window.navigator.vibrate?.(30);
-  });
 
