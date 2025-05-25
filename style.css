@@ -82,47 +82,63 @@ body.light .bottom-nav {
   display: none !important;
 }
 
-/* Bottom nav */
+/* Bottom nav — обновленная */
 .bottom-nav {
   position: fixed;
-  bottom: 40px;
+  bottom: 60px; /* чуть выше */
   width: 100%;
   max-width: 420px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(17, 17, 17, 0.6);
-  backdrop-filter: blur(10px);
+  background: linear-gradient(90deg, #0af, #4fd1ff);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
   display: flex;
   justify-content: space-around;
-  padding: 12px 0;
-  border-radius: 20px;
-  box-shadow: 0 0 18px #0af;
+  padding: 14px 0;
+  box-shadow: 0 6px 20px rgba(0, 170, 255, 0.5);
   z-index: 999;
+  user-select: none;
 }
+
 .nav-btn {
   flex: 1;
-  margin: 0 8px;
-  background: transparent;
+  margin: 0 10px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
   border: none;
-  color: #0af;
-  font-size: 16px;
-  font-weight: 600;
+  color: #e0f7ff;
+  font-size: 24px;
+  font-weight: 700;
   cursor: pointer;
-  transition: color 0.3s ease;
-  padding: 8px 0;
+  padding: 12px 0;
+  box-shadow: 0 3px 10px rgba(0, 170, 255, 0.4);
+  transition: background-color 0.25s ease, transform 0.2s ease, color 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 .nav-btn:hover,
 .nav-btn:focus {
-  color: #4fd1ff;
+  background: rgba(255, 255, 255, 0.35);
+  color: #fff;
+  transform: scale(1.15);
   outline: none;
 }
 
-/* Animations */
+.nav-btn:active {
+  background: rgba(255, 255, 255, 0.55);
+  transform: scale(0.95);
+}
+
+/* Анимация появления */
 .fade-in {
   opacity: 0;
   transform: translateY(20px);
   animation: fadeInUp 0.6s ease-out forwards;
 }
+
 @keyframes fadeInUp {
   to {
     opacity: 1;
@@ -130,8 +146,7 @@ body.light .bottom-nav {
   }
 }
 
-
-/* Кнопка смены темы - перемещена над панелью */
+/* Кнопка смены темы - вынесена отдельно */
 .theme-toggle {
   position: fixed;
   right: 20px;
@@ -166,4 +181,3 @@ body.light .bottom-nav {
 body.dark .theme-toggle svg {
   fill: #ffb400;
 }
-
