@@ -4,41 +4,43 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>iPASTORE</title>
-
   <style>
     body {
       margin: 0;
       background-color: #000;
       font-family: -apple-system, BlinkMacSystemFont, sans-serif;
       color: white;
+      overflow: hidden; /* Скрыть всё до добавления ярлыка */
     }
 
-    /* Модальное окно */
+    .hidden {
+      display: none !important;
+    }
+
+    /* Модальное окно "добавить на главный экран" */
     .modal {
       position: fixed;
       inset: 0;
-      background-color: rgba(0, 0, 0, 0.8);
+      background-color: rgba(0, 0, 0, 0.85);
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 9999;
-    }
-    .modal.hidden {
-      display: none;
+      text-align: center;
     }
     .modal-content {
       background-color: #111;
-      padding: 20px;
-      border-radius: 12px;
-      text-align: center;
+      padding: 24px;
+      border-radius: 16px;
+      max-width: 90%;
     }
     .icon-img {
       width: 40px;
       height: 40px;
-      margin-top: 10px;
+      margin: 10px auto;
     }
 
-    /* Приветственный экран */
+    /* Приветствие */
     .start-screen {
       position: fixed;
       inset: 0;
@@ -61,7 +63,7 @@
       opacity: 0.9;
     }
 
-    /* Панель иконок игр */
+    /* Иконки игр */
     .games-container {
       display: flex;
       justify-content: space-around;
@@ -75,6 +77,7 @@
       border-radius: 12px;
       margin: 10px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       cursor: pointer;
@@ -84,20 +87,18 @@
       background-color: #0af;
     }
     .game-title {
-      font-size: 1rem;
-      color: white;
-      text-align: center;
+      font-size: 0.85rem;
+      margin-top: 6px;
     }
 
     /* Нижняя панель */
     .bottom-nav {
       position: fixed;
-      bottom: 40px;
-      width: 100%;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 40px);
       max-width: 420px;
-      left: 0;
-      right: 0;
-      margin: 0 auto;
       background-color: #111;
       display: flex;
       justify-content: space-around;
@@ -106,14 +107,12 @@
       box-shadow: 0 0 18px #0af;
       z-index: 999;
     }
-    .bottom-nav.hidden {
-      display: none;
-    }
     .nav-btn {
       background: none;
       color: white;
       border: none;
       font-size: 1rem;
+      cursor: pointer;
     }
 
     /* Модальное окно установки игры */
@@ -142,86 +141,87 @@
       font-size: 1.2rem;
       margin-top: 20px;
     }
-    .install-modal.hidden {
-      display: none;
+
+    /* Показывать содержимое при standalone режиме */
+    .show-content body {
+      overflow: auto;
     }
   </style>
 
-  <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjogImlQQVNUT1JFIiwic2hvcnRfbmFtZSI6ICJpUEFTVE9SRSIsInN0YXJ0X3VybCI6ICIvaVBBVkhJLyIsImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsImJhY2tncm91bmRfY29sb3IiOiAiIzAwMDAwMCIsInRoZW1lX2NvbG9yIjogIiMwMDAwMDAiLCJpY29ucyI6IFt7InNyYyI6IklNR181MTUyLnBuZyIsInNpemVzIjogIjE5MngxOTIiLCJ0eXBlIjogImltYWdlL3BuZyJ9LHsic3JjIjogIklNR181MTUyLnBuZyIsInNpemVzIjogIjUxMng1MTIiLCJ0eXBlIjogImltYWdlL3BuZyJ9XX0=" />
+  <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjogImlQQVNUT1JFIiwic2hvcnRfbmFtZSI6ICJpUEFTVE9SRSIsInN0YXJ0X3VybCI6ICIvaVBBVkhJLyIsImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsImJhY2tncm91bmRfY29sb3IiOiAiIzAwMDAwMCIsInRoZW1lX2NvbG9yIjogIiMwMDAwMDAiLCJpY29ucyI6IFt7InNyYyI6IklNR181MTUyLnBuZyIsInNpemVzIjogIjE5MngxOTIiLCJ0eXBlIjogImltYWdlL3BuZyJ9XX0=" />
 </head>
 <body>
 
-<!-- Add to Home Screen инструкция -->
+<!-- Модалка "Добавить на главный экран" -->
 <div id="install-modal" class="modal hidden">
   <div class="modal-content">
-    <h2>Install this App</h2>
+    <h2>Установить как приложение</h2>
     <p>
-      <img src="homescreen-icon.png" class="icon-img" alt="Homescreen icon" />
-      Tap the button in the toolbar.
+      <img src="share-icon.png" class="icon-img" alt="Share icon" />
+      Нажмите «Поделиться» и выберите <strong>На экран "Домой"</strong>
     </p>
-    <p>
-      Then select <strong>Add to Home Screen</strong>
-      <img src="share-icon.png" class="icon-img" alt="Share icon" /> from the menu that pops up.
-    </p>
-    <p>An icon will be added to your home screen for quick access.</p>
+    <p>Чтобы быстро открывать сайт как приложение.</p>
+  </div>
+</div>
+
+<!-- Приветствие -->
+<div id="start-screen" class="start-screen hidden">
+  <div class="start-wrapper">
+    <div class="welcome-title">Добро пожаловать в iPASTORE</div>
+    <div class="welcome-subtitle">Магазин iOS-игр и приложений</div>
   </div>
 </div>
 
 <!-- Иконки игр -->
-<div class="games-container">
-  <div class="game-icon" onclick="openInstallModal('Game 1')">
-    <img src="game1-icon.png" alt="Game 1" class="icon-img" />
-    <div class="game-title">Game 1</div>
+<div id="main-content" class="hidden">
+  <div class="games-container">
+    <div class="game-icon" onclick="openInstallModal('Game 1')">
+      <img src="game1-icon.png" alt="Game 1" class="icon-img" />
+      <div class="game-title">Game 1</div>
+    </div>
+    <div class="game-icon" onclick="openInstallModal('Game 2')">
+      <img src="game2-icon.png" alt="Game 2" class="icon-img" />
+      <div class="game-title">Game 2</div>
+    </div>
+    <div class="game-icon" onclick="openInstallModal('Game 3')">
+      <img src="game3-icon.png" alt="Game 3" class="icon-img" />
+      <div class="game-title">Game 3</div>
+    </div>
   </div>
-  <div class="game-icon" onclick="openInstallModal('Game 2')">
-    <img src="game2-icon.png" alt="Game 2" class="icon-img" />
-    <div class="game-title">Game 2</div>
-  </div>
-  <div class="game-icon" onclick="openInstallModal('Game 3')">
-    <img src="game3-icon.png" alt="Game 3" class="icon-img" />
-    <div class="game-title">Game 3</div>
+
+  <!-- Нижняя панель -->
+  <div class="bottom-nav">
+    <button class="nav-btn">Игры</button>
+    <button class="nav-btn">Приложения</button>
+    <button class="nav-btn">Поиск</button>
+    <button class="nav-btn">Ещё</button>
   </div>
 </div>
 
-<!-- Модальное окно установки игры -->
+<!-- Модалка установки игры -->
 <div id="install-game-modal" class="install-modal hidden">
   <div class="install-modal-content">
-    <h2 id="game-title">Install Game</h2>
-    <p>Click the button below to install the selected game.</p>
-    <button onclick="installGame()">Installer</button>
+    <h2 id="game-title">Установка</h2>
+    <p>Нажмите кнопку ниже для установки.</p>
+    <button onclick="installGame()">Установить</button>
   </div>
-</div>
-
-<!-- Нижняя панель -->
-<div class="bottom-nav hidden">
-  <button class="nav-btn">Games</button>
-  <button class="nav-btn">Apps</button>
-  <button class="nav-btn">Search</button>
-  <button class="nav-btn">More</button>
 </div>
 
 <script>
   window.addEventListener('DOMContentLoaded', () => {
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-
     const installModal = document.getElementById('install-modal');
-    const bottomNav = document.querySelector('.bottom-nav');
+    const startScreen = document.getElementById('start-screen');
+    const mainContent = document.getElementById('main-content');
 
     if (isStandalone) {
-      const startScreen = document.createElement('div');
-      startScreen.className = 'start-screen';
-      startScreen.innerHTML = `
-        <div class="start-wrapper">
-          <div class="welcome-title">Welcome to iPASTORE</div>
-          <div class="welcome-subtitle">Your Store for iOS Apps & Games</div>
-        </div>
-      `;
-      document.body.appendChild(startScreen);
-
+      // Показать приветствие, затем контент
+      startScreen.classList.remove('hidden');
       setTimeout(() => {
-        startScreen.remove();
-        bottomNav.classList.remove('hidden');
-      }, 2500);
+        startScreen.classList.add('hidden');
+        mainContent.classList.remove('hidden');
+        document.body.classList.add('show-content');
+      }, 2000);
     } else {
       installModal.classList.remove('hidden');
     }
@@ -230,36 +230,25 @@
   function openInstallModal(gameName) {
     const modal = document.getElementById('install-game-modal');
     const gameTitle = document.getElementById('game-title');
-    gameTitle.textContent = `Install ${gameName}`;
+    gameTitle.textContent = `Установить ${gameName}`;
     modal.classList.remove('hidden');
   }
 
   function installGame() {
-    alert("The game is being installed...");
+    alert("Игра устанавливается...");
     document.getElementById('install-game-modal').classList.add('hidden');
   }
 
-  // Регистрация service worker
+  // Service Worker
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service-worker.js').catch(console.error);
+    const swBlob = new Blob([`
+      self.addEventListener('install', e => self.skipWaiting());
+      self.addEventListener('activate', e => e.waitUntil(clients.claim()));
+      self.addEventListener('fetch', () => {});
+    `], { type: 'application/javascript' });
+    const swUrl = URL.createObjectURL(swBlob);
+    navigator.serviceWorker.register(swUrl).catch(console.error);
   }
 </script>
-
-<!-- Service Worker Inline -->
-<script type="text/javascript">
-  const swBlob = new Blob([`
-    self.addEventListener('install', event => {self.skipWaiting();
-     });
-self.addEventListener('activate', event => {
-event.waitUntil(clients.claim());
-});
-self.addEventListener('fetch', () => {});
-`], { type: 'application/javascript' });
-
-const swUrl = URL.createObjectURL(swBlob);
-navigator.serviceWorker.register(swUrl);
-</script>
-
-</body> 
+</body>
 </html>
-
