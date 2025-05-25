@@ -9,45 +9,44 @@
 </head>
 <body>
 
-<!-- Иконка игры (вверху слева, только в standalone) -->
-<div id="game-icon" class="game-icon hidden" style="left: 12px; bottom: auto; top: 20px;">
-  <button id="open-icon-modal" style="all: unset; cursor: pointer;">
+<!-- Иконка игры -->
+<div id="game-icon" class="game-icon hidden">
+  <button id="open-icon-modal">
     <img src="https://raw.githubusercontent.com/viibbee/iPAVHI/main/photo_2025-05-25_11-33-04.jpg" alt="Game Icon" />
     <div class="game-label">Free Fire</div>
   </button>
 </div>
 
-<!-- Модальное окно с увеличенной иконкой -->
+<!-- Модалка с увеличенной иконкой -->
 <div id="icon-modal" class="modal hidden">
   <div class="modal-content icon-popup">
     <img src="https://raw.githubusercontent.com/viibbee/iPAVHI/main/photo_2025-05-25_11-33-04.jpg" alt="Large Game Icon" />
   </div>
 </div>
 
-<!-- Кнопка обновления сайта -->
+<!-- Кнопка обновления -->
 <button id="refresh-btn" aria-label="Обновить сайт" title="Обновить сайт">
-  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+  <svg viewBox="0 0 24 24">
     <path d="M17.65 6.35a7.95 7.95 0 0 0-5.6-2.35 8 8 0 1 0 8 8h-2a6 6 0 1 1-1.76-4.24l-1.99 2V6h5v5l-2.35-2.35z"/>
   </svg>
 </button>
 
-<!-- Add to Home Screen инструкция -->
+<!-- Окно установки -->
 <div id="install-modal" class="modal hidden">
   <div class="modal-content">
     <h2>Install this App</h2>
     <p>
       <img src="homescreen-icon.png" class="icon-img" alt="Homescreen icon" />
-      Tap the button in the toolbar.
+      Tap the share button.
     </p>
     <p>
       Then select <strong>Add to Home Screen</strong>
-      <img src="share-icon.png" class="icon-img" alt="Share icon" /> from the menu that pops up.
+      <img src="share-icon.png" class="icon-img" alt="Share icon" /> from the menu.
     </p>
-    <p>An icon will be added to your home screen for quick access.</p>
   </div>
 </div>
 
-<!-- Нижняя панель (для standalone режима) -->
+<!-- Нижняя панель -->
 <div class="bottom-nav hidden"></div>
 
 <script src="script.js"></script>
