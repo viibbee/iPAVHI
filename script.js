@@ -5,21 +5,19 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const installModal = document.getElementById('install-modal');
   const appContent = document.getElementById('app-content');
-  const bottomBar = document.getElementById('bottom-bar');
+  const bottomNav = document.querySelector('.bottom-nav');
   const gameModal = document.getElementById('game-modal');
   const gameIcon = document.getElementById('main-game-icon');
 
   if (isStandalone) {
     installModal.classList.add('hidden');
     appContent.classList.remove('hidden');
-    bottomBar.classList.remove('hidden');
+    bottomNav.classList.remove('hidden');
 
-    // Клик по иконке игры
     gameIcon.addEventListener('click', () => {
       gameModal.classList.remove('hidden');
     });
 
-    // Закрытие модалки по клику вне содержимого
     gameModal.addEventListener('click', (e) => {
       if (e.target === gameModal) {
         gameModal.classList.add('hidden');
