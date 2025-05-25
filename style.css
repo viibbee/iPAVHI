@@ -1,3 +1,4 @@
+/* Основные стили body */
 body {
   margin: 0;
   background: #000;
@@ -7,6 +8,7 @@ body {
   overflow: hidden;
 }
 
+/* Иконка игры в левом верхнем углу */
 .game-icon {
   position: fixed;
   top: 20px;
@@ -18,7 +20,7 @@ body {
 }
 
 .game-icon img {
-  width: 54px;  /* ваш текущий размер иконки */
+  width: 54px; /* текущий размер иконки */
   height: auto;
   border-radius: 12px;
   box-shadow: 0 3px 8px rgba(0,0,0,0.3);
@@ -78,6 +80,7 @@ body {
 #refresh-btn:hover svg {
   transform: rotate(20deg);
 }
+
 /* Анимация появления сверху */
 @keyframes fadeInDown {
   from {
@@ -95,6 +98,7 @@ body.light {
   background: #fff;
   color: #000;
 }
+
 body.light .bottom-nav {
   background: rgba(255, 255, 255, 0.8);
   color: #000;
@@ -113,7 +117,10 @@ body.light .bottom-nav {
 }
 
 @keyframes hideSplash {
-  to { opacity: 0; visibility: hidden; }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 .splash-title {
@@ -123,11 +130,17 @@ body.light .bottom-nav {
 }
 
 @keyframes splashFade {
-  0% { opacity: 0; transform: scale(0.8); }
-  100% { opacity: 1; transform: scale(1); }
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-/* Modal */
+/* Модальное окно */
 .modal {
   position: fixed;
   inset: 0;
@@ -166,12 +179,12 @@ body.light .bottom-nav {
   margin: 0 6px;
 }
 
-/* Hide class */
+/* Скрытый класс */
 .hidden {
   display: none !important;
 }
 
-/* Bottom nav — обновленная */
+/* Нижняя навигация — обновленная */
 .bottom-nav {
   position: fixed;
   bottom: 60px;
@@ -235,7 +248,7 @@ body.light .bottom-nav {
   }
 }
 
-/* Кнопка смены темы - вынесена отдельно */
+/* Кнопка смены темы */
 .theme-toggle {
   position: fixed;
   right: 20px;
@@ -270,6 +283,7 @@ body.light .bottom-nav {
 body.dark .theme-toggle svg {
   fill: #ffb400;
 }
+
 /* Модальное окно для увеличенной иконки */
 #icon-modal {
   position: fixed;
