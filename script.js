@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const bottomNav = document.querySelector(".bottom-nav");
   const gameIcon = document.getElementById("game-icon");
   const iconModal = document.getElementById("icon-modal");
+  const installBtn = document.getElementById("install-btn");
 
   if (!isStandalone) {
     // Обычный Safari режим — показываем подсказку установки, скрываем навигацию и иконку
@@ -43,6 +44,13 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(`Clicked ${title}`);
       });
       bottomNav.appendChild(btn);
+    });
+  }
+
+  // Обработчик кнопки Install (открыть ссылку)
+  if (installBtn) {
+    installBtn.addEventListener("click", () => {
+      window.open("https://signipa.org/Jqj8oB8J", "_blank");
     });
   }
 
