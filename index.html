@@ -1,45 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>iPASTORE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VHI Game Catalog</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#000000" />
 </head>
 <body>
 
-<!-- Add to Home Screen инструкция -->
-<div id="install-modal" class="modal hidden">
-  <div class="modal-content">
-    <h2>Install this App</h2>
-    <p>
-      <img src="homescreen-icon.png" class="icon-img" alt="Homescreen icon" />
-      Tap the button in the toolbar.
-    </p>
-    <p>
-      Then select <strong>Add to Home Screen</strong>
-      <img src="share-icon.png" class="icon-img" alt="Share icon" /> from the menu that pops up.
-    </p>
-    <p>An icon will be added to your home screen for quick access.</p>
+  <!-- Иконка игры в верхней части -->
+  <div id="game-icon" class="game-icon hidden">
+    <img src="game-icon.png" alt="Game Icon" />
+    <span>Super Game</span>
   </div>
-</div>
 
-<!-- Нижняя панель (для standalone режима) -->
-<div class="bottom-nav hidden">
-  <button class="nav-btn">Games</button>
-  <button class="nav-btn">Apps</button>
-  <button class="nav-btn">Search</button>
-  <button class="nav-btn">More</button>
-</div>
-<!-- Иконка игры в верхней части экрана (только для standalone) -->
-<div id="game-icon" class="game-icon hidden">
-  <img src="game-icon.png" alt="Game Icon" />
-  <span>Super Game</span>
-</div>
+  <!-- Основной интерфейс -->
+  <div id="app">
+    <h1>Добро пожаловать в каталог игр VHI</h1>
+    <!-- Здесь будет каталог игр -->
+  </div>
 
-<script src="script.js"></script>
+  <!-- Нижняя навигация -->
+  <nav id="bottom-nav" class="bottom-nav">
+    <button>Игры</button>
+    <button>Избранное</button>
+    <button>Профиль</button>
+  </nav>
+
+  <script src="script.js"></script>
 </body>
 </html>
+
 
 
