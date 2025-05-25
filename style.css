@@ -37,7 +37,7 @@ body {
 /* Кнопка обновления сайта */
 #refresh-btn {
   position: fixed;
-  bottom: 120px; /* над нижней панелью (которая на 60px от низа) */
+  bottom: 160px; /* над нижней панелью (которая на 60px от низа) */
   right: 20px;
   background: linear-gradient(90deg, #0af, #4fd1ff);
   color: #fff;
