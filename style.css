@@ -10,8 +10,8 @@ body {
 .game-icon {
   position: fixed;
   top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 20px;           /* смещаем влево с центра */
+  transform: none;      /* убираем translateX(-50%) */
   background: rgba(0, 170, 255, 0.2);
   backdrop-filter: blur(10px);
   border: 1px solid #0af;
@@ -29,11 +29,10 @@ body {
 }
 
 .game-icon img {
-  width: 32px;
-  height: 32px;
+  width: 48px;   /* увеличил размер с 32px */
+  height: 48px;  /* увеличил размер */
   border-radius: 8px;
 }
-
 /* Анимация появления сверху */
 @keyframes fadeInDown {
   from {
