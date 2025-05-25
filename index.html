@@ -4,43 +4,142 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>iPASTORE</title>
-  <link rel="stylesheet" href="style.css" />
   <link rel="manifest" href="manifest.json" />
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      color: white;
+    }
+
+    .hidden { display: none; }
+
+    /* Модальное окно установки */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    .modal-content {
+      background-color: #111;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+    }
+    .icon-img {
+      width: 40px;
+      height: 40px;
+      margin-top: 10px;
+    }
+
+    /* Нижняя панель */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #111;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      box-shadow: 0 -2px 10px rgba(0, 170, 255, 0.3);
+      z-index: 1000;
+    }
+    .nav-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .nav-btn:active {
+      color: #0af;
+    }
+
+    /* Основной контент */
+    #app-content {
+      padding-top: 20px;
+      text-align: center;
+    }
+
+    #main-game-icon {
+      width: 100px;
+      height: 100px;
+      border-radius: 24px;
+      margin: 20px auto 10px;
+      display: block;
+      box-shadow: 0 0 12px #0af;
+      cursor: pointer;
+    }
+
+    /* Модалка с игрой */
+    #game-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 9998;
+    }
+
+    #game-modal .large-icon {
+      width: 160px;
+      height: 160px;
+      border-radius: 32px;
+      box-shadow: 0 0 18px #0af;
+      margin-bottom: 20px;
+    }
+
+    #game-modal button {
+      background: #0af;
+      color: #000;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      border-radius: 16px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
 
-<!-- Add to Home Screen инструкция -->
+<!-- Установка PWA -->
 <div id="install-modal" class="modal hidden">
   <div class="modal-content">
     <h2>Install this App</h2>
     <p>
-      <img src="homescreen-icon.png" class="icon-img" alt="Homescreen icon" />
-      Tap the button in the toolbar.
+      <img src="homescreen-icon.png" class="icon-img" alt="Icon" />
+      Tap the share button in Safari.
     </p>
-    <p>
-      Then select <strong>Add to Home Screen</strong>
-      <img src="share-icon.png" class="icon-img" alt="Share icon" /> from the menu that pops up.
-    </p>
-    <p>An icon will be added to your home screen for quick access.</p>
+    <p>Then select <strong>Add to Home Screen</strong>.</p>
   </div>
 </div>
 
-<!-- Главное содержимое standalone -->
+<!-- Основной контент (только в standalone) -->
 <div id="app-content" class="hidden">
-  <div class="game-icon-container">
-    <img src="IMG_5152.png" alt="Game Icon" id="main-game-icon" class="game-icon" />
-  </div>
+  <!-- Иконка игры -->
+  <img src="IMG_5152.png" id="main-game-icon" alt="Game Icon" />
+
+  <!-- Здесь может быть текст, логотип и прочее -->
+  <h2>iPASTORE</h2>
+  <p>Tap the icon to install the game</p>
 </div>
 
-<!-- Модальное окно при нажатии на иконку -->
-<div id="game-modal" class="modal hidden">
-  <div class="modal-content">
-    <img src="IMG_5152.png" class="modal-game-icon" alt="Game Icon Large" />
-    <a href="https://signipa.org/Jqj8oB8J" class="install-btn">Install</a>
-  </div>
+<!-- Модалка с кнопкой Install -->
+<div id="game-modal">
+  <img src="IMG_5152.png" class="large-icon" alt="Large Game Icon" />
+  <button onclick="window.open('https://signipa.org/Jqj8oB8J', '_blank')">Install</button>
 </div>
 
-<!-- Новая нижняя панель -->
+<!-- Нижняя панель -->
 <div class="bottom-nav hidden">
   <button class="nav-btn">Games</button>
   <button class="nav-btn">Apps</button>
@@ -48,7 +147,35 @@
   <button class="nav-btn">More</button>
 </div>
 
-<script src="script.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+
+    const installModal = document.getElementById('install-modal');
+    const appContent = document.getElementById('app-content');
+    const bottomNav = document.querySelector('.bottom-nav');
+    const gameModal = document.getElementById('game-modal');
+    const gameIcon = document.getElementById('main-game-icon');
+
+    if (isStandalone) {
+      installModal.classList.add('hidden');
+      appContent.classList.remove('hidden');
+      bottomNav.classList.remove('hidden');
+
+      gameIcon.addEventListener('click', () => {
+        gameModal.style.display = 'flex';
+      });
+
+      gameModal.addEventListener('click', (e) => {
+        if (e.target === gameModal) {
+          gameModal.style.display = 'none';
+        }
+      });
+    } else {
+      installModal.classList.remove('hidden');
+    }
+  });
+</script>
+
 </body>
 </html>
-
