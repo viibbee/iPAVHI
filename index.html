@@ -61,6 +61,34 @@
       opacity: 0.9;
     }
 
+    /* Панель иконок игр */
+    .games-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      padding: 20px;
+    }
+    .game-icon {
+      width: 80px;
+      height: 80px;
+      background-color: #222;
+      border-radius: 12px;
+      margin: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .game-icon:hover {
+      background-color: #0af;
+    }
+    .game-title {
+      font-size: 1rem;
+      color: white;
+      text-align: center;
+    }
+
     /* Нижняя панель */
     .bottom-nav {
       position: fixed;
@@ -87,6 +115,36 @@
       border: none;
       font-size: 1rem;
     }
+
+    /* Модальное окно установки игры */
+    .install-modal {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    .install-modal-content {
+      background-color: #111;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+    }
+    .install-modal button {
+      background-color: #0af;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      margin-top: 20px;
+    }
+    .install-modal.hidden {
+      display: none;
+    }
   </style>
 
   <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjogImlQQVNUT1JFIiwic2hvcnRfbmFtZSI6ICJpUEFTVE9SRSIsInN0YXJ0X3VybCI6ICIvaVBBVkhJLyIsImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsImJhY2tncm91bmRfY29sb3IiOiAiIzAwMDAwMCIsInRoZW1lX2NvbG9yIjogIiMwMDAwMDAiLCJpY29ucyI6IFt7InNyYyI6IklNR181MTUyLnBuZyIsInNpemVzIjogIjE5MngxOTIiLCJ0eXBlIjogImltYWdlL3BuZyJ9LHsic3JjIjogIklNR181MTUyLnBuZyIsInNpemVzIjogIjUxMng1MTIiLCJ0eXBlIjogImltYWdlL3BuZyJ9XX0=" />
@@ -106,6 +164,31 @@
       <img src="share-icon.png" class="icon-img" alt="Share icon" /> from the menu that pops up.
     </p>
     <p>An icon will be added to your home screen for quick access.</p>
+  </div>
+</div>
+
+<!-- Иконки игр -->
+<div class="games-container">
+  <div class="game-icon" onclick="openInstallModal('Game 1')">
+    <img src="game1-icon.png" alt="Game 1" class="icon-img" />
+    <div class="game-title">Game 1</div>
+  </div>
+  <div class="game-icon" onclick="openInstallModal('Game 2')">
+    <img src="game2-icon.png" alt="Game 2" class="icon-img" />
+    <div class="game-title">Game 2</div>
+  </div>
+  <div class="game-icon" onclick="openInstallModal('Game 3')">
+    <img src="game3-icon.png" alt="Game 3" class="icon-img" />
+    <div class="game-title">Game 3</div>
+  </div>
+</div>
+
+<!-- Модальное окно установки игры -->
+<div id="install-game-modal" class="install-modal hidden">
+  <div class="install-modal-content">
+    <h2 id="game-title">Install Game</h2>
+    <p>Click the button below to install the selected game.</p>
+    <button onclick="installGame()">Installer</button>
   </div>
 </div>
 
@@ -144,6 +227,18 @@
     }
   });
 
+  function openInstallModal(gameName) {
+    const modal = document.getElementById('install-game-modal');
+    const gameTitle = document.getElementById('game-title');
+    gameTitle.textContent = `Install ${gameName}`;
+    modal.classList.remove('hidden');
+  }
+
+  function installGame() {
+    alert("The game is being installed...");
+    document.getElementById('install-game-modal').classList.add('hidden');
+  }
+
   // Регистрация service worker
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('service-worker.js').catch(console.error);
@@ -153,31 +248,18 @@
 <!-- Service Worker Inline -->
 <script type="text/javascript">
   const swBlob = new Blob([`
-    self.addEventListener('install', event => {
-      event.waitUntil(
-        caches.open('v1').then(cache => {
-          return cache.addAll([
-            '/',
-            '/index.html',
-            '/style.css',
-            '/script.js',
-            '/manifest.json'
-          ]);
-        })
-      );
-    });
+    self.addEventListener('install', event => {self.skipWaiting();
+     });
+self.addEventListener('activate', event => {
+event.waitUntil(clients.claim());
+});
+self.addEventListener('fetch', () => {});
+`], { type: 'application/javascript' });
 
-    self.addEventListener('fetch', event => {
-      event.respondWith(
-        caches.match(event.request).then(response => response || fetch(event.request))
-      );
-    });
-  `], { type: 'application/javascript' });
-
-  const swUrl = URL.createObjectURL(swBlob);
-  navigator.serviceWorker.register(swUrl);
+const swUrl = URL.createObjectURL(swBlob);
+navigator.serviceWorker.register(swUrl);
 </script>
 
-</body>
+</body> 
 </html>
 
