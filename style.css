@@ -6,6 +6,7 @@ body {
   height: 100vh;
   overflow: hidden;
 }
+
 .game-icon {
   position: fixed;
   top: 20px;
@@ -66,14 +67,17 @@ body.light .bottom-nav {
   z-index: 2000;
   animation: hideSplash 1s 1.8s forwards;
 }
+
 @keyframes hideSplash {
   to { opacity: 0; visibility: hidden; }
 }
+
 .splash-title {
   font-size: 32px;
   color: #0af;
   animation: splashFade 1.5s ease-in-out;
 }
+
 @keyframes splashFade {
   0% { opacity: 0; transform: scale(0.8); }
   100% { opacity: 1; transform: scale(1); }
@@ -91,6 +95,7 @@ body.light .bottom-nav {
   box-sizing: border-box;
   z-index: 1000;
 }
+
 .modal-content {
   width: 90%;
   max-width: 360px;
@@ -103,11 +108,13 @@ body.light .bottom-nav {
   border: 2px solid #0af;
   box-shadow: 0 0 18px #0af;
 }
+
 .modal-content h2 {
   font-size: 22px;
   margin-bottom: 20px;
   color: #0af;
 }
+
 .icon-img {
   width: 26px;
   height: 26px;
@@ -123,7 +130,7 @@ body.light .bottom-nav {
 /* Bottom nav — обновленная */
 .bottom-nav {
   position: fixed;
-  bottom: 60px; /* чуть выше */
+  bottom: 60px;
   width: 100%;
   max-width: 420px;
   left: 50%;
@@ -219,4 +226,3 @@ body.light .bottom-nav {
 body.dark .theme-toggle svg {
   fill: #ffb400;
 }
-
