@@ -6,6 +6,44 @@ body {
   height: 100vh;
   overflow: hidden;
 }
+.game-icon {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 170, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid #0af;
+  border-radius: 16px;
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #0af;
+  font-weight: 600;
+  font-size: 16px;
+  z-index: 1001;
+  box-shadow: 0 4px 12px rgba(0, 170, 255, 0.3);
+  animation: fadeInDown 0.8s ease forwards;
+}
+
+.game-icon img {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+}
+
+/* Анимация появления сверху */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
 
 /* Light theme */
 body.light {
