@@ -10,31 +10,29 @@
 <body>
 
 <!-- Иконка игры -->
-<div id="game-icon" class="game-icon hidden">
-  <button id="open-icon-modal">
-    <img src="https://raw.githubusercontent.com/viibbee/iPAVHI/main/photo_2025-05-25_11-33-04.jpg" alt="Game Icon" />
-    <div class="game-label">Free Fire</div>
-  </button>
+<div id="game-icon" class="game-icon hidden" role="button" aria-label="Open game icon preview" tabindex="0">
+  <img src="https://raw.githubusercontent.com/viibbee/iPAVHI/main/photo_2025-05-25_11-33-04.jpg" alt="Game Icon Free Fire" />
+  <div class="game-label">Free Fire</div>
 </div>
 
 <!-- Модалка с увеличенной иконкой -->
-<div id="icon-modal" class="modal hidden">
-  <div class="modal-content icon-popup">
-    <img src="https://raw.githubusercontent.com/viibbee/iPAVHI/main/photo_2025-05-25_11-33-04.jpg" alt="Large Game Icon" />
+<div id="icon-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="icon-modal-title" tabindex="-1">
+  <div class="modal-content icon-popup" tabindex="0">
+    <img src="https://raw.githubusercontent.com/viibbee/iPAVHI/main/photo_2025-05-25_11-33-04.jpg" alt="Large Game Icon Free Fire" />
   </div>
 </div>
 
 <!-- Кнопка обновления -->
-<button id="refresh-btn" aria-label="Обновить сайт" title="Обновить сайт">
-  <svg viewBox="0 0 24 24">
+<button id="refresh-btn" aria-label="Обновить сайт" title="Обновить сайт" type="button">
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
     <path d="M17.65 6.35a7.95 7.95 0 0 0-5.6-2.35 8 8 0 1 0 8 8h-2a6 6 0 1 1-1.76-4.24l-1.99 2V6h5v5l-2.35-2.35z"/>
   </svg>
 </button>
 
 <!-- Окно установки -->
-<div id="install-modal" class="modal hidden">
+<div id="install-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="install-modal-title" tabindex="-1">
   <div class="modal-content">
-    <h2>Install this App</h2>
+    <h2 id="install-modal-title">Install this App</h2>
     <p>
       <img src="homescreen-icon.png" class="icon-img" alt="Homescreen icon" />
       Tap the share button.
@@ -47,11 +45,10 @@
 </div>
 
 <!-- Нижняя панель -->
-<div class="bottom-nav hidden"></div>
+<div class="bottom-nav hidden" role="navigation" aria-label="Bottom navigation"></div>
 
 <script src="script.js"></script>
 </body>
 </html>
-
 
 
