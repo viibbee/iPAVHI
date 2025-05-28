@@ -3,38 +3,38 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<title>GameHub PWA</title>
+<title>GameHub</title>
 <link rel="manifest" href="manifest.json" />
 <link rel="stylesheet" href="style.css" />
-<script defer src="app.js"></script>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
 </head>
 <body>
 <header>
   <h1>GameHub</h1>
-  <p>Add this site to your home screen for the best experience</p>
+  <p>Add this site to your Home Screen for best experience</p>
 </header>
-<main id="games-list" class="games-list">
-  <!-- Игры будут вставлены здесь через JS -->
+
+<main id="game-list">
+  <!-- Игры будут добавлены здесь через JS -->
 </main>
 
-<!-- Модальное окно с информацией об игре -->
 <div id="modal" class="modal hidden">
   <div class="modal-content">
-    <button id="modal-close" class="modal-close">&times;</button>
-    <div class="game-info">
-      <img id="modal-icon" src="" alt="Game Icon" />
-      <h2 id="modal-title"></h2>
-      <p id="modal-description"></p>
-      <div id="download-status" class="download-status"></div>
-      <div class="modal-buttons">
-        <button id="install-btn" class="btn">Install</button>
-        <button id="ipa-btn" class="btn">IPA</button>
-      </div>
+    <button class="modal-close" aria-label="Close modal">&times;</button>
+    <img id="modal-icon" src="" alt="Game icon" />
+    <h2 id="modal-title"></h2>
+    <p id="modal-description"></p>
+    <div class="modal-buttons">
+      <button id="install-btn">Install</button>
+      <button id="ipa-btn">IPA</button>
+    </div>
+    <div id="install-progress" class="progress-bar hidden">
+      <div class="progress-fill"></div>
     </div>
   </div>
 </div>
 
+<script src="app.js"></script>
 </body>
 </html>
