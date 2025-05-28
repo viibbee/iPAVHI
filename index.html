@@ -1,20 +1,279 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Game Store PWA</title>
+
+  <!-- PWA манифест -->
   <link rel="manifest" href="manifest.json" />
-  <link rel="stylesheet" href="style.css" />
-  <meta name="theme-color" content="#ffffff" />
-  <title>iPAVHI App Store</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Game Store" />
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      margin: 0; padding: 0; background: #f5f5f7; color: #1c1c1e;
+    }
+    header {
+      background: #fff;
+      padding: 12px 16px;
+      font-weight: 700;
+      font-size: 20px;
+      border-bottom: 1px solid #ccc;
+      text-align: center;
+    }
+    main {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 0 16px;
+    }
+    .instruction {
+      background: #fff;
+      padding: 16px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      font-size: 16px;
+      line-height: 1.4;
+    }
+    .game-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .game-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .game-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      background-size: cover;
+      background-position: center;
+      flex-shrink: 0;
+    }
+    .game-info {
+      flex-grow: 1;
+    }
+    .game-name {
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+    .game-desc {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 8px;
+    }
+    .btn-get {
+      background: #007aff;
+      border: none;
+      color: white;
+      border-radius: 20px;
+      padding: 8px 16px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.3s ease;
+    }
+    .btn-get:hover {
+      background: #005fcc;
+    }
+    /* Модальное окно */
+    .modal {
+      display: none;
+      position: fixed;
+      top:0; left:0; right:0; bottom:0;
+      background: rgba(0,0,0,0.4);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal.active {
+      display: flex;
+    }
+    .modal-content {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      position: relative;
+      text-align: center;
+    }
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 20px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+    }
+    .modal-title {
+      font-weight: 700;
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+    .modal-description {
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: #444;
+    }
+    .btn-install, .btn-ipa {
+      background: #007aff;
+      border: none;
+      color: white;
+      border-radius: 20px;
+      padding: 12px 24px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.3s ease;
+      margin: 0 8px;
+      width: 120px;
+    }
+    .btn-install:hover, .btn-ipa:hover {
+      background: #005fcc;
+    }
+    .modal-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>iPAVHI Game Hub</h1>
-  </header>
-  <main id="app-list">
-    <!-- Игры будут добавлены JavaScript'ом -->
+  <header>Game Store</header>
+  <main>
+    <section class="instruction">
+      <h2>Добро пожаловать!</h2>
+      <p>Для удобного доступа добавьте этот сайт на главный экран вашего устройства.</p>
+      <p><strong>На iPhone:</strong> нажмите кнопку «Поделиться» и выберите «На экран «Домой»».</p>
+      <p><strong>На Android:</strong> нажмите меню браузера и выберите «Добавить на главный экран».</p>
+    </section>
+
+    <section class="game-list" id="gameList">
+      <!-- Игры динамически вставятся сюда -->
+    </section>
   </main>
-  <script src="app.js"></script>
+
+  <!-- Модальное окно для игры -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div class="modal-title" id="modalTitle">Игра</div>
+      <div class="modal-description" id="modalDescription">Описание игры...</div>
+      <div class="modal-buttons">
+        <button class="btn-install" id="btnInstall">Install</button>
+        <button class="btn-ipa" id="btnIPA">IPA</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const games = [
+      {
+        id: 1,
+        name: "Amazing Adventure",
+        description: "Увлекательное приключение с множеством уровней и загадок.",
+        icon: "https://via.placeholder.com/60/007aff/ffffff?text=A",
+        installUrl: "https://example.com/install/amazing-adventure",
+        ipaUrl: "https://example.com/downloads/amazing-adventure.ipa"
+      },
+      {
+        id: 2,
+        name: "Space Shooter",
+        description: "Классический шутер в космосе с динамичными сражениями.",
+        icon: "https://via.placeholder.com/60/ff3b30/ffffff?text=S",
+        installUrl: "https://example.com/install/space-shooter",
+        ipaUrl: "https://example.com/downloads/space-shooter.ipa"
+      }
+    ];
+
+    const gameListEl = document.getElementById('gameList');
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDescription = document.getElementById('modalDescription');
+    const btnInstall = document.getElementById('btnInstall');
+    const btnIPA = document.getElementById('btnIPA');
+    const modalClose = document.getElementById('modalClose');
+
+    // Функция создания карточки игры
+    function createGameCard(game) {
+      const card = document.createElement('div');
+      card.className = 'game-card';
+
+      const icon = document.createElement('div');
+      icon.className = 'game-icon';
+      icon.style.backgroundImage = `url(${game.icon})`;
+
+      const info = document.createElement('div');
+      info.className = 'game-info';
+
+      const name = document.createElement('div');
+      name.className = 'game-name';
+      name.textContent = game.name;
+
+      const desc = document.createElement('div');
+      desc.className = 'game-desc';
+      desc.textContent = game.description;
+
+      const btnGet = document.createElement('button');
+      btnGet.className = 'btn-get';
+      btnGet.textContent = 'Get';
+
+      btnGet.onclick = () => openModal(game);
+
+      info.appendChild(name);
+      info.appendChild(desc);
+      info.appendChild(btnGet);
+
+      card.appendChild(icon);
+      card.appendChild(info);
+
+      return card;
+    }
+
+    // Заполняем список игр
+    games.forEach(game => {
+      gameListEl.appendChild(createGameCard(game));
+    });
+
+    // Открыть модалку с инфо об игре
+    function openModal(game) {
+      modalTitle.textContent = game.name;
+      modalDescription.textContent = game.description;
+      btnInstall.onclick = () => {
+        window.open(game.installUrl, '_blank');
+      };
+      btnIPA.onclick = () => {
+        window.open(game.ipaUrl, '_blank');
+      };
+      modal.classList.add('active');
+    }
+
+    // Закрыть модалку
+    modalClose.onclick = () => {
+      modal.classList.remove('active');
+    };
+
+    // Закрытие при клике вне контента
+    modal.onclick = (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+      }
+    };
+  </script>
 </body>
 </html>
