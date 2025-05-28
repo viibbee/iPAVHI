@@ -1,450 +1,74 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>Games PWA</title>
-
-  <!-- Цвет статус-бара для iOS и Android -->
-  <meta name="theme-color" content="#1a1a2e" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-
-  <style>
-    /* ========== ОБЩИЕ СТИЛИ ========== */
-    body {
-      margin: 0;
-      background: #121222;
-      color: #e0e0f0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-      padding-bottom: 60px; /* пространство под нижнюю навигацию */
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      -webkit-tap-highlight-color: transparent;
-    }
-    * {
-      box-sizing: border-box;
-    }
-    a {
-      color: #a8a8ff;
-      text-decoration: none;
-    }
-    a:hover,
-    a:focus {
-      text-decoration: underline;
-    }
-    h1, h2, h3 {
-      margin: 0;
-    }
-
-    /* ========== HEADER ========== */
-    header {
-      background: linear-gradient(90deg, #282a3a, #3b3d59);
-      padding: 16px 20px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(75, 80, 170, 0.7);
-      border-bottom: 1px solid #44476e;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-    header h1 {
-      font-weight: 700;
-      font-size: 1.5rem;
-      color: #a8a8ff;
-      user-select: none;
-    }
-
-    /* ========== GAME LIST ========== */
-    #game-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 16px;
-      padding: 20px;
-    }
-
-    .game-card {
-      background: #1f2035;
-      box-shadow:
-        0 6px 12px rgb(100 100 180 / 0.3),
-        0 2px 6px rgb(100 100 180 / 0.22);
-      color: #cfd0ff;
-      border-radius: 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 12px;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      user-select: none;
-    }
-    .game-card:hover,
-    .game-card:focus {
-      transform: translateY(-6px) scale(1.05);
-      box-shadow:
-        0 14px 28px rgb(130 130 230 / 0.55),
-        0 8px 14px rgb(130 130 230 / 0.44);
-      outline: none;
-    }
-    .game-icon {
-      width: 96px;
-      height: 96px;
-      border-radius: 24px;
-      object-fit: cover;
-      margin-bottom: 12px;
-      box-shadow: 0 4px 8px rgb(150 150 220 / 0.5);
-      background: linear-gradient(135deg, #4f4fc9 0%, #8686ff 100%);
-    }
-    .game-info {
-      text-align: center;
-    }
-    .game-title {
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: #b1b2ff;
-      margin-bottom: 6px;
-    }
-    .game-desc {
-      font-size: 0.85rem;
-      color: #bbbbee;
-      line-height: 1.3;
-    }
-
-    /* ========== MODAL ========== */
-    .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(20, 20, 40, 0.9);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      visibility: hidden;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      z-index: 100;
-    }
-    .modal.active {
-      visibility: visible;
-      opacity: 1;
-    }
-    .modal-content {
-      background: #282a3a;
-      border-radius: 20px;
-      width: 90%;
-      max-width: 400px;
-      padding: 20px 24px;
-      color: #d1d1ff;
-      box-shadow: 0 0 20px rgba(120, 120, 255, 0.4);
-      position: relative;
-    }
-    .modal-close {
-      position: absolute;
-      top: 12px;
-      right: 16px;
-      font-size: 24px;
-      color: #9999ff;
-      cursor: pointer;
-      user-select: none;
-      font-weight: 700;
-      border: none;
-      background: none;
-    }
-    .modal-close:hover,
-    .modal-close:focus {
-      color: #dddfff;
-      outline: none;
-    }
-
-    .modal-content h2 {
-      margin-top: 0;
-      margin-bottom: 12px;
-      font-weight: 700;
-      color: #a8a8ff;
-      text-align: center;
-    }
-    .modal-content p {
-      font-size: 0.9rem;
-      line-height: 1.4;
-      margin-bottom: 20px;
-      text-align: center;
-      color: #c0c0ff;
-    }
-
-    .modal-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-    }
-    .btn {
-      flex: 1;
-      padding: 12px 0;
-      border-radius: 14px;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      border: none;
-      transition: background-color 0.3s ease;
-      user-select: none;
-    }
-    .btn.install {
-      background: #6060ff;
-      color: white;
-      box-shadow: 0 4px 12px rgba(96, 96, 255, 0.6);
-    }
-    .btn.install:hover,
-    .btn.install:focus {
-      background: #7a7aff;
-      outline: none;
-    }
-    .btn.ipa {
-      background: transparent;
-      color: #a0a0ff;
-      border: 2px solid #a0a0ff;
-    }
-    .btn.ipa:hover,
-    .btn.ipa:focus {
-      background: #a0a0ff;
-      color: #222244;
-      outline: none;
-    }
-
-    /* ========== НИЖНЯЯ НАВИГАЦИЯ ========== */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 56px;
-      background: #292a3d;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      border-top-left-radius: 16px;
-      border-top-right-radius: 16px;
-      box-shadow: 0 -3px 12px rgba(100, 100, 210, 0.6);
-      user-select: none;
-      z-index: 20;
-    }
-    .bottom-nav .nav-btn {
-      background: transparent;
-      border: none;
-      color: #9a9ae3;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      padding: 6px 4px 4px;
-      transition: color 0.3s ease;
-    }
-    .bottom-nav .nav-btn .nav-icon {
-      font-size: 22px;
-      line-height: 1;
-      margin-bottom: 2px;
-    }
-    .bottom-nav .nav-btn.active {
-      color: #e0e0ff;
-    }
-    .bottom-nav .nav-btn:focus-visible {
-      outline-offset: 2px;
-      outline: 2px solid #b2a9ff;
-      border-radius: 8px;
-    }
-
-    /* ========== СТРАНИЦЫ (СЕКЦИИ) ========== */
-    .page {
-      display: none;
-      padding-bottom: 80px; /* Для навигации */
-    }
-    .page.active {
-      display: block;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>GameHub</title>
+<link rel="manifest" href="manifest.json" />
+<link rel="stylesheet" href="style.css" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 </head>
 <body>
-  <header>
-    <h1>Games PWA</h1>
-  </header>
+<header>
+  <h1>GameHub</h1>
+  <p>Discover & Install Your Favorite Games</p>
+</header>
 
-  <!-- Страницы -->
-  <main>
-    <section id="games" class="page active" aria-label="Games List">
-      <div id="game-list" role="list"></div>
-    </section>
-    <section id="info" class="page" aria-label="Info">
-      <div style="padding:20px; font-size:1rem; color:#c0c0ff; line-height:1.4;">
-        <h2>How to add to Home Screen</h2>
-        <p>To get the best experience, add this website to your home screen (PWA mode):</p>
-        <ol>
-          <li>Tap the Share button in Safari (square with arrow up).</li>
-          <li>Choose "Add to Home Screen".</li>
-          <li>Open the app from your home screen for a better experience.</li>
-        </ol>
-      </div>
-    </section>
-    <section id="settings" class="page" aria-label="Settings">
-      <div style="padding:20px; font-size:1rem; color:#c0c0ff; line-height:1.4;">
-        <h2>Settings</h2>
-        <p>Settings will be here soon!</p>
-      </div>
-    </section>
-  </main>
+<main id="game-list" class="page active">
+  <!-- Игры добавляются через JS -->
+</main>
 
-  <!-- Модальное окно -->
-  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-desc">
-    <div class="modal-content">
-      <button class="modal-close" id="modal-close" aria-label="Close modal">&times;</button>
-      <h2 id="modal-title"></h2>
-      <p id="modal-desc"></p>
-      <div class="modal-buttons">
-        <button class="btn install" id="btn-install">Install</button>
-        <button class="btn ipa" id="btn-ipa">IPA</button>
-      </div>
+<section id="search-page" class="page">
+  <input type="search" id="search-input" placeholder="Search games..." />
+  <div id="search-results"></div>
+</section>
+
+<section id="downloads-page" class="page">
+  <h2>Your Downloads</h2>
+  <p>No downloads yet.</p>
+</section>
+
+<section id="profile-page" class="page">
+  <h2>Profile</h2>
+  <p>Welcome, Player!</p>
+</section>
+
+<div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-content">
+    <button class="modal-close" aria-label="Close modal">&times;</button>
+    <img id="modal-icon" src="" alt="Game icon" />
+    <h2 id="modal-title"></h2>
+    <p id="modal-description"></p>
+    <div class="modal-buttons">
+      <button id="install-btn">Install</button>
+      <button id="ipa-btn">IPA</button>
+    </div>
+    <div id="install-progress" class="progress-bar hidden">
+      <div class="progress-fill"></div>
     </div>
   </div>
+</div>
 
-  <!-- Нижняя навигация -->
-  <nav class="bottom-nav" role="navigation" aria-label="Bottom navigation">
-    <button class="nav-btn active" data-target="games" aria-current="page" aria-label="Games tab">
-      <span class="nav-icon">🎮</span>
-      <span>Games</span>
-    </button>
-    <button class="nav-btn" data-target="info" aria-label="Info tab">
-      <span class="nav-icon">ℹ️</span>
-      <span>Info</span>
-    </button>
-    <button class="nav-btn" data-target="settings" aria-label="Settings tab">
-      <span class="nav-icon">⚙️</span>
-      <span>Settings</span>
-    </button>
-  </nav>
+<nav class="bottom-nav" role="navigation" aria-label="Bottom navigation">
+  <button class="nav-btn active" data-target="game-list" aria-label="Games">
+    <span class="nav-icon">🎮</span>
+    <span class="nav-text">Games</span>
+  </button>
+  <button class="nav-btn" data-target="search-page" aria-label="Search">
+    <span class="nav-icon">🔍</span>
+    <span class="nav-text">Search</span>
+  </button>
+  <button class="nav-btn" data-target="downloads-page" aria-label="Downloads">
+    <span class="nav-icon">⬇️</span>
+    <span class="nav-text">Downloads</span>
+  </button>
+  <button class="nav-btn" data-target="profile-page" aria-label="Profile">
+    <span class="nav-icon">👤</span>
+    <span class="nav-text">Profile</span>
+  </button>
+</nav>
 
-  <script>
-    // Данные игр
-    const games = [
-      {
-        id: "game1",
-        title: "Cyber Runner",
-        description: "Fast-paced endless runner in neon city.",
-        icon: "https://i.ibb.co/wKZ7K0Z/cyber-runner.png",
-        installLink: "https://example.com/cyber-runner-install",
-        ipaLink: "https://example.com/cyber-runner.ipa",
-      },
-      {
-        id: "game2",
-        title: "Mystic Quest",
-        description: "Explore ancient ruins and solve puzzles.",
-        icon: "https://i.ibb.co/FKJ4jR9/mystic-quest.png",
-        installLink: "https://example.com/mystic-quest-install",
-        ipaLink: "https://example.com/mystic-quest.ipa",
-      },
-      {
-        id: "game3",
-        title: "Galaxy Shooter",
-        description: "Arcade-style space battle shooter.",
-        icon: "https://i.ibb.co/YbpXz1H/galaxy-shooter.png",
-        installLink: "https://example.com/galaxy-shooter-install",
-        ipaLink: "https://example.com/galaxy-shooter.ipa",
-      }
-    ];
-
-    const gameList = document.getElementById("game-list");
-    const modal = document.getElementById("modal");
-    const modalTitle = document.getElementById("modal-title");
-    const modalDesc = document.getElementById("modal-desc");
-    const btnClose = document.getElementById("modal-close");
-    const btnInstall = document.getElementById("btn-install");
-    const btnIpa = document.getElementById("btn-ipa");
-
-    // Заполнить список игр
-    function renderGames() {
-      gameList.innerHTML = "";
-      games.forEach(game => {
-        const card = document.createElement("div");
-        card.className = "game-card";
-        card.tabIndex = 0;
-        card.setAttribute("role", "listitem");
-        card.setAttribute("aria-label", game.title);
-
-        card.innerHTML = `
-          <img src="${game.icon}" alt="${game.title} icon" class="game-icon" />
-          <div class="game-info">
-            <div class="game-title">${game.title}</div>
-            <div class="game-desc">${game.description}</div>
-          </div>
-        `;
-
-        card.addEventListener("click", () => openModal(game));
-        card.addEventListener("keydown", e => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            openModal(game);
-          }
-        });
-
-        gameList.appendChild(card);
-      });
-    }
-
-    // Открыть модальное окно
-    function openModal(game) {
-      modalTitle.textContent = game.title;
-      modalDesc.textContent = game.description;
-
-      btnInstall.onclick = () => {
-        window.open(game.installLink, "_blank");
-        closeModal();
-      };
-      btnIpa.onclick = () => {
-        window.open(game.ipaLink, "_blank");
-        closeModal();
-      };
-
-      modal.classList.add("active");
-      btnClose.focus();
-    }
-
-    // Закрыть модальное окно
-    function closeModal() {
-      modal.classList.remove("active");
-    }
-
-    btnClose.addEventListener("click", closeModal);
-    modal.addEventListener("click", e => {
-      if (e.target === modal) {
-        closeModal();
-      }
-    });
-    document.addEventListener("keydown", e => {
-      if (e.key === "Escape" && modal.classList.contains("active")) {
-        closeModal();
-      }
-    });
-
-    // Навигация по вкладкам
-    const navButtons = document.querySelectorAll(".bottom-nav .nav-btn");
-    const pages = document.querySelectorAll(".page");
-
-    navButtons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        const target = btn.getAttribute("data-target");
-
-        // Переключаем активный таб
-        navButtons.forEach(b => {
-          b.classList.toggle("active", b === btn);
-          b.setAttribute("aria-current", b === btn ? "page" : "false");
-        });
-
-        // Показать соответствующую страницу
-        pages.forEach(page => {
-          page.classList.toggle("active", page.id === target);
-        });
-      });
-    });
-
-    renderGames();
-  </script>
+<script src="app.js"></script>
 </body>
 </html>
