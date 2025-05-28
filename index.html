@@ -2,21 +2,19 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>App Vault</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/4b6f7d9b17.js" crossorigin="anonymous"></script>
   <style>
     :root {
-      --bg: #0a0a0a;
-      --glass: rgba(255, 255, 255, 0.06);
-      --blur: 24px;
-      --border: rgba(255, 255, 255, 0.12);
-      --accent: #00b3ff;
-      --accent-hover: #1cc8ff;
-      --text: #fff;
-      --muted: #aaa;
-      --shadow: rgba(0, 0, 0, 0.4);
+      --bg: #0f0f0f;
+      --glass: rgba(255, 255, 255, 0.03);
+      --border: rgba(255, 255, 255, 0.15);
+      --accent: #00f2ff;
+      --accent-glow: #0ff;
+      --text: #fdfdfd;
+      --muted: #999;
     }
 
     * {
@@ -25,170 +23,138 @@
 
     body {
       margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
       color: var(--text);
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
       overflow: hidden;
     }
 
     header {
-      padding: 16px 12px 8px;
+      padding: 20px;
       text-align: center;
-      font-size: 2rem;
-      font-weight: 700;
-      background: linear-gradient(90deg, #00b3ff, #0072ff);
+      font-size: 2.2rem;
+      font-weight: bold;
+      background: linear-gradient(90deg, #0ff, #09f);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      user-select: none;
+      letter-spacing: 2px;
     }
 
     .app-scroll {
-      flex: 1;
-      overflow-x: auto;
-      overflow-y: hidden;
       display: flex;
-      gap: 16px;
-      padding: 16px 12px;
+      gap: 20px;
+      overflow-x: auto;
+      padding: 20px;
       scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      scroll-behavior: smooth;
     }
 
     .app {
-      flex: 0 0 200px;
-      height: 320px;
-      scroll-snap-align: start;
-      backdrop-filter: blur(var(--blur));
-      background-color: var(--glass);
+      flex: 0 0 220px;
+      height: 340px;
+      backdrop-filter: blur(20px);
+      background: var(--glass);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 12px;
+      border-radius: 18px;
+      padding: 14px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      box-shadow: 0 6px 16px var(--shadow);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      opacity: 0;
-      animation: fadeInUp 0.5s forwards;
-    }
-
-    .app:nth-child(1) { animation-delay: 0.1s; }
-    .app:nth-child(2) { animation-delay: 0.25s; }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      box-shadow: 0 0 12px rgba(0, 255, 255, 0.1);
+      transition: all 0.3s ease;
+      scroll-snap-align: start;
     }
 
     .app:hover {
-      transform: scale(1.05);
-      box-shadow: 0 10px 24px var(--shadow);
-      cursor: pointer;
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
     }
 
     .app img {
       width: 100%;
-      height: 100px;
+      height: 120px;
       object-fit: cover;
       border-radius: 12px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .app h3 {
-      margin: 0 0 4px;
-      font-size: 1.1rem;
-      line-height: 1.2;
+      margin: 0;
+      font-size: 1rem;
+      text-shadow: 0 0 5px rgba(0,255,255,0.3);
     }
 
     .app p {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--muted);
-      margin: 0 0 10px;
-      line-height: 1.2;
+      margin-bottom: 12px;
     }
 
     .download-btn {
-      background-color: var(--accent);
+      padding: 10px;
       border: none;
       border-radius: 12px;
-      padding: 10px;
-      color: white;
-      font-weight: 600;
-      font-size: 0.95rem;
+      background: linear-gradient(145deg, #0ff, #00aaff);
+      color: #000;
+      font-weight: bold;
+      text-transform: uppercase;
       cursor: pointer;
-      transition: background-color 0.25s ease, transform 0.15s ease;
-      box-shadow: 0 2px 6px rgba(0, 179, 255, 0.4);
+      box-shadow: 0 0 10px #00f2ff;
+      transition: all 0.3s ease;
     }
 
-    .download-btn:hover,
-    .download-btn:focus {
-      background-color: var(--accent-hover);
+    .download-btn:hover {
+      background: #00e5ff;
+      box-shadow: 0 0 15px #0ff, 0 0 30px #0ff;
       transform: translateY(-2px);
-      box-shadow: 0 4px 10px rgba(28, 200, 255, 0.6);
     }
 
     footer {
       position: fixed;
-      bottom: 16px;
+      bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
       gap: 24px;
-      background: var(--glass);
-      backdrop-filter: blur(24px);
-      padding: 10px 24px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      padding: 10px 30px;
       border-radius: 32px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-      z-index: 100;
+      z-index: 10;
+      box-shadow: 0 0 20px rgba(0,255,255,0.1);
     }
 
     .nav-button {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 8px 12px;
-      border-radius: 16px;
-      transition: all 0.3s ease;
       color: var(--muted);
+      font-size: 0.75rem;
+      transition: 0.3s;
     }
 
     .nav-button i {
       font-size: 1.4rem;
-      margin-bottom: 2px;
-    }
-
-    .nav-button span {
-      font-size: 0.75rem;
+      margin-bottom: 4px;
     }
 
     .nav-button:hover {
-      background: rgba(255, 255, 255, 0.08);
+      color: var(--accent-glow);
       transform: translateY(-2px);
-      color: var(--accent-hover);
     }
 
     .nav-button.active {
-      background: rgba(0, 179, 255, 0.15);
       color: var(--accent);
+      text-shadow: 0 0 6px var(--accent);
     }
   </style>
 </head>
 <body>
+
   <header>App Vault</header>
 
-  <div class="app-scroll" role="list">
-    <div class="app" role="listitem" tabindex="0">
-      <img src="https://is5-ssl.mzstatic.com/image/thumb/Purple126/v4/63/13/ff/6313ffb3-1945-79d6-f9d5-1c6bc7be29a3/AppIcon-0-1x_U007emarketing-0-0-85-220-0.png/120x120bb.jpg" alt="DMC" />
+  <div class="app-scroll">
+    <div class="app">
+      <img src="https://is5-ssl.mzstatic.com/image/thumb/Purple126/v4/63/13/ff/6313ffb3-1945-79d6-f9d5-1c6bc7be29a3/AppIcon-0-1x_U007emarketing-0-0-85-220-0.png/120x120bb.jpg" alt="DMC"/>
       <h3>Devil May Cry: Peak of Combat</h3>
       <p>Only DMC Licensed on Mobile</p>
       <a href="https://example.com/dmc.ipa" download>
@@ -196,8 +162,8 @@
       </a>
     </div>
 
-    <div class="app" role="listitem" tabindex="0">
-      <img src="https://is3-ssl.mzstatic.com/image/thumb/Purple116/v4/c8/2a/77/c82a774b-1acb-f6f5-cf6f-bf95f3d5d938/AppIcon-1x_U007emarketing-0-7-0-85-220.png/120x120bb.jpg" alt="Vampire Survivors" />
+    <div class="app">
+      <img src="https://is3-ssl.mzstatic.com/image/thumb/Purple116/v4/c8/2a/77/c82a774b-1acb-f6f5-cf6f-bf95f3d5d938/AppIcon-1x_U007emarketing-0-7-0-85-220.png/120x120bb.jpg" alt="Vampire Survivors"/>
       <h3>Vampire Survivors</h3>
       <p>Roguelike survival pixel RPG</p>
       <a href="https://example.com/vampire.ipa" download>
@@ -224,5 +190,6 @@
       <span>More</span>
     </div>
   </footer>
+
 </body>
 </html>
