@@ -89,6 +89,10 @@ modal.addEventListener('click', (e) => {
 
 installBtn.addEventListener('click', () => {
   if (!currentGame) return;
+
+  // Открытие installUrl при клике
+  window.open(currentGame.installUrl, '_blank');
+
   startInstall(currentGame.installUrl);
 });
 
@@ -114,9 +118,6 @@ function startInstall(url) {
       progressFill.style.width = '0%';
     }
   }, 300);
-
-  // логика установки
 }
 
 renderGames();
-
