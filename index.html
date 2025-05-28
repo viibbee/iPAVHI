@@ -7,12 +7,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --main-bg: #0d0d0d;
-      --card-bg: #1a1a1a;
-      --accent: #007aff;
-      --accent-hover: #339aff;
-      --text: #ffffff;
-      --text-muted: #aaa;
+      --bg: #0a0a0a;
+      --glass: rgba(255, 255, 255, 0.05);
+      --blur: 20px;
+      --border: rgba(255, 255, 255, 0.1);
+      --accent: #00b3ff;
+      --accent-hover: #1cc8ff;
+      --text: #fff;
+      --muted: #aaa;
     }
 
     * {
@@ -22,69 +24,68 @@
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background-color: var(--main-bg);
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
       color: var(--text);
       display: flex;
       flex-direction: column;
-      height: 100vh;
+      min-height: 100vh;
+      background-attachment: fixed;
     }
 
     header {
       padding: 20px;
       text-align: center;
-      font-size: 1.75rem;
+      font-size: 2rem;
       font-weight: 600;
-      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      background: linear-gradient(90deg, #00b3ff, #0072ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .app-list {
       flex: 1;
-      overflow-y: auto;
-      padding: 10px 20px 80px;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
     }
 
     .app {
-      background-color: var(--card-bg);
-      border-radius: 16px;
-      padding: 15px;
+      backdrop-filter: blur(var(--blur));
+      background-color: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px;
       display: flex;
-      align-items: center;
-      margin-bottom: 16px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      transition: background-color 0.2s;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease;
     }
 
     .app:hover {
-      background-color: #252525;
+      transform: scale(1.03);
     }
 
     .app img {
-      width: 60px;
-      height: 60px;
-      border-radius: 12px;
-      margin-right: 15px;
+      width: 100%;
+      height: 180px;
       object-fit: cover;
+      border-radius: 16px;
+      margin-bottom: 12px;
     }
 
-    .app-info {
-      flex-grow: 1;
-    }
-
-    .app-info h3 {
+    .app h3 {
       margin: 0;
-      font-size: 1rem;
-      font-weight: 600;
+      font-size: 1.2rem;
     }
 
-    .app-info p {
-      margin: 4px 0 0;
-      font-size: 0.875rem;
-      color: var(--text-muted);
+    .app p {
+      font-size: 0.9rem;
+      color: var(--muted);
     }
 
     .download-btn {
+      margin-top: auto;
       background-color: var(--accent);
       border: none;
       border-radius: 12px;
@@ -106,16 +107,17 @@
       display: flex;
       justify-content: space-around;
       align-items: center;
-      background-color: var(--card-bg);
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--border);
       padding: 10px 0;
-      border-top: 1px solid #333;
     }
 
     footer button {
       background: none;
       border: none;
-      color: var(--text-muted);
-      font-size: 1.2rem;
+      color: var(--muted);
+      font-size: 1.4rem;
       transition: 0.2s;
     }
 
@@ -130,23 +132,17 @@
   <div class="app-list">
     <div class="app">
       <img src="https://is5-ssl.mzstatic.com/image/thumb/Purple126/v4/63/13/ff/6313ffb3-1945-79d6-f9d5-1c6bc7be29a3/AppIcon-0-1x_U007emarketing-0-0-85-220-0.png/120x120bb.jpg" alt="DMC" />
-      <div class="app-info">
-        <h3>Devil May Cry: Peak of Combat</h3>
-        <p>Only DMC Licensed on Mobile</p>
-      </div>
+      <h3>Devil May Cry: Peak of Combat</h3>
+      <p>Only DMC Licensed on Mobile</p>
       <a href="https://example.com/dmc.ipa"><button class="download-btn">Скачать</button></a>
     </div>
 
     <div class="app">
       <img src="https://is3-ssl.mzstatic.com/image/thumb/Purple116/v4/c8/2a/77/c82a774b-1acb-f6f5-cf6f-bf95f3d5d938/AppIcon-1x_U007emarketing-0-7-0-85-220.png/120x120bb.jpg" alt="Vampire Survivors" />
-      <div class="app-info">
-        <h3>Vampire Survivors</h3>
-        <p>Roguelike survival pixel RPG</p>
-      </div>
+      <h3>Vampire Survivors</h3>
+      <p>Roguelike survival pixel RPG</p>
       <a href="https://example.com/vampire.ipa"><button class="download-btn">Скачать</button></a>
     </div>
-
-    <!-- Дополнительные приложения можно добавить здесь -->
   </div>
 
   <footer>
