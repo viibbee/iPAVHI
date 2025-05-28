@@ -3,103 +3,153 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Game Hub</title>
+  <title>App List</title>
   <style>
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: #121212;
+      background-color: #000;
       color: white;
     }
-    header, section {
-      padding: 20px;
+    .app-list {
+      padding: 15px;
+      margin-bottom: 60px; /* space for bottom nav */
     }
-    h1, h2 {
-      font-weight: 600;
-    }
-    .game-card {
+    .app-card {
       display: flex;
       align-items: center;
-      margin: 10px 0;
-      border-bottom: 1px solid #333;
-      padding-bottom: 10px;
+      padding: 12px 0;
+      border-bottom: 1px solid #222;
     }
-    .game-card img {
+    .app-card img {
       width: 60px;
       height: 60px;
       border-radius: 15px;
       margin-right: 15px;
     }
-    .game-info {
-      flex-grow: 1;
+    .app-info {
+      flex: 1;
     }
-    .game-title {
+    .app-title {
       font-size: 16px;
       font-weight: 500;
       color: #fff;
     }
-    .game-description {
-      font-size: 12px;
-      color: #aaa;
+    .app-description {
+      font-size: 13px;
+      color: #ccc;
+    }
+    .get-button-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .get-button {
-      background-color: #2d8fad;
-      color: white;
-      padding: 6px 12px;
-      border: none;
+      background-color: #222;
+      color: #2e9eff;
+      padding: 6px 14px;
       border-radius: 15px;
-      font-weight: bold;
+      font-weight: 600;
+      border: none;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+    .in-app {
+      font-size: 10px;
+      color: #888;
     }
     .bottom-nav {
       position: fixed;
       bottom: 0;
       width: 100%;
-      background-color: #1e1e1e;
+      background-color: #111;
       display: flex;
       justify-content: space-around;
       padding: 10px 0;
-      border-top: 1px solid #333;
+      border-top: 1px solid #222;
     }
     .bottom-nav div {
       text-align: center;
       color: #7daed3;
+      font-size: 13px;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Games</h1>
-    <h2>Featured Games</h2>
-    <div class="game-card">
-      <img src="https://i.imgur.com/4YQ6pGV.png" alt="Pokemon" />
-      <div class="game-info">
-        <div class="game-title">Pokémon Explorers: Idle Tale...</div>
-        <div class="game-description">Brief Description: Pokémo...</div>
+  <div class="app-list">
+    <div class="app-card">
+      <img src="https://i.imgur.com/rD2VKKU.png" alt="Devil May Cry"/>
+      <div class="app-info">
+        <div class="app-title">Devil May Cry: Peak of Combat</div>
+        <div class="app-description">Only DMC Licensed on Mobile</div>
       </div>
-      <button class="get-button">GET</button>
-    </div>
-    <div class="game-card">
-      <img src="https://i.imgur.com/y8Q4k6g.png" alt="Last Day" />
-      <div class="game-info">
-        <div class="game-title">Last Day on Earth: Survival...</div>
-        <div class="game-description">Anti-Cheat -> Disable Che...</div>
+      <div class="get-button-group">
+        <button class="get-button">Get</button>
+        <div class="in-app">In-App Purchases</div>
       </div>
-      <button class="get-button">GET</button>
     </div>
-  </header>
 
-  <section>
-    <h2>What's new</h2>
-    <div class="game-card">
-      <img src="https://i.imgur.com/NnP3FQw.png" alt="Stand & Fight" />
-      <div class="game-info">
-        <div class="game-title">Stand & Fight: Backpack Batt...</div>
-        <div class="game-description">Debug Menu</div>
+    <div class="app-card">
+      <img src="https://i.imgur.com/b5r5Px0.png" alt="Vampire Survivors"/>
+      <div class="app-info">
+        <div class="app-title">Vampire Survivors</div>
+        <div class="app-description">Roguelike survival pixel RPG</div>
       </div>
-      <button class="get-button">GET</button>
+      <div class="get-button-group">
+        <button class="get-button">Get</button>
+        <div class="in-app">In-App Purchases</div>
+      </div>
     </div>
-  </section>
+
+    <div class="app-card">
+      <img src="https://i.imgur.com/VdpK3KH.png" alt="Minion Rush"/>
+      <div class="app-info">
+        <div class="app-title">Minion Rush: Running game</div>
+        <div class="app-description">Endless run with the Minions</div>
+      </div>
+      <div class="get-button-group">
+        <button class="get-button">Get</button>
+        <div class="in-app">In-App Purchases</div>
+      </div>
+    </div>
+
+    <div class="app-card">
+      <img src="https://i.imgur.com/0DlZ8aY.png" alt="CATS"/>
+      <div class="app-info">
+        <div class="app-title">CATS: Crash Arena Turbo Stars</div>
+        <div class="app-description">Build battle car and dominate!</div>
+      </div>
+      <div class="get-button-group">
+        <button class="get-button">Get</button>
+        <div class="in-app">In-App Purchases</div>
+      </div>
+    </div>
+
+    <div class="app-card">
+      <img src="https://i.imgur.com/I8bLfW0.png" alt="Squad Busters"/>
+      <div class="app-info">
+        <div class="app-title">Squad Busters</div>
+        <div class="app-description">Action Strategy Battles Online</div>
+      </div>
+      <div class="get-button-group">
+        <button class="get-button">Get</button>
+        <div class="in-app">In-App Purchases</div>
+      </div>
+    </div>
+
+    <div class="app-card">
+      <img src="https://i.imgur.com/QLMCrUv.png" alt="Warframe"/>
+      <div class="app-info">
+        <div class="app-title">Warframe</div>
+        <div class="app-description">Action</div>
+      </div>
+      <div class="get-button-group">
+        <button class="get-button">Get</button>
+        <div class="in-app">In-App Purchases</div>
+      </div>
+    </div>
+  </div>
 
   <div class="bottom-nav">
     <div>Games</div>
@@ -110,3 +160,4 @@
 
 </body>
 </html>
+
