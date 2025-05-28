@@ -2,194 +2,137 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>App Vault</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/4b6f7d9b17.js" crossorigin="anonymous"></script>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="theme-color" content="#0a0a0a" />
   <style>
-    :root {
-      --bg: #0f0f0f;
-      --glass: rgba(255, 255, 255, 0.03);
-      --border: rgba(255, 255, 255, 0.15);
-      --accent: #00f2ff;
-      --accent-glow: #0ff;
-      --text: #fdfdfd;
-      --muted: #999;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
+    html, body {
       margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
-      color: var(--text);
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+      color: #fff;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
       overflow: hidden;
     }
 
     header {
-      padding: 20px;
       text-align: center;
-      font-size: 2.2rem;
+      font-size: 2rem;
       font-weight: bold;
-      background: linear-gradient(90deg, #0ff, #09f);
+      padding: 16px;
+      background: linear-gradient(90deg, #00b3ff, #0072ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      letter-spacing: 2px;
     }
 
     .app-scroll {
-      display: flex;
-      gap: 20px;
+      flex: 1;
       overflow-x: auto;
-      padding: 20px;
+      display: flex;
+      gap: 16px;
+      padding: 16px;
       scroll-snap-type: x mandatory;
     }
 
     .app {
-      flex: 0 0 220px;
-      height: 340px;
-      backdrop-filter: blur(20px);
-      background: var(--glass);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 14px;
+      flex: 0 0 200px;
+      background-color: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 12px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      box-shadow: 0 0 12px rgba(0, 255, 255, 0.1);
-      transition: all 0.3s ease;
       scroll-snap-align: start;
-    }
-
-    .app:hover {
-      transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+      justify-content: space-between;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
     }
 
     .app img {
       width: 100%;
-      height: 120px;
-      object-fit: cover;
       border-radius: 12px;
-      margin-bottom: 10px;
+      height: 100px;
+      object-fit: cover;
     }
 
-    .app h3 {
-      margin: 0;
-      font-size: 1rem;
-      text-shadow: 0 0 5px rgba(0,255,255,0.3);
-    }
-
-    .app p {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-bottom: 12px;
+    .app h3, .app p {
+      margin: 8px 0;
     }
 
     .download-btn {
-      padding: 10px;
+      background-color: #00b3ff;
       border: none;
       border-radius: 12px;
-      background: linear-gradient(145deg, #0ff, #00aaff);
-      color: #000;
-      font-weight: bold;
-      text-transform: uppercase;
+      padding: 10px;
+      color: white;
+      font-weight: 600;
       cursor: pointer;
-      box-shadow: 0 0 10px #00f2ff;
-      transition: all 0.3s ease;
-    }
-
-    .download-btn:hover {
-      background: #00e5ff;
-      box-shadow: 0 0 15px #0ff, 0 0 30px #0ff;
-      transform: translateY(-2px);
     }
 
     footer {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 24px;
-      background: rgba(255, 255, 255, 0.05);
+      height: 20vh;
+      min-height: 100px;
+      background: rgba(255,255,255,0.06);
       backdrop-filter: blur(20px);
-      padding: 10px 30px;
-      border-radius: 32px;
-      z-index: 10;
-      box-shadow: 0 0 20px rgba(0,255,255,0.1);
-    }
-
-    .nav-button {
       display: flex;
-      flex-direction: column;
+      justify-content: space-around;
       align-items: center;
-      color: var(--muted);
-      font-size: 0.75rem;
-      transition: 0.3s;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
     }
 
-    .nav-button i {
-      font-size: 1.4rem;
-      margin-bottom: 4px;
+    .nav-button svg {
+      width: 36px;
+      height: 36px;
+      fill: #aaa;
+      transition: fill 0.3s ease;
     }
 
-    .nav-button:hover {
-      color: var(--accent-glow);
-      transform: translateY(-2px);
+    .nav-button:hover svg {
+      fill: #00b3ff;
     }
 
-    .nav-button.active {
-      color: var(--accent);
-      text-shadow: 0 0 6px var(--accent);
+    .nav-button.active svg {
+      fill: #00b3ff;
     }
   </style>
 </head>
 <body>
-
   <header>App Vault</header>
 
   <div class="app-scroll">
     <div class="app">
-      <img src="https://is5-ssl.mzstatic.com/image/thumb/Purple126/v4/63/13/ff/6313ffb3-1945-79d6-f9d5-1c6bc7be29a3/AppIcon-0-1x_U007emarketing-0-0-85-220-0.png/120x120bb.jpg" alt="DMC"/>
-      <h3>Devil May Cry: Peak of Combat</h3>
+      <img src="https://is5-ssl.mzstatic.com/image/thumb/Purple126/v4/63/13/ff/6313ffb3-1945-79d6-f9d5-1c6bc7be29a3/AppIcon-0-1x_U007emarketing-0-0-85-220-0.png/120x120bb.jpg" />
+      <h3>Devil May Cry</h3>
       <p>Only DMC Licensed on Mobile</p>
-      <a href="https://example.com/dmc.ipa" download>
-        <button class="download-btn">Скачать</button>
-      </a>
+      <a href="https://example.com/dmc.ipa"><button class="download-btn">Скачать</button></a>
     </div>
-
-    <div class="app">
-      <img src="https://is3-ssl.mzstatic.com/image/thumb/Purple116/v4/c8/2a/77/c82a774b-1acb-f6f5-cf6f-bf95f3d5d938/AppIcon-1x_U007emarketing-0-7-0-85-220.png/120x120bb.jpg" alt="Vampire Survivors"/>
-      <h3>Vampire Survivors</h3>
-      <p>Roguelike survival pixel RPG</p>
-      <a href="https://example.com/vampire.ipa" download>
-        <button class="download-btn">Скачать</button>
-      </a>
-    </div>
+    <!-- Ещё приложения... -->
   </div>
 
   <footer>
     <div class="nav-button active">
-      <i class="fas fa-gamepad"></i>
-      <span>Games</span>
+      <svg viewBox="0 0 24 24"><path d="M6 19h4v-6H6v6zm8-8h4v10h-4V11zm-4 4h4v6h-4v-6z"/></svg>
     </div>
     <div class="nav-button">
-      <i class="fas fa-th-large"></i>
-      <span>Apps</span>
+      <svg viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm4 0h2v-2H7v2zm0-4h2v-2H7v2zm4 0h2v-2h-2v2zm4 0h2v-2h-2v2zm4 0h2v-2h-2v2zM7 9h2V7H7v2zm4 0h2V7h-2v2zm4 0h2V7h-2v2zm4 0h2V7h-2v2z"/></svg>
     </div>
     <div class="nav-button">
-      <i class="fas fa-search"></i>
-      <span>Search</span>
+      <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 5L20.49 19l-5-5zm-6 0C8.01 14 6 11.99 6 9.5S8.01 5 10.5 5 15 7.01 15 9.5 12.99 14 10.5 14z"/></svg>
     </div>
     <div class="nav-button">
-      <i class="fas fa-ellipsis-h"></i>
-      <span>More</span>
+      <svg viewBox="0 0 24 24"><path d="M12 8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
     </div>
   </footer>
 
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  </script>
 </body>
 </html>
