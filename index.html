@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>App Vault</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
@@ -22,27 +22,21 @@
       box-sizing: border-box;
     }
 
-    html, body {
+    body {
       margin: 0;
-      padding: 0;
       font-family: 'Inter', sans-serif;
       background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
       color: var(--text);
-      height: 100%;
-      overflow: hidden;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    body {
       display: flex;
       flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
     }
 
     header {
-      padding: 24px 20px 12px;
+      padding: 16px 12px 8px;
       text-align: center;
-      font-size: 2.4rem;
+      font-size: 2rem;
       font-weight: 700;
       background: linear-gradient(90deg, #00b3ff, #0072ff);
       -webkit-background-clip: text;
@@ -55,25 +49,26 @@
       overflow-x: auto;
       overflow-y: hidden;
       display: flex;
-      gap: 24px;
-      padding: 20px;
+      gap: 16px;
+      padding: 16px 12px;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
       scroll-behavior: smooth;
     }
 
     .app {
-      flex: 0 0 280px;
+      flex: 0 0 200px;
+      height: 320px;
       scroll-snap-align: start;
       backdrop-filter: blur(var(--blur));
       background-color: var(--glass);
       border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 20px;
+      border-radius: 16px;
+      padding: 12px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      box-shadow: 0 8px 20px var(--shadow);
+      box-shadow: 0 6px 16px var(--shadow);
       transition: transform 0.25s ease, box-shadow 0.25s ease;
       opacity: 0;
       animation: fadeInUp 0.5s forwards;
@@ -81,7 +76,6 @@
 
     .app:nth-child(1) { animation-delay: 0.1s; }
     .app:nth-child(2) { animation-delay: 0.25s; }
-    .app:nth-child(3) { animation-delay: 0.4s; }
 
     @keyframes fadeInUp {
       from {
@@ -95,57 +89,50 @@
     }
 
     .app:hover {
-      transform: scale(1.06);
-      box-shadow: 0 14px 32px var(--shadow);
+      transform: scale(1.05);
+      box-shadow: 0 10px 24px var(--shadow);
       cursor: pointer;
     }
 
     .app img {
       width: 100%;
-      height: 180px;
+      height: 100px;
       object-fit: cover;
-      border-radius: 16px;
-      margin-bottom: 16px;
-      user-select: none;
-      pointer-events: none;
+      border-radius: 12px;
+      margin-bottom: 8px;
     }
 
     .app h3 {
-      margin: 0 0 8px;
-      font-size: 1.25rem;
-      line-height: 1.3;
-      user-select: none;
+      margin: 0 0 4px;
+      font-size: 1.1rem;
+      line-height: 1.2;
     }
 
     .app p {
-      font-size: 0.95rem;
+      font-size: 0.85rem;
       color: var(--muted);
-      margin: 0 0 20px;
-      user-select: none;
-      min-height: 46px;
+      margin: 0 0 10px;
+      line-height: 1.2;
     }
 
     .download-btn {
-      margin-top: auto;
       background-color: var(--accent);
       border: none;
-      border-radius: 14px;
-      padding: 10px 16px;
+      border-radius: 12px;
+      padding: 10px;
       color: white;
-      font-weight: 700;
+      font-weight: 600;
       font-size: 0.95rem;
       cursor: pointer;
       transition: background-color 0.25s ease, transform 0.15s ease;
-      user-select: none;
-      box-shadow: 0 3px 8px rgba(0, 179, 255, 0.5);
+      box-shadow: 0 2px 6px rgba(0, 179, 255, 0.4);
     }
 
     .download-btn:hover,
     .download-btn:focus {
       background-color: var(--accent-hover);
       transform: translateY(-2px);
-      outline: none;
-      box-shadow: 0 6px 12px rgba(28, 200, 255, 0.75);
+      box-shadow: 0 4px 10px rgba(28, 200, 255, 0.6);
     }
 
     footer {
@@ -157,10 +144,9 @@
       align-items: center;
       gap: 32px;
       background: var(--glass);
-      backdrop-filter: blur(14px);
+      backdrop-filter: blur(12px);
       border-top: 1px solid var(--border);
-      padding: 10px 0;
-      user-select: none;
+      padding: 12px 0;
       z-index: 10;
     }
 
@@ -168,7 +154,7 @@
       background: none;
       border: none;
       color: var(--muted);
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       transition: color 0.3s ease, transform 0.15s ease;
       cursor: pointer;
     }
@@ -176,54 +162,13 @@
     footer button:hover,
     footer button:focus {
       color: var(--accent);
-      transform: scale(1.15);
-      outline: none;
+      transform: scale(1.1);
     }
 
     footer button.active {
       color: var(--accent);
       font-weight: 700;
       transform: scale(1.2);
-    }
-
-    @media (max-width: 720px) {
-      .app-scroll {
-        padding: 16px 12px;
-        gap: 16px;
-      }
-
-      .app {
-        flex: 0 0 240px;
-        padding: 16px;
-      }
-
-      .app img {
-        height: 140px;
-        margin-bottom: 12px;
-      }
-
-      header {
-        font-size: 1.8rem;
-        padding: 16px 12px 8px;
-      }
-    }
-
-    @media (max-width: 400px) {
-      .app {
-        flex: 0 0 200px;
-      }
-
-      .app img {
-        height: 120px;
-      }
-
-      footer {
-        gap: 24px;
-      }
-
-      footer button {
-        font-size: 1.3rem;
-      }
     }
   </style>
 </head>
@@ -236,7 +181,7 @@
       <h3>Devil May Cry: Peak of Combat</h3>
       <p>Only DMC Licensed on Mobile</p>
       <a href="https://example.com/dmc.ipa" download>
-        <button class="download-btn" aria-label="Скачать Devil May Cry">Скачать</button>
+        <button class="download-btn">Скачать</button>
       </a>
     </div>
 
@@ -245,7 +190,7 @@
       <h3>Vampire Survivors</h3>
       <p>Roguelike survival pixel RPG</p>
       <a href="https://example.com/vampire.ipa" download>
-        <button class="download-btn" aria-label="Скачать Vampire Survivors">Скачать</button>
+        <button class="download-btn">Скачать</button>
       </a>
     </div>
   </div>
