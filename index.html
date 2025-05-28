@@ -28,8 +28,8 @@
       color: var(--text);
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
-      background-attachment: fixed;
+      height: 100vh;
+      overflow: hidden;
     }
 
     header {
@@ -42,15 +42,20 @@
       -webkit-text-fill-color: transparent;
     }
 
-    .app-list {
+    .app-scroll {
       flex: 1;
-      padding: 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      overflow-x: auto;
+      overflow-y: hidden;
+      display: flex;
       gap: 20px;
+      padding: 20px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
     }
 
     .app {
+      flex: 0 0 300px;
+      scroll-snap-align: start;
       backdrop-filter: blur(var(--blur));
       background-color: var(--glass);
       border: 1px solid var(--border);
@@ -129,7 +134,7 @@
 <body>
   <header>App Vault</header>
 
-  <div class="app-list">
+  <div class="app-scroll">
     <div class="app">
       <img src="https://is5-ssl.mzstatic.com/image/thumb/Purple126/v4/63/13/ff/6313ffb3-1945-79d6-f9d5-1c6bc7be29a3/AppIcon-0-1x_U007emarketing-0-0-85-220-0.png/120x120bb.jpg" alt="DMC" />
       <h3>Devil May Cry: Peak of Combat</h3>
@@ -152,4 +157,3 @@
   </footer>
 </body>
 </html>
-
