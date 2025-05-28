@@ -1,10 +1,10 @@
 {
-  "name": "Modern PWA Example",
-  "short_name": "Vault",
-  "start_url": "./",
+  "name": "Современный PWA",
+  "short_name": "PWA",
+  "start_url": "/",
   "display": "standalone",
-  "background_color": "#0a0a0a",
-  "theme_color": "#00b3ff",
+  "background_color": "#0e0e0e",
+  "theme_color": "#3b82f6",
   "icons": [
     {
       "src": "icons/icon-192.png",
