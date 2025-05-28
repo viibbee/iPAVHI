@@ -1,27 +1,27 @@
 const games = [
   {
     id: "1",
-    title: "Clash of Clans",
-    description: "Build your village, train troops, and battle!",
-    icon: "https://cdn-icons-png.flaticon.com/512/2920/2920112.png",
-    installUrl: "https://example.com/install/clash",
-    ipaUrl: "https://example.com/ipa/clash.ipa"
+    title: "Dragon Quest",
+    description: "Embark on an epic dragon quest!",
+    icon: "https://cdn-icons-png.flaticon.com/512/616/616408.png", // твоя иконка 1
+    installUrl: "https://example.com/install/dragonquest",
+    ipaUrl: "https://example.com/ipa/dragonquest.ipa"
   },
   {
     id: "2",
-    title: "Among Us",
-    description: "Find the impostor before it's too late.",
-    icon: "https://cdn-icons-png.flaticon.com/512/1144/1144709.png",
-    installUrl: "https://example.com/install/amongus",
-    ipaUrl: "https://example.com/ipa/amongus.ipa"
+    title: "Space Raiders",
+    description: "Conquer the galaxy in this space adventure.",
+    icon: "https://cdn-icons-png.flaticon.com/512/471/471662.png", // твоя иконка 2
+    installUrl: "https://example.com/install/spaceraiders",
+    ipaUrl: "https://example.com/ipa/spaceraiders.ipa"
   },
   {
     id: "3",
-    title: "Minecraft",
-    description: "Create and explore endless worlds.",
-    icon: "https://cdn-icons-png.flaticon.com/512/590/590887.png",
-    installUrl: "https://example.com/install/minecraft",
-    ipaUrl: "https://example.com/ipa/minecraft.ipa"
+    title: "Mystic Farm",
+    description: "Build and harvest your mystical farm.",
+    icon: "https://cdn-icons-png.flaticon.com/512/616/616408.png", // твоя иконка 3 (замени ссылку на свою)
+    installUrl: "https://example.com/install/mysticfarm",
+    ipaUrl: "https://example.com/ipa/mysticfarm.ipa"
   },
 ];
 
@@ -119,4 +119,3 @@ function startInstall(url) {
 }
 
 renderGames();
-
