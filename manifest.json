@@ -1,7 +1,7 @@
 {
-  "name": "App Vault",
+  "name": "Modern PWA Example",
   "short_name": "Vault",
-  "start_url": "iPAVHI",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#0a0a0a",
   "theme_color": "#00b3ff",
