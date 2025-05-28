@@ -21,7 +21,7 @@
 
 <!-- Другие страницы -->
 <section id="search-page" class="page">
-  <input type="search" id="search-input" placeholder="Search games..." />
+  <input type="search" id="search-input" placeholder="Search apps..." />
   <div id="search-results"></div>
 </section>
 
@@ -31,11 +31,11 @@
 </section>
 
 <section id="profile-page" class="page">
-  <h2>Profile</h2>
+  <h2>More</h2>
   <p>Welcome, Player!</p>
 </section>
 
-<div id="modal" class="modal hidden">
+<div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description">
   <div class="modal-content">
     <button class="modal-close" aria-label="Close modal">&times;</button>
     <img id="modal-icon" src="" alt="Game icon" />
@@ -45,28 +45,28 @@
       <button id="install-btn">Install</button>
       <button id="ipa-btn">IPA</button>
     </div>
-    <div id="install-progress" class="progress-bar hidden">
+    <div id="install-progress" class="progress-bar hidden" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
       <div class="progress-fill"></div>
     </div>
   </div>
 </div>
 
-<nav class="bottom-nav" role="navigation" aria-label="Bottom navigation">
-  <button class="nav-btn active" data-target="game-list" aria-label="Games section">
+<nav class="bottom-nav" role="navigation" aria-label="Main navigation">
+  <button class="nav-btn active" data-target="game-list" aria-label="Games">
     <span class="nav-icon">🎮</span>
-    <span>Games</span>
+    <span class="nav-text">Games</span>
   </button>
-  <button class="nav-btn" data-target="downloads-page" aria-label="Apps section">
+  <button class="nav-btn" data-target="search-page" aria-label="Apps">
     <span class="nav-icon">📱</span>
-    <span>Apps</span>
+    <span class="nav-text">Apps</span>
   </button>
-  <button class="nav-btn" data-target="search-page" aria-label="Search section">
+  <button class="nav-btn" data-target="downloads-page" aria-label="Search">
     <span class="nav-icon">🔍</span>
-    <span>Search</span>
+    <span class="nav-text">Search</span>
   </button>
-  <button class="nav-btn" data-target="profile-page" aria-label="More section">
+  <button class="nav-btn" data-target="profile-page" aria-label="More">
     <span class="nav-icon">⋯</span>
-    <span>More</span>
+    <span class="nav-text">More</span>
   </button>
 </nav>
 
