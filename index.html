@@ -1,77 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>App List</title>
+  <title>App Store Style</title>
   <style>
-    body {
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0e0e0e;
       font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: #000;
-      color: white;
+      color: #fff;
+      padding-bottom: 80px;
     }
+
     .app-list {
-      padding: 15px;
-      margin-bottom: 60px; /* space for bottom nav */
+      padding: 20px;
     }
+
     .app-card {
       display: flex;
       align-items: center;
-      padding: 12px 0;
-      border-bottom: 1px solid #222;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.02);
+      transition: background 0.3s ease;
     }
+
+    .app-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
     .app-card img {
-      width: 60px;
-      height: 60px;
-      border-radius: 15px;
+      width: 65px;
+      height: 65px;
+      border-radius: 20px;
       margin-right: 15px;
+      object-fit: cover;
     }
+
     .app-info {
       flex: 1;
     }
+
     .app-title {
-      font-size: 16px;
-      font-weight: 500;
-      color: #fff;
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 4px;
     }
+
     .app-description {
       font-size: 13px;
-      color: #ccc;
+      color: #aaa;
     }
+
     .get-button-group {
       display: flex;
       flex-direction: column;
       align-items: center;
     }
+
     .get-button {
-      background-color: #222;
+      background-color: #1a1a1a;
+      border: 1px solid #2e9eff;
       color: #2e9eff;
-      padding: 6px 14px;
-      border-radius: 15px;
-      font-weight: 600;
-      border: none;
+      padding: 6px 16px;
+      border-radius: 20px;
       font-size: 14px;
-      margin-bottom: 5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
     }
+
+    .get-button:hover {
+      background-color: #2e9eff;
+      color: black;
+    }
+
     .in-app {
       font-size: 10px;
-      color: #888;
+      color: #777;
+      margin-top: 5px;
     }
+
     .bottom-nav {
       position: fixed;
       bottom: 0;
-      width: 100%;
-      background-color: #111;
+      left: 0;
+      right: 0;
+      background: rgba(20, 20, 20, 0.95);
+      border-top: 1px solid #333;
       display: flex;
       justify-content: space-around;
       padding: 10px 0;
-      border-top: 1px solid #222;
+      backdrop-filter: blur(10px);
     }
+
     .bottom-nav div {
       text-align: center;
-      color: #7daed3;
       font-size: 13px;
+      color: #7daed3;
+      transition: color 0.2s ease;
+      cursor: pointer;
+    }
+
+    .bottom-nav div:hover {
+      color: #2e9eff;
     }
   </style>
 </head>
@@ -160,4 +200,3 @@
 
 </body>
 </html>
-
