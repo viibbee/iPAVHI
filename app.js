@@ -1,166 +1,174 @@
 const games = [
   {
     id: 1,
-    title: "Zombie Shooter",
-    description: "Fast-paced zombie shooting action. Survive the hordes!",
-    icon: "https://cdn-icons-png.flaticon.com/512/616/616408.png",
-    installUrl: "https://example.com/install/zombie-shooter",
-    ipaUrl: "https://example.com/downloads/zombie-shooter.ipa",
+    title: "Shadow Quest",
+    desc: "Epic RPG adventure in a dark fantasy world.",
+    icon: "https://i.imgur.com/6qf1xjq.jpg",
+    ipa: "https://example.com/shadowquest.ipa",
+    install: "https://t.me/install_shadowquest"
   },
   {
     id: 2,
-    title: "Space Racer",
-    description: "Race through the galaxy in this thrilling space racing game.",
-    icon: "https://cdn-icons-png.flaticon.com/512/1995/1995523.png",
-    installUrl: "https://example.com/install/space-racer",
-    ipaUrl: "https://example.com/downloads/space-racer.ipa",
+    title: "Pixel Racer",
+    desc: "Fast-paced pixel art racing game.",
+    icon: "https://i.imgur.com/WzP18Ub.jpg",
+    ipa: "https://example.com/pixelracer.ipa",
+    install: "https://t.me/install_pixelracer"
   },
   {
     id: 3,
-    title: "Mystery Puzzle",
-    description: "Solve puzzles to uncover hidden secrets in an ancient temple.",
-    icon: "https://cdn-icons-png.flaticon.com/512/2099/2099069.png",
-    installUrl: "https://example.com/install/mystery-puzzle",
-    ipaUrl: "https://example.com/downloads/mystery-puzzle.ipa",
+    title: "Neon Wars",
+    desc: "Multiplayer neon-themed shooter.",
+    icon: "https://i.imgur.com/BGdwPTg.jpg",
+    ipa: "https://example.com/neonwars.ipa",
+    install: "https://t.me/install_neonwars"
   },
 ];
 
-// UI элементы
-const gameListEl = document.getElementById("game-list");
-const modalEl = document.getElementById("modal");
-const modalTitleEl = document.getElementById("modal-title");
-const modalDescEl = document.getElementById("modal-description");
-const modalIconEl = document.getElementById("modal-icon");
+const gameList = document.getElementById("game-list");
+const modal = document.getElementById("modal");
+const modalIcon = document.getElementById("modal-icon");
+const modalTitle = document.getElementById("modal-title");
+const modalDescription = document.getElementById("modal-description");
 const installBtn = document.getElementById("install-btn");
 const ipaBtn = document.getElementById("ipa-btn");
+const modalClose = modal.querySelector(".modal-close");
 const progressBar = document.getElementById("install-progress");
 const progressFill = progressBar.querySelector(".progress-fill");
 
+const pages = document.querySelectorAll(".page");
+const navButtons = document.querySelectorAll(".nav-btn");
+
 let currentGame = null;
 
-// Функция рендера списка игр
-function renderGameList(gamesArray) {
-  gameListEl.innerHTML = "";
-  for (const game of gamesArray) {
+// Создаем карточки игр
+function renderGames() {
+  gameList.innerHTML = "";
+  games.forEach(game => {
     const card = document.createElement("button");
     card.className = "game-card";
     card.setAttribute("aria-label", `Open details for ${game.title}`);
     card.innerHTML = `
-      <img src="${game.icon}" alt="${game.title} icon" class="game-icon" />
+      <img class="game-icon" src="${game.icon}" alt="${game.title} icon" />
       <div class="game-info">
         <h3 class="game-title">${game.title}</h3>
-        <p class="game-desc">${game.description}</p>
+        <p class="game-desc">${game.desc}</p>
       </div>
     `;
-    card.onclick = () => openModal(game);
-    gameListEl.appendChild(card);
-  }
+    card.addEventListener("click", () => openModal(game));
+    gameList.appendChild(card);
+  });
 }
 
-// Открытие модального окна с деталями игры
 function openModal(game) {
   currentGame = game;
-  modalTitleEl.textContent = game.title;
-  modalDescEl.textContent = game.description;
-  modalIconEl.src = game.icon;
+  modalIcon.src = game.icon;
+  modalTitle.textContent = game.title;
+  modalDescription.textContent = game.desc;
   progressBar.classList.add("hidden");
   progressFill.style.width = "0%";
-  modalEl.classList.remove("hidden");
+  modal.classList.remove("hidden");
   installBtn.disabled = false;
   ipaBtn.disabled = false;
+  installBtn.focus();
 }
 
-// Закрытие модального окна
 function closeModal() {
-  modalEl.classList.add("hidden");
+  modal.classList.add("hidden");
   currentGame = null;
 }
 
-// Клик по кнопке Install
+modalClose.addEventListener("click", closeModal);
+
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+    closeModal();
+  }
+});
+
+// Симуляция процесса установки с прогрессбаром
 installBtn.addEventListener("click", () => {
   if (!currentGame) return;
+
   installBtn.disabled = true;
   ipaBtn.disabled = true;
   progressBar.classList.remove("hidden");
-
-  // Симуляция прогресса установки
   let progress = 0;
+
   const interval = setInterval(() => {
     progress += 10;
-    progressFill.style.width = `${progress}%`;
+    progressFill.style.width = progress + "%";
+    progressBar.setAttribute("aria-valuenow", progress);
+
     if (progress >= 100) {
       clearInterval(interval);
-      progressBar.classList.add("hidden");
-      alert(`Installation of "${currentGame.title}" completed!`);
+      alert(`Installation started for ${currentGame.title}!\n\nYou will be redirected now.`);
+      window.open(currentGame.install, "_blank");
       closeModal();
     }
-  }, 200);
+  }, 300);
 });
 
-// Клик по кнопке IPA - сразу скачиваем файл
+// Кнопка IPA — просто открывает ссылку на IPA файл
 ipaBtn.addEventListener("click", () => {
   if (!currentGame) return;
-  window.open(currentGame.ipaUrl, "_blank");
+  window.open(currentGame.ipa, "_blank");
+  closeModal();
 });
 
-// Закрытие модалки при клике по крестику
-modalEl.querySelector(".modal-close").addEventListener("click", closeModal);
-
-// Навигация по нижнему меню
-const navButtons = document.querySelectorAll(".nav-btn");
-navButtons.forEach((btn) => {
+// Навигация по страницам
+navButtons.forEach(btn => {
   btn.addEventListener("click", () => {
-    // Убрать активный класс у всех
-    navButtons.forEach((b) => b.classList.remove("active"));
+    // Активная кнопка
+    navButtons.forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
 
     // Показать нужную страницу
-    const target = btn.getAttribute("data-target");
-    document.querySelectorAll(".page").forEach((page) => {
-      page.classList.toggle("active", page.id === target);
+    const target = btn.dataset.target;
+    pages.forEach(p => {
+      if (p.id === target) {
+        p.classList.add("active");
+      } else {
+        p.classList.remove("active");
+      }
     });
   });
 });
 
-// Поиск по играм
+// Поиск (для примера фильтруем по названию)
 const searchInput = document.getElementById("search-input");
 const searchResults = document.getElementById("search-results");
 
 searchInput.addEventListener("input", () => {
-  const term = searchInput.value.trim().toLowerCase();
-  if (!term) {
-    searchResults.innerHTML = "";
+  const query = searchInput.value.toLowerCase().trim();
+  if (query === "") {
+    searchResults.innerHTML = "<p>Type to search apps...</p>";
     return;
   }
-  const filtered = games.filter((g) => g.title.toLowerCase().includes(term));
-  renderSearchResults(filtered);
-});
-
-function renderSearchResults(results) {
+  const filtered = games.filter(g => g.title.toLowerCase().includes(query));
+  if (filtered.length === 0) {
+    searchResults.innerHTML = "<p>No results found.</p>";
+    return;
+  }
   searchResults.innerHTML = "";
-  if (results.length === 0) {
-    searchResults.textContent = "No results found.";
-    return;
-  }
-  for (const game of results) {
-    const card = document.createElement("button");
-    card.className = "game-card";
-    card.setAttribute("aria-label", `Open details for ${game.title}`);
-    card.innerHTML = `
-      <img src="${game.icon}" alt="${game.title} icon" class="game-icon" />
-      <div class="game-info">
+  filtered.forEach(game => {
+    const btn = document.createElement("button");
+    btn.className = "game-card";
+    btn.style.width = "100%";
+    btn.innerHTML = `
+      <img class="game-icon" src="${game.icon}" alt="${game.title} icon" style="width:60px; height:60px; border-radius:12px; flex-shrink:0; margin-right:12px;" />
+      <div class="game-info" style="padding:0; flex-grow:1;">
         <h3 class="game-title">${game.title}</h3>
-        <p class="game-desc">${game.description}</p>
+        <p class="game-desc">${game.desc}</p>
       </div>
     `;
-    card.onclick = () => {
-      openModal(game);
-      // Перейти на страницу с деталями, если надо
-    };
-    searchResults.appendChild(card);
-  }
-}
+    btn.style.display = "flex";
+    btn.style.alignItems = "center";
+    btn.addEventListener("click", () => openModal(game));
+    searchResults.appendChild(btn);
+  });
+});
 
 // Инициализация
-renderGameList(games);
-
+renderGames();
+searchResults.innerHTML = "<p>Type to search apps...</p>";
