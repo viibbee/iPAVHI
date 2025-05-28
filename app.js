@@ -1,7 +1,7 @@
 const games = [
   {
     id: "1",
-    title: "Clash of Clans",
+    title: "Free Fire",
     description: "Build your village, train troops, and battle!",
     icon: "https://cdn-icons-png.flaticon.com/512/2920/2920112.png",
     installUrl: "https://example.com/install/clash",
