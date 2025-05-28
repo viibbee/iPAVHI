@@ -5,7 +5,7 @@ const games = [
     description: "Build your village, train troops, and battle!",
     icon: "https://raw.githubusercontent.com/viibbee/iPAVHI/main/photo_2025-05-25_11-33-04.jpg",
     installUrl: "https://example.com/install/clash",
-    ipaUrl: "https://example.com/ipa/clash.ipa"
+    ipaUrl: "https://vhistoretg.s3.eu-north-1.amazonaws.com/FF_1.111.X_1.3.8.ipa"
   },
   {
     id: "2",
