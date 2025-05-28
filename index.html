@@ -138,41 +138,48 @@
 
     footer {
       position: fixed;
-      bottom: 0;
-      width: 100%;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
-      justify-content: space-around;
-      align-items: center;
+      gap: 24px;
       background: var(--glass);
-      backdrop-filter: blur(18px);
-      border-top: 1px solid var(--border);
-      padding: 10px 0;
-      z-index: 10;
-      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(24px);
+      padding: 10px 24px;
+      border-radius: 32px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+      z-index: 100;
     }
 
     .nav-button {
       display: flex;
       flex-direction: column;
       align-items: center;
-      font-size: 0.75rem;
+      justify-content: center;
+      padding: 8px 12px;
+      border-radius: 16px;
+      transition: all 0.3s ease;
       color: var(--muted);
-      transition: color 0.3s ease, transform 0.2s ease;
     }
 
     .nav-button i {
       font-size: 1.4rem;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
+    }
+
+    .nav-button span {
+      font-size: 0.75rem;
     }
 
     .nav-button:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-2px);
       color: var(--accent-hover);
-      transform: scale(1.1);
     }
 
     .nav-button.active {
+      background: rgba(0, 179, 255, 0.15);
       color: var(--accent);
-      font-weight: 600;
     }
   </style>
 </head>
