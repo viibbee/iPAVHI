@@ -6,11 +6,24 @@
   <title>App Vault</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      --main-bg: #0d0d0d;
+      --card-bg: #1a1a1a;
+      --accent: #007aff;
+      --accent-hover: #339aff;
+      --text: #ffffff;
+      --text-muted: #aaa;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background-color: #0d0d0d;
-      color: white;
+      background-color: var(--main-bg);
+      color: var(--text);
       display: flex;
       flex-direction: column;
       height: 100vh;
@@ -19,7 +32,7 @@
     header {
       padding: 20px;
       text-align: center;
-      font-size: 1.5rem;
+      font-size: 1.75rem;
       font-weight: 600;
       background: linear-gradient(90deg, #00c6ff, #0072ff);
       -webkit-background-clip: text;
@@ -29,21 +42,22 @@
     .app-list {
       flex: 1;
       overflow-y: auto;
-      padding: 10px 20px;
+      padding: 10px 20px 80px;
     }
 
     .app {
-      background-color: #1a1a1a;
+      background-color: var(--card-bg);
       border-radius: 16px;
       padding: 15px;
       display: flex;
       align-items: center;
       margin-bottom: 16px;
-      transition: 0.2s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.2s;
     }
 
     .app:hover {
-      background-color: #2a2a2a;
+      background-color: #252525;
     }
 
     .app img {
@@ -51,6 +65,7 @@
       height: 60px;
       border-radius: 12px;
       margin-right: 15px;
+      object-fit: cover;
     }
 
     .app-info {
@@ -66,29 +81,32 @@
     .app-info p {
       margin: 4px 0 0;
       font-size: 0.875rem;
-      color: #aaa;
+      color: var(--text-muted);
     }
 
     .download-btn {
-      background-color: #007aff;
+      background-color: var(--accent);
       border: none;
       border-radius: 12px;
       padding: 10px 16px;
       color: white;
       font-weight: 600;
       cursor: pointer;
-      transition: 0.2s;
+      transition: background-color 0.2s;
     }
 
     .download-btn:hover {
-      background-color: #339aff;
+      background-color: var(--accent-hover);
     }
 
     footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
       display: flex;
       justify-content: space-around;
       align-items: center;
-      background-color: #1a1a1a;
+      background-color: var(--card-bg);
       padding: 10px 0;
       border-top: 1px solid #333;
     }
@@ -96,17 +114,17 @@
     footer button {
       background: none;
       border: none;
-      color: #aaa;
+      color: var(--text-muted);
       font-size: 1.2rem;
+      transition: 0.2s;
     }
 
     footer button.active {
-      color: #007aff;
+      color: var(--accent);
     }
   </style>
 </head>
 <body>
-
   <header>App Vault</header>
 
   <div class="app-list">
@@ -128,7 +146,7 @@
       <a href="https://example.com/vampire.ipa"><button class="download-btn">Скачать</button></a>
     </div>
 
-    <!-- Добавляй другие блоки по этому шаблону -->
+    <!-- Дополнительные приложения можно добавить здесь -->
   </div>
 
   <footer>
@@ -136,6 +154,6 @@
     <button>🔍</button>
     <button>👤</button>
   </footer>
-
 </body>
 </html>
+
