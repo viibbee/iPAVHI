@@ -8,13 +8,14 @@
   <style>
     :root {
       --bg: #0a0a0a;
-      --glass: rgba(255, 255, 255, 0.05);
-      --blur: 20px;
-      --border: rgba(255, 255, 255, 0.1);
+      --glass: rgba(255, 255, 255, 0.06);
+      --blur: 24px;
+      --border: rgba(255, 255, 255, 0.12);
       --accent: #00b3ff;
       --accent-hover: #1cc8ff;
       --text: #fff;
       --muted: #aaa;
+      --shadow: rgba(0, 0, 0, 0.4);
     }
 
     * {
@@ -30,16 +31,19 @@
       flex-direction: column;
       height: 100vh;
       overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     header {
-      padding: 20px;
+      padding: 24px 20px 12px;
       text-align: center;
-      font-size: 2rem;
-      font-weight: 600;
+      font-size: 2.4rem;
+      font-weight: 700;
       background: linear-gradient(90deg, #00b3ff, #0072ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      user-select: none;
     }
 
     .app-scroll {
@@ -47,14 +51,15 @@
       overflow-x: auto;
       overflow-y: hidden;
       display: flex;
-      gap: 20px;
+      gap: 24px;
       padding: 20px;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
     }
 
     .app {
-      flex: 0 0 300px;
+      flex: 0 0 280px;
       scroll-snap-align: start;
       backdrop-filter: blur(var(--blur));
       background-color: var(--glass);
@@ -64,11 +69,32 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: transform 0.2s ease;
+      box-shadow: 0 8px 20px var(--shadow);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      opacity: 0;
+      animation: fadeInUp 0.5s forwards;
+    }
+
+    .app:nth-child(1) { animation-delay: 0.1s; }
+    .app:nth-child(2) { animation-delay: 0.25s; }
+    .app:nth-child(3) { animation-delay: 0.4s; }
+    /* Добавь дополнительные задержки если будет больше карточек */
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .app:hover {
-      transform: scale(1.03);
+      transform: scale(1.06);
+      box-shadow: 0 14px 32px var(--shadow);
+      cursor: pointer;
     }
 
     .app img {
@@ -76,33 +102,47 @@
       height: 180px;
       object-fit: cover;
       border-radius: 16px;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
+      user-select: none;
+      pointer-events: none;
     }
 
     .app h3 {
-      margin: 0;
-      font-size: 1.2rem;
+      margin: 0 0 8px;
+      font-size: 1.25rem;
+      line-height: 1.3;
+      user-select: none;
     }
 
     .app p {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: var(--muted);
+      margin: 0 0 20px;
+      user-select: none;
+      min-height: 46px;
     }
 
     .download-btn {
       margin-top: auto;
       background-color: var(--accent);
       border: none;
-      border-radius: 12px;
-      padding: 10px 16px;
+      border-radius: 14px;
+      padding: 12px 20px;
       color: white;
-      font-weight: 600;
+      font-weight: 700;
+      font-size: 1rem;
       cursor: pointer;
-      transition: background-color 0.2s;
+      transition: background-color 0.25s ease, transform 0.15s ease;
+      user-select: none;
+      box-shadow: 0 3px 8px rgba(0, 179, 255, 0.5);
     }
 
-    .download-btn:hover {
+    .download-btn:hover,
+    .download-btn:focus {
       background-color: var(--accent-hover);
+      transform: translateY(-2px);
+      outline: none;
+      box-shadow: 0 6px 12px rgba(28, 200, 255, 0.75);
     }
 
     footer {
@@ -110,50 +150,109 @@
       bottom: 0;
       width: 100%;
       display: flex;
-      justify-content: space-around;
+      justify-content: center;
       align-items: center;
+      gap: 48px;
       background: var(--glass);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(14px);
       border-top: 1px solid var(--border);
-      padding: 10px 0;
+      padding: 14px 0;
+      user-select: none;
+      z-index: 10;
     }
 
     footer button {
       background: none;
       border: none;
       color: var(--muted);
-      font-size: 1.4rem;
-      transition: 0.2s;
+      font-size: 1.8rem;
+      transition: color 0.3s ease, transform 0.15s ease;
+      cursor: pointer;
+    }
+
+    footer button:hover,
+    footer button:focus {
+      color: var(--accent);
+      transform: scale(1.15);
+      outline: none;
     }
 
     footer button.active {
       color: var(--accent);
+      font-weight: 700;
+      transform: scale(1.3);
+    }
+
+    /* Адаптив */
+
+    @media (max-width: 720px) {
+      .app-scroll {
+        padding: 16px 12px;
+        gap: 16px;
+      }
+
+      .app {
+        flex: 0 0 240px;
+        padding: 16px;
+      }
+
+      .app img {
+        height: 140px;
+        margin-bottom: 12px;
+      }
+
+      header {
+        font-size: 1.8rem;
+        padding: 16px 12px 8px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .app {
+        flex: 0 0 200px;
+      }
+
+      .app img {
+        height: 120px;
+      }
+
+      footer {
+        gap: 32px;
+      }
+
+      footer button {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
   <header>App Vault</header>
 
-  <div class="app-scroll">
-    <div class="app">
+  <div class="app-scroll" role="list">
+    <div class="app" role="listitem" tabindex="0">
       <img src="https://is5-ssl.mzstatic.com/image/thumb/Purple126/v4/63/13/ff/6313ffb3-1945-79d6-f9d5-1c6bc7be29a3/AppIcon-0-1x_U007emarketing-0-0-85-220-0.png/120x120bb.jpg" alt="DMC" />
       <h3>Devil May Cry: Peak of Combat</h3>
       <p>Only DMC Licensed on Mobile</p>
-      <a href="https://example.com/dmc.ipa"><button class="download-btn">Скачать</button></a>
+      <a href="https://example.com/dmc.ipa" download>
+        <button class="download-btn" aria-label="Скачать Devil May Cry">Скачать</button>
+      </a>
     </div>
 
-    <div class="app">
+    <div class="app" role="listitem" tabindex="0">
       <img src="https://is3-ssl.mzstatic.com/image/thumb/Purple116/v4/c8/2a/77/c82a774b-1acb-f6f5-cf6f-bf95f3d5d938/AppIcon-1x_U007emarketing-0-7-0-85-220.png/120x120bb.jpg" alt="Vampire Survivors" />
       <h3>Vampire Survivors</h3>
       <p>Roguelike survival pixel RPG</p>
-      <a href="https://example.com/vampire.ipa"><button class="download-btn">Скачать</button></a>
+      <a href="https://example.com/vampire.ipa" download>
+        <button class="download-btn" aria-label="Скачать Vampire Survivors">Скачать</button>
+      </a>
     </div>
   </div>
 
   <footer>
-    <button class="active">⌂</button>
-    <button>🔍</button>
-    <button>👤</button>
+    <button class="active" aria-label="Главная">⌂</button>
+    <button aria-label="Поиск">🔍</button>
+    <button aria-label="Профиль">👤</button>
   </footer>
 </body>
 </html>
