@@ -2,7 +2,7 @@ const games = [
   {
     id: "1",
     title: "Free Fire",
-    description: "Build your village, train troops, and battle!",
+    description: "To enter the game you need to buy a key in our telegram channel https://t.me/vibehackipa",
     icon: "https://raw.githubusercontent.com/viibbee/iPAVHI/main/photo_2025-05-25_11-33-04.jpg",
     installUrl: "https://example.com/install/clash",
     ipaUrl: "https://vhistoretg.s3.eu-north-1.amazonaws.com/FF_1.111.X_1.3.8.ipa"
