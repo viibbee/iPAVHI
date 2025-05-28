@@ -10,10 +10,11 @@ body {
   -webkit-tap-highlight-color: transparent;
   padding-bottom: 90px; /* пространство под панель навигации */
   overflow-y: hidden; /* отключаем вертикальную прокрутку */
+  height: 100%;
 }
 
 /* Чтобы не было скролла при PWA */
-html, body {
+html {
   height: 100%;
   overflow: hidden;
 }
@@ -25,6 +26,7 @@ header {
   background: #3a32b8;
   color: #eee;
   box-shadow: 0 4px 6px rgb(58 50 184 / 0.7);
+  user-select: none;
 }
 
 h1 {
@@ -43,19 +45,20 @@ header p {
 /* --- Страницы --- */
 .page {
   display: none;
-  padding: 1rem 1rem 4rem;
+  padding: 1rem;
   height: calc(100vh - 120px);
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .page.active {
   display: block;
 }
 
-/* --- Список игр — карточки в 1 строку с прокруткой --- */
+/* --- Горизонтальный список игр --- */
 #game-list {
   display: flex;
-  flex-wrap: nowrap; /* не переносить */
+  flex-wrap: nowrap;
   overflow-x: auto;
   gap: 16px;
   padding: 12px 0;
@@ -63,7 +66,7 @@ header p {
   -webkit-overflow-scrolling: touch;
 }
 
-/* Стили скроллбара горизонтального */
+/* Стили горизонтального скроллбара */
 #game-list::-webkit-scrollbar {
   height: 8px;
 }
@@ -75,7 +78,7 @@ header p {
   background: transparent;
 }
 
-/* --- Обновлённые карточки игр --- */
+/* --- Карточки игр --- */
 .game-card {
   flex: 0 0 auto;
   width: 140px;
@@ -87,7 +90,7 @@ header p {
   padding: 12px 8px;
   border-radius: 14px;
   background: #2a276f;
-  box-shadow: 0 6px 14px rgb(102 90 255 / 0.3);
+  box-shadow: 0 6px 14px rgba(102, 90, 255, 0.3);
   color: #ddd;
   border: none;
   cursor: pointer;
@@ -98,7 +101,7 @@ header p {
 .game-card:hover,
 .game-card:focus-visible {
   outline: none;
-  box-shadow: 0 6px 20px rgb(132 112 255 / 0.8);
+  box-shadow: 0 6px 20px rgba(132, 112, 255, 0.8);
   transform: scale(1.05);
 }
 
@@ -129,25 +132,25 @@ header p {
   text-overflow: ellipsis;
 }
 
-/* --- Модалка (с фиксированным позиционированием и подъемом выше) --- */
+/* --- Модальное окно --- */
 .modal {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(0,0,0,0.75);
+  background: rgba(0, 0, 0, 0.75);
   width: 100%;
   max-width: 400px;
   max-height: 80vh;
   overflow-y: auto;
   border-radius: 20px;
-  box-shadow: 0 8px 24px rgb(102 90 255 / 0.5);
+  box-shadow: 0 8px 24px rgba(102, 90, 255, 0.5);
   color: #ddd;
   z-index: 3000;
-  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0;
 }
 
 .modal.hidden {
@@ -164,10 +167,9 @@ header p {
   position: relative;
   color: #ddd;
   box-sizing: border-box;
-  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
-/* Уменьшим margin чтобы окно не "уезжало" вниз */
 .modal-content img#modal-icon {
   width: 120px;
   height: 120px;
@@ -189,12 +191,13 @@ header p {
   line-height: 1.3;
 }
 
-/* --- Кнопки внутри модалки --- */
+/* --- Кнопки в модалке --- */
 .modal-buttons {
   display: flex;
   justify-content: center;
   gap: 20px;
   margin-bottom: 1rem;
+  flex-wrap: wrap;
 }
 
 .modal-buttons button {
@@ -206,10 +209,10 @@ header p {
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgb(108 99 255 / 0.8);
+  box-shadow: 0 4px 16px rgba(108, 99, 255, 0.8);
   transition: background-color 0.3s ease;
   user-select: none;
-  flex: 1;
+  flex: 1 1 140px;
   max-width: 140px;
 }
 
@@ -259,7 +262,7 @@ header p {
   transition: width 0.4s ease;
 }
 
-/* --- Навигация внизу --- */
+/* --- Нижняя навигация --- */
 .bottom-nav {
   position: fixed;
   bottom: 0;
@@ -270,7 +273,7 @@ header p {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  box-shadow: 0 -4px 12px rgb(44 39 160 / 0.8);
+  box-shadow: 0 -4px 12px rgba(44, 39, 160, 0.8);
   z-index: 4000;
   user-select: none;
 }
@@ -287,6 +290,7 @@ header p {
   cursor: pointer;
   padding: 4px 6px 2px;
   transition: color 0.25s ease;
+  user-select: none;
 }
 
 .nav-btn.active,
@@ -304,11 +308,11 @@ header p {
 }
 
 .nav-text {
-  user-select: none;
   font-weight: 600;
+  user-select: none;
 }
 
-/* --- Для input поиска --- */
+/* --- Поисковый input --- */
 #search-input {
   width: 100%;
   padding: 0.75rem 1rem;
@@ -319,6 +323,7 @@ header p {
   color: #eee;
   box-sizing: border-box;
   margin-bottom: 16px;
+  transition: background-color 0.3s ease, outline 0.3s ease;
 }
 
 #search-input:focus {
@@ -326,11 +331,9 @@ header p {
   background: #4c43b9;
 }
 
-/* --- Список результатов поиска --- */
+/* --- Результаты поиска --- */
 #search-results {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
 }
-
-/* --- Для карточек в поиске тоже применим похожий стиль, можно позже --- */
