@@ -3,10 +3,10 @@ const games = [
     id: "1",
     title: "Free Fire",
     description: "Build your village, train troops, and battle!",
-    icon: "https://github.com/viibbee/iPAVHI/blob/main/photo_2025-05-25_11-33-04.jpg",
+    icon: "https://raw.githubusercontent.com/viibbee/iPAVHI/main/photo_2025-05-25_11-33-04.jpg",
     installUrl: "https://example.com/install/clash",
     ipaUrl: "https://example.com/ipa/clash.ipa"
-  },
+  }
   {
     id: "2",
     title: "Among Us",
