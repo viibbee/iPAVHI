@@ -14,8 +14,11 @@
   <h1>iPASStore</h1>
 </header>
 
-<main id="game-list" class="page active">
-  <!-- Игры добавляются через JS -->
+<main id="main-content" class="page active">
+  <h2 class="top-games-title">Top Games</h2>
+  <div id="game-list">
+    <!-- Игры добавляются через JS -->
+  </div>
 </main>
 
 <!-- Другие страницы -->
@@ -51,7 +54,7 @@
 </div>
 
 <nav class="bottom-nav" role="navigation" aria-label="Main navigation">
-  <button class="nav-btn active" data-target="game-list" aria-label="Games">
+  <button class="nav-btn active" data-target="main-content" aria-label="Games">
     <span class="nav-icon">🎮</span>
     <span class="nav-text">Games</span>
   </button>
@@ -72,4 +75,3 @@
 <script src="app.js"></script>
 </body>
 </html>
-
