@@ -3,7 +3,7 @@ const games = [
     id: "1",
     title: "Free Fire",
     description: "Build your village, train troops, and battle!",
-    icon: "https://cdn-icons-png.flaticon.com/512/2920/2920112.png",
+    icon: "https://github.com/viibbee/iPAVHI/blob/main/photo_2025-05-25_11-33-04.jpg",
     installUrl: "https://example.com/install/clash",
     ipaUrl: "https://example.com/ipa/clash.ipa"
   },
