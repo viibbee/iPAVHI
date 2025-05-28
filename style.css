@@ -3,21 +3,27 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background: linear-gradient(135deg, #e0d9ff, #c1b8ff);
-  color: #222;
+  background: linear-gradient(135deg, #1e1e2f, #2a2a43);
+  color: #ddd;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
   padding-bottom: 60px; /* пространство под панель навигации */
+  min-height: 100vh;
+}
+
+/* Убираем голубую полосу статуса в iOS PWA */
+meta[name="apple-mobile-web-app-status-bar-style"][content="black-translucent"] {
+  background-color: transparent;
 }
 
 header {
   padding: 1.25rem 1rem;
   text-align: center;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
-  background: #4a3aff;
-  color: #fff;
-  box-shadow: 0 4px 6px rgb(74 58 255 / 0.3);
+  border-bottom: 1px solid rgba(255 255 255 / 0.1);
+  background: #2f2f4e;
+  color: #e0d9ff;
+  box-shadow: 0 4px 6px rgb(110 100 190 / 0.5);
 }
 
 h1 {
@@ -25,12 +31,13 @@ h1 {
   font-weight: 700;
   font-size: 2rem;
   letter-spacing: -0.02em;
+  color: #cfc9ff;
 }
 
 header p {
   margin: 0.3rem 0 0;
   font-size: 1rem;
-  opacity: 0.85;
+  opacity: 0.7;
 }
 
 /* --- Страницы --- */
@@ -51,11 +58,11 @@ header p {
 }
 
 .game-card {
-  background: white;
+  background: #3a3a61;
   border-radius: 16px;
   box-shadow:
-    0 8px 12px rgb(74 58 255 / 0.15),
-    0 2px 4px rgb(74 58 255 / 0.12);
+    0 8px 12px rgb(100 90 220 / 0.5),
+    0 2px 4px rgb(100 90 220 / 0.3);
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
@@ -68,8 +75,8 @@ header p {
 .game-card:focus {
   transform: translateY(-6px) scale(1.05);
   box-shadow:
-    0 16px 32px rgb(74 58 255 / 0.25),
-    0 6px 12px rgb(74 58 255 / 0.22);
+    0 16px 32px rgb(120 110 255 / 0.75),
+    0 6px 12px rgb(120 110 255 / 0.7);
   outline: none;
 }
 
@@ -77,7 +84,7 @@ header p {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #575776;
   border-radius: 16px 16px 0 0;
 }
 
@@ -93,40 +100,87 @@ header p {
   margin: 0;
   font-weight: 700;
   font-size: 1.1rem;
-  color: #4a3aff;
-  text-shadow: 0 1px 4px rgb(74 58 255 / 0.3);
+  color: #b8a8ff;
+  text-shadow: 0 1px 4px rgb(120 110 255 / 0.5);
 }
 
 .game-desc {
   margin: 0.5rem 0 0;
   font-size: 0.85rem;
-  color: #555;
+  color: #aaa;
   flex-grow: 1;
 }
 
 /* --- Модалка --- */
-/* без изменений, оставь предыдущие стили или сделаем чуть ярче */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 30, 30, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+}
+
+.modal.hidden {
+  display: none;
+}
 
 .modal-content {
-  background: #fff;
+  background: #222244;
   border-radius: 20px;
   padding: 1.5rem 1.5rem 2rem;
   max-width: 350px;
-  width: 100%;
+  width: 90vw;
   text-align: center;
   box-shadow:
-    0 8px 24px rgb(74 58 255 / 0.25);
+    0 8px 24px rgb(100 90 220 / 0.75);
   position: relative;
+  color: #eee;
 }
 
 .modal-close {
-  color: #4a3aff;
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: #b8a8ff;
+  cursor: pointer;
+  transition: color 0.3s ease;
 }
 
-/* --- Кнопки --- */
+.modal-close:hover {
+  color: #fff;
+}
+
+.modal-content img {
+  max-width: 120px;
+  border-radius: 16px;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 8px rgb(150 130 255 / 0.7);
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
 .modal-buttons button#install-btn {
+  flex: 1;
+  padding: 0.75rem 0;
+  border: none;
+  border-radius: 14px;
   background: #6c63ff;
   color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgb(108 99 255 / 0.7);
+  transition: background-color 0.3s ease;
 }
 
 .modal-buttons button#install-btn:hover {
@@ -134,22 +188,37 @@ header p {
 }
 
 .modal-buttons button#ipa-btn {
-  background: #ddd;
-  color: #444;
+  flex: 1;
+  padding: 0.75rem 0;
+  border: none;
+  border-radius: 14px;
+  background: #444;
+  color: #ddd;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgb(80 80 80 / 0.7);
+  transition: background-color 0.3s ease;
 }
 
 .modal-buttons button#ipa-btn:hover {
-  background: #bbb;
+  background: #666;
 }
 
 /* --- Прогресс-бар --- */
 .progress-bar {
-  background: #eee;
+  margin-top: 1rem;
+  height: 10px;
+  background: #444;
   border-radius: 8px;
+  overflow: hidden;
 }
 
 .progress-fill {
+  height: 100%;
   background: #6c63ff;
+  width: 0%;
+  transition: width 0.3s ease;
 }
 
 /* --- Нижняя навигация --- */
@@ -159,42 +228,79 @@ header p {
   left: 0;
   width: 100%;
   height: 56px;
-  background: #4a3aff;
+  background: #2f2f4e;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  box-shadow: 0 -3px 6px rgb(0 0 0 / 0.1);
+  box-shadow: 0 -4px 8px rgb(50 45 110 / 0.8);
+  user-select: none;
   z-index: 2000;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
 }
 
-.bottom-nav .nav-btn {
-  background: transparent;
+.nav-btn {
+  background: none;
   border: none;
-  color: #c5c5ff;
+  color: #aaa;
+  font-weight: 600;
+  font-size: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 12px;
-  font-weight: 600;
+  gap: 4px;
   cursor: pointer;
-  padding: 6px 4px 4px;
+  padding: 4px 8px;
   transition: color 0.3s ease;
-  user-select: none;
 }
 
-.bottom-nav .nav-btn .nav-icon {
-  font-size: 22px;
+.nav-btn .nav-icon {
+  font-size: 1.4rem;
   line-height: 1;
 }
 
-.bottom-nav .nav-btn.active {
-  color: #fff;
+.nav-btn.active,
+.nav-btn:hover,
+.nav-btn:focus {
+  color: #b8a8ff;
+  outline: none;
 }
 
-.bottom-nav .nav-btn:focus-visible {
+/* --- Поиск --- */
+#search-input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border-radius: 14px;
+  border: none;
+  box-shadow: inset 0 0 5px #6c63ffaa;
+  margin-bottom: 16px;
+  background: #222244;
+  color: #eee;
+}
+
+#search-input::placeholder {
+  color: #9999bb;
+}
+
+#search-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(160px,1fr));
+  gap: 16px;
+}
+
+/* --- Ссылки в описаниях --- */
+a {
+  color: #a299ff;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #d0caff;
+}
+
+/* --- Фокус для кнопок и ссылок --- */
+button:focus,
+a:focus {
+  outline: 2px solid #6c63ff;
   outline-offset: 2px;
-  outline: 2px solid #b2a9ff;
   border-radius: 8px;
 }
