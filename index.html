@@ -1,75 +1,321 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>GameHub</title>
-<link rel="manifest" href="manifest.json" />
-<link rel="stylesheet" href="style.css" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Игры</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background: #f0f0f0;
+  }
+
+  #search-input {
+    width: 100%;
+    max-width: 400px;
+    padding: 8px 12px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+
+  #game-list, #search-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(140px,1fr));
+    gap: 16px;
+    max-width: 800px;
+  }
+
+  .game-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    border: none;
+    cursor: pointer;
+    user-select: none;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: box-shadow 0.2s ease;
+  }
+  .game-card:hover {
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  }
+  .game-card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 16px;
+    object-fit: cover;
+    margin-bottom: 8px;
+  }
+  .game-card h3 {
+    margin: 0 0 6px;
+    font-size: 1.1rem;
+  }
+  .game-card p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #666;
+  }
+
+  /* Модальное окно */
+  #modal.hidden {
+    display: none;
+  }
+  #modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 400px;
+    width: 90%;
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    z-index: 1000;
+    overflow-y: auto;
+    max-height: 80vh;
+  }
+  #modal .modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: transparent;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+  }
+  #modal img {
+    width: 120px;
+    height: 120px;
+    border-radius: 20px;
+    display: block;
+    margin: 0 auto 16px;
+    object-fit: cover;
+  }
+  #modal h2 {
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  #modal p {
+    text-align: center;
+    margin-bottom: 24px;
+    color: #444;
+  }
+  #install-progress {
+    width: 100%;
+    background: #eee;
+    border-radius: 12px;
+    height: 14px;
+    margin-bottom: 16px;
+  }
+  #install-progress.hidden {
+    display: none;
+  }
+  #install-progress .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: #4caf50;
+    border-radius: 12px;
+    transition: width 0.3s ease;
+  }
+  #modal button {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+  }
+  #install-btn {
+    background: #4caf50;
+    color: white;
+  }
+  #install-btn:disabled {
+    background: #a5d6a7;
+    cursor: default;
+  }
+  #ipa-btn {
+    background: #2196f3;
+    color: white;
+  }
+</style>
 </head>
 <body>
-<header>
-  <h1>GameHub</h1>
-  <p>Discover & Install Your Favorite Games</p>
-</header>
 
-<main id="game-list" class="page active">
-  <!-- Игры добавляются через JS -->
-</main>
+<input type="text" id="search-input" placeholder="Поиск игр..." aria-label="Поиск игр" />
 
-<!-- Другие страницы -->
-<section id="search-page" class="page">
-  <input type="search" id="search-input" placeholder="Search apps..." />
-  <div id="search-results"></div>
-</section>
+<div id="game-list" aria-live="polite" aria-relevant="additions"></div>
+<div id="search-results" style="display:none;" aria-live="polite" aria-relevant="additions"></div>
 
-<section id="downloads-page" class="page">
-  <h2>Your Downloads</h2>
-  <p>No downloads yet.</p>
-</section>
-
-<section id="profile-page" class="page">
-  <h2>More</h2>
-  <p>Welcome, Player!</p>
-</section>
-
-<div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description">
-  <div class="modal-content">
-    <button class="modal-close" aria-label="Close modal">&times;</button>
-    <img id="modal-icon" src="" alt="Game icon" />
-    <h2 id="modal-title"></h2>
-    <p id="modal-description"></p>
-    <div class="modal-buttons">
-      <button id="install-btn">Install</button>
-      <button id="ipa-btn">IPA</button>
-    </div>
-    <div id="install-progress" class="progress-bar hidden" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-      <div class="progress-fill"></div>
-    </div>
+<div id="modal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description">
+  <button class="modal-close" aria-label="Закрыть окно">✕</button>
+  <img id="modal-icon" alt="Иконка игры" />
+  <h2 id="modal-title"></h2>
+  <p id="modal-description"></p>
+  <div id="install-progress" class="hidden" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+    <div class="progress-fill"></div>
   </div>
+  <button id="install-btn">Установить</button>
+  <button id="ipa-btn">Скачать IPA</button>
 </div>
 
-<nav class="bottom-nav" role="navigation" aria-label="Main navigation">
-  <button class="nav-btn active" data-target="game-list" aria-label="Games">
-    <span class="nav-icon">🎮</span>
-    <span class="nav-text">Games</span>
-  </button>
-  <button class="nav-btn" data-target="search-page" aria-label="Apps">
-    <span class="nav-icon">📱</span>
-    <span class="nav-text">Apps</span>
-  </button>
-  <button class="nav-btn" data-target="downloads-page" aria-label="Search">
-    <span class="nav-icon">🔍</span>
-    <span class="nav-text">Search</span>
-  </button>
-  <button class="nav-btn" data-target="profile-page" aria-label="More">
-    <span class="nav-icon">⋯</span>
-    <span class="nav-text">More</span>
-  </button>
-</nav>
+<script>
+  const games = [
+    {
+      id: 1,
+      title: "Shadow Quest",
+      desc: "Эпическое RPG приключение в мире тёмного фэнтези.",
+      icon: "https://i.imgur.com/6qf1xjq.jpg",
+      ipa: "https://example.com/shadowquest.ipa",
+      install: "https://t.me/install_shadowquest"
+    },
+    {
+      id: 2,
+      title: "Pixel Racer",
+      desc: "Быстрые гонки в пиксельном стиле.",
+      icon: "https://i.imgur.com/WzP18Ub.jpg",
+      ipa: "https://example.com/pixelracer.ipa",
+      install: "https://t.me/install_pixelracer"
+    },
+    {
+      id: 3,
+      title: "Neon Wars",
+      desc: "Мультиплеерный шутер в неоновом стиле.",
+      icon: "https://i.imgur.com/BGdwPTg.jpg",
+      ipa: "https://example.com/neonwars.ipa",
+      install: "https://t.me/install_neonwars"
+    }
+  ];
 
-<script src="app.js"></script>
+  const gameList = document.getElementById("game-list");
+  const modal = document.getElementById("modal");
+  const modalIcon = document.getElementById("modal-icon");
+  const modalTitle = document.getElementById("modal-title");
+  const modalDescription = document.getElementById("modal-description");
+  const installBtn = document.getElementById("install-btn");
+  const ipaBtn = document.getElementById("ipa-btn");
+  const modalClose = modal.querySelector(".modal-close");
+  const progressBar = document.getElementById("install-progress");
+  const progressFill = progressBar.querySelector(".progress-fill");
+
+  const searchInput = document.getElementById("search-input");
+  const searchResults = document.getElementById("search-results");
+
+  let currentGame = null;
+
+  function renderGames() {
+    gameList.innerHTML = "";
+    games.forEach(game => {
+      const card = document.createElement("button");
+      card.className = "game-card";
+      card.setAttribute("aria-label", `Открыть информацию о ${game.title}`);
+
+      card.innerHTML = `
+        <img src="${game.icon}" alt="Иконка игры ${game.title}" />
+        <h3>${game.title}</h3>
+        <p>${game.desc}</p>
+      `;
+      card.addEventListener("click", () => openModal(game));
+      gameList.appendChild(card);
+    });
+  }
+
+  function openModal(game) {
+    currentGame = game;
+    modalIcon.src = game.icon;
+    modalTitle.textContent = game.title;
+    modalDescription.textContent = game.desc;
+    progressBar.classList.add("hidden");
+    progressFill.style.width = "0%";
+    progressBar.setAttribute("aria-valuenow", 0);
+    modal.classList.remove("hidden");
+    installBtn.disabled = false;
+    ipaBtn.disabled = false;
+    installBtn.focus();
+  }
+
+  function closeModal() {
+    modal.classList.add("hidden");
+    currentGame = null;
+  }
+
+  modalClose.addEventListener("click", closeModal);
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+      closeModal();
+    }
+  });
+
+  installBtn.addEventListener("click", () => {
+    if (!currentGame) return;
+    installBtn.disabled = true;
+    ipaBtn.disabled = true;
+    progressBar.classList.remove("hidden");
+    let progress = 0;
+
+    const interval = setInterval(() => {
+      progress += 10;
+      progressFill.style.width = progress + "%";
+      progressBar.setAttribute("aria-valuenow", progress);
+
+      if (progress >= 100) {
+        clearInterval(interval);
+        alert(`Установка игры ${currentGame.title} началась!\n\nВы будете перенаправлены.`);
+        window.open(currentGame.install, "_blank");
+        closeModal();
+      }
+    }, 300);
+  });
+
+  ipaBtn.addEventListener("click", () => {
+    if (!currentGame) return;
+    window.open(currentGame.ipa, "_blank");
+    closeModal();
+  });
+
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.toLowerCase().trim();
+
+    if (query === "") {
+      searchResults.style.display = "none";
+      gameList.style.display = "grid";
+      return;
+    }
+
+    const filtered = games.filter(g => g.title.toLowerCase().includes(query));
+
+    searchResults.innerHTML = "";
+    if (filtered.length === 0) {
+      searchResults.innerHTML = "<p>Результаты не найдены.</p>";
+    } else {
+      filtered.forEach(game => {
+        const btn = document.createElement("button");
+        btn.className = "game-card";
+        btn.style.width = "100%";
+
+        btn.innerHTML = `
+          <img src="${game.icon}" alt="Иконка игры ${game.title}" style="width:80px; height:80px; border-radius:12px; object-fit:cover;" />
+          <h3>${game.title}</h3>
+          <p>${game.desc}</p>
+        `;
+        btn.addEventListener("click", () => openModal(game));
+        searchResults.appendChild(btn);
+      });
+    }
+    gameList.style.display = "none";
+    searchResults.style.display = "grid";
+  });
+
+  renderGames();
+</script>
+
 </body>
 </html>
+
