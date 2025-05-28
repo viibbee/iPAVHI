@@ -1,46 +1,40 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js" >
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <title>GameZone - PWA Game Store</title>
-  <link rel="manifest" href="manifest.json" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png" />
-  <meta name="theme-color" content="#1d1d1f" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<title>GameHub PWA</title>
+<link rel="manifest" href="manifest.json" />
+<link rel="stylesheet" href="style.css" />
+<script defer src="app.js"></script>
 </head>
 <body>
-  <header>
-    <h1>GameZone</h1>
-    <p class="instruction">Добавьте этот сайт в PWA, чтобы получить удобный доступ к играм через ярлык на рабочем столе.</p>
-  </header>
+<header>
+  <h1>GameHub</h1>
+  <p>Add this site to your home screen for the best experience</p>
+</header>
+<main id="games-list" class="games-list">
+  <!-- Игры будут вставлены здесь через JS -->
+</main>
 
-  <main>
-    <section id="gameList" aria-label="Список игр"></section>
-  </main>
-
-  <div id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
-    <div id="modalContent" role="document">
-      <button id="modalClose" aria-label="Закрыть окно">&times;</button>
-      <h2 id="modalTitle"></h2>
-      <p id="modalDescription"></p>
-      <div id="modalButtons">
-        <button id="btnInstall" class="btn action">Install</button>
-        <button id="btnIPA" class="btn secondary">IPA</button>
-      </div>
-      <div id="progressContainer" hidden>
-        <progress id="downloadProgress" value="0" max="100"></progress>
-        <span id="progressText">0%</span>
+<!-- Модальное окно с информацией об игре -->
+<div id="modal" class="modal hidden">
+  <div class="modal-content">
+    <button id="modal-close" class="modal-close">&times;</button>
+    <div class="game-info">
+      <img id="modal-icon" src="" alt="Game Icon" />
+      <h2 id="modal-title"></h2>
+      <p id="modal-description"></p>
+      <div id="download-status" class="download-status"></div>
+      <div class="modal-buttons">
+        <button id="install-btn" class="btn">Install</button>
+        <button id="ipa-btn" class="btn">IPA</button>
       </div>
     </div>
   </div>
+</div>
 
-  <footer>
-    <small>© 2025 GameZone. Все права защищены.</small>
-  </footer>
-
-  <script src="app.js"></script>
 </body>
 </html>
