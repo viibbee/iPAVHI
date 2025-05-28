@@ -1,118 +1,124 @@
 const games = [
   {
     id: 1,
-    title: "SkyQuest",
-    description: "Exciting flying adventure through mystical skies.",
-    icon: "icons/skyquest.png",
-    installUrl: "https://example.com/skyquest/install",
-    ipaUrl: "https://example.com/skyquest/game.ipa",
+    title: "Super Fun Game",
+    description:
+      "Addictive and fun arcade game. Tap 'Install' to start playing!",
+    icon: "icons/game1.png",
+    ipaLink: "https://example.com/game1.ipa",
   },
   {
     id: 2,
-    title: "Puzzle Mania",
-    description: "Challenging puzzles to test your brainpower.",
-    icon: "icons/puzzlemania.png",
-    installUrl: "https://example.com/puzzlemania/install",
-    ipaUrl: "https://example.com/puzzlemania/game.ipa",
+    title: "Puzzle Master",
+    description: "Challenge your brain with tricky puzzles.",
+    icon: "icons/game2.png",
+    ipaLink: "https://example.com/game2.ipa",
   },
   {
     id: 3,
-    title: "Racing Thunder",
-    description: "High-speed racing with stunning graphics.",
-    icon: "icons/racingthunder.png",
-    installUrl: "https://example.com/racingthunder/install",
-    ipaUrl: "https://example.com/racingthunder/game.ipa",
+    title: "Space Runner",
+    description: "Fast-paced endless runner in outer space.",
+    icon: "icons/game3.png",
+    ipaLink: "https://example.com/game3.ipa",
   },
 ];
 
-const gamesListEl = document.getElementById("games-list");
+// Элементы DOM
+const gameList = document.getElementById("game-list");
 const modal = document.getElementById("modal");
-const modalCloseBtn = document.getElementById("modal-close");
-const modalIcon = document.getElementById("modal-icon");
 const modalTitle = document.getElementById("modal-title");
 const modalDescription = document.getElementById("modal-description");
-const downloadStatus = document.getElementById("download-status");
+const modalIcon = document.getElementById("modal-icon");
 const installBtn = document.getElementById("install-btn");
 const ipaBtn = document.getElementById("ipa-btn");
+const installProgress = document.getElementById("install-progress");
+const progressFill = installProgress.querySelector(".progress-fill");
+const modalClose = modal.querySelector(".modal-close");
 
 let currentGame = null;
 
-// Функция для создания карточек игр
 function renderGames() {
   games.forEach((game) => {
     const card = document.createElement("div");
     card.className = "game-card";
+    card.tabIndex = 0;
+    card.setAttribute("role", "button");
+    card.setAttribute("aria-pressed", "false");
+
     card.innerHTML = `
-      <img src="${game.icon}" alt="${game.title} icon" />
-      <h3>${game.title}</h3>
-      <p>${game.description}</p>
-      <button class="btn get-btn">Get</button>
+      <img src="${game.icon}" alt="${game.title} icon" class="game-icon" />
+      <div class="game-info">
+        <h3 class="game-title">${game.title}</h3>
+        <p class="game-desc">${game.description}</p>
+      </div>
     `;
 
-    card.querySelector(".get-btn").addEventListener("click", () => {
-      openModal(game);
+    card.addEventListener("click", () => openModal(game));
+    card.addEventListener("keypress", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        openModal(game);
+      }
     });
 
-    gamesListEl.appendChild(card);
+    gameList.appendChild(card);
   });
 }
 
-// Открытие модального окна с информацией об игре
 function openModal(game) {
   currentGame = game;
-  modalIcon.src = game.icon;
   modalTitle.textContent = game.title;
   modalDescription.textContent = game.description;
-  downloadStatus.textContent = "";
-  installBtn.disabled = false;
-  ipaBtn.disabled = false;
+  modalIcon.src = game.icon;
+  installProgress.classList.add("hidden");
+  progressFill.style.width = "0%";
+
   modal.classList.remove("hidden");
 }
 
-// Закрытие модального окна
-modalCloseBtn.addEventListener("click", () => {
+function closeModal() {
   modal.classList.add("hidden");
-});
+  currentGame = null;
+  installProgress.classList.add("hidden");
+  progressFill.style.width = "0%";
+}
 
-// Обработчик кнопки Install
-installBtn.addEventListener("click", () => {
+function simulateInstall() {
   if (!currentGame) return;
-  downloadStatus.textContent = "Starting installation...";
+
+  installProgress.classList.remove("hidden");
+  let progress = 0;
+
   installBtn.disabled = true;
   ipaBtn.disabled = true;
 
-  // Имитируем процесс загрузки (пример)
-  let progress = 0;
   const interval = setInterval(() => {
-    progress += 10;
-    downloadStatus.textContent = `Installing... ${progress}%`;
+    progress += 5;
+    progressFill.style.width = progress + "%";
+
     if (progress >= 100) {
       clearInterval(interval);
-      downloadStatus.textContent = "Installation complete!";
-      // Можно сделать редирект на installUrl
-      window.open(currentGame.installUrl, "_blank");
+      alert(`${currentGame.title} installed!`);
       installBtn.disabled = false;
       ipaBtn.disabled = false;
+      installProgress.classList.add("hidden");
+      progressFill.style.width = "0%";
+      closeModal();
     }
-  }, 300);
-});
+  }, 100);
+}
 
-// Обработчик кнопки IPA
-ipaBtn.addEventListener("click", () => {
+function openIpa() {
   if (!currentGame) return;
-  downloadStatus.textContent = "Starting IPA download...";
-  installBtn.disabled = true;
-  ipaBtn.disabled = true;
+  window.open(currentGame.ipaLink, "_blank");
+}
 
-  // Открываем ссылку на IPA файл
-  window.open(currentGame.ipaUrl, "_blank");
-
-  setTimeout(() => {
-    downloadStatus.textContent = "IPA download started.";
-    installBtn.disabled = false;
-    ipaBtn.disabled = false;
-  }, 1500);
+// События
+installBtn.addEventListener("click", simulateInstall);
+ipaBtn.addEventListener("click", openIpa);
+modalClose.addEventListener("click", closeModal);
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) closeModal();
 });
 
-// Инициализация сайта
+// Инициализация
 renderGames();
