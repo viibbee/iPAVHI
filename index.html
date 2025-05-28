@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
   <title>App Vault</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
@@ -22,17 +22,21 @@
       box-sizing: border-box;
     }
 
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
       font-family: 'Inter', sans-serif;
       background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
       color: var(--text);
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
+      height: 100%;
       overflow: hidden;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
     }
 
     header {
@@ -78,7 +82,6 @@
     .app:nth-child(1) { animation-delay: 0.1s; }
     .app:nth-child(2) { animation-delay: 0.25s; }
     .app:nth-child(3) { animation-delay: 0.4s; }
-    /* Добавь дополнительные задержки если будет больше карточек */
 
     @keyframes fadeInUp {
       from {
@@ -127,10 +130,10 @@
       background-color: var(--accent);
       border: none;
       border-radius: 14px;
-      padding: 12px 20px;
+      padding: 10px 16px;
       color: white;
       font-weight: 700;
-      font-size: 1rem;
+      font-size: 0.95rem;
       cursor: pointer;
       transition: background-color 0.25s ease, transform 0.15s ease;
       user-select: none;
@@ -152,11 +155,11 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 48px;
+      gap: 32px;
       background: var(--glass);
       backdrop-filter: blur(14px);
       border-top: 1px solid var(--border);
-      padding: 14px 0;
+      padding: 10px 0;
       user-select: none;
       z-index: 10;
     }
@@ -165,7 +168,7 @@
       background: none;
       border: none;
       color: var(--muted);
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       transition: color 0.3s ease, transform 0.15s ease;
       cursor: pointer;
     }
@@ -180,10 +183,8 @@
     footer button.active {
       color: var(--accent);
       font-weight: 700;
-      transform: scale(1.3);
+      transform: scale(1.2);
     }
-
-    /* Адаптив */
 
     @media (max-width: 720px) {
       .app-scroll {
@@ -217,11 +218,11 @@
       }
 
       footer {
-        gap: 32px;
+        gap: 24px;
       }
 
       footer button {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
       }
     }
   </style>
