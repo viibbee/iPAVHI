@@ -140,37 +140,41 @@
       bottom: 0;
       width: 100%;
       display: flex;
-      justify-content: center;
+      justify-content: space-around;
       align-items: center;
-      gap: 32px;
       background: var(--glass);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(18px);
       border-top: 1px solid var(--border);
-      padding: 12px 0;
+      padding: 10px 0;
       z-index: 10;
+      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.3);
     }
 
-    footer button {
-      background: none;
-      border: none;
+    .nav-button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 0.75rem;
       color: var(--muted);
-      font-size: 1.6rem;
-      transition: color 0.3s ease, transform 0.15s ease;
-      cursor: pointer;
+      transition: color 0.3s ease, transform 0.2s ease;
     }
 
-    footer button:hover,
-    footer button:focus {
-      color: var(--accent);
+    .nav-button i {
+      font-size: 1.4rem;
+      margin-bottom: 4px;
+    }
+
+    .nav-button:hover {
+      color: var(--accent-hover);
       transform: scale(1.1);
     }
 
-    footer button.active {
+    .nav-button.active {
       color: var(--accent);
-      font-weight: 700;
-      transform: scale(1.2);
+      font-weight: 600;
     }
   </style>
+  <script src="https://kit.fontawesome.com/4b6f7d9b17.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <header>App Vault</header>
@@ -196,9 +200,22 @@
   </div>
 
   <footer>
-    <button class="active" aria-label="Главная">⌂</button>
-    <button aria-label="Поиск">🔍</button>
-    <button aria-label="Профиль">👤</button>
+    <div class="nav-button active">
+      <i class="fas fa-gamepad"></i>
+      <span>Games</span>
+    </div>
+    <div class="nav-button">
+      <i class="fas fa-th-large"></i>
+      <span>Apps</span>
+    </div>
+    <div class="nav-button">
+      <i class="fas fa-search"></i>
+      <span>Search</span>
+    </div>
+    <div class="nav-button">
+      <i class="fas fa-ellipsis-h"></i>
+      <span>More</span>
+    </div>
   </footer>
 </body>
 </html>
