@@ -1,26 +1,30 @@
-/* --- Отключаем прокрутку и фиксируем высоту --- */
-html, body {
-  height: 100%;
+/* --- Общие стили --- */
+body {
   margin: 0;
-  overflow: hidden;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background: linear-gradient(135deg, #2a265f, #1f1c48);
-  color: #eee;
+  background: linear-gradient(135deg, #1a164a, #2b266e);
+  color: #ddd;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
-  padding-bottom: 56px; /* пространство под панель навигации */
+  padding-bottom: 90px; /* пространство под панель навигации */
+  overflow-y: hidden; /* отключаем вертикальную прокрутку */
 }
 
-/* --- Заголовок --- */
+/* Чтобы не было скролла при PWA */
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
 header {
   padding: 1.25rem 1rem;
   text-align: center;
-  border-bottom: 1px solid rgba(255 255 255 / 0.15);
-  background: #1a1640;
-  color: #a6a0ff;
-  box-shadow: 0 4px 6px rgb(102 90 255 / 0.6);
+  border-bottom: 1px solid rgba(255 255 255 / 0.1);
+  background: #3a32b8;
+  color: #eee;
+  box-shadow: 0 4px 6px rgb(58 50 184 / 0.7);
 }
 
 h1 {
@@ -28,320 +32,231 @@ h1 {
   font-weight: 700;
   font-size: 2rem;
   letter-spacing: -0.02em;
-  color: #b3afff;
 }
 
 header p {
   margin: 0.3rem 0 0;
   font-size: 1rem;
-  opacity: 0.75;
-  color: #c2bfff;
+  opacity: 0.85;
 }
 
 /* --- Страницы --- */
 .page {
   display: none;
   padding: 1rem 1rem 4rem;
-  height: calc(100vh - 92px); /* высота минус header + nav */
+  height: calc(100vh - 120px);
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 .page.active {
   display: block;
 }
 
-/* --- Список игр — карточки --- */
+/* --- Список игр — карточки в 1 строку с прокруткой --- */
 #game-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(160px,1fr));
+  display: flex;
+  flex-wrap: nowrap; /* не переносить */
+  overflow-x: auto;
   gap: 16px;
+  padding: 12px 0;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
+/* Стили скроллбара горизонтального */
+#game-list::-webkit-scrollbar {
+  height: 8px;
+}
+#game-list::-webkit-scrollbar-thumb {
+  background: #6c63ff;
+  border-radius: 8px;
+}
+#game-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Карточки игр */
 .game-card {
-  background: #353159;
-  border-radius: 16px;
-  box-shadow:
-    0 8px 12px rgb(102 90 255 / 0.35),
-    0 2px 4px rgb(102 90 255 / 0.2);
+  flex: 0 0 auto;
+  width: 220px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: #2a276f;
+  box-shadow: 0 6px 14px rgb(102 90 255 / 0.3);
+  color: #ddd;
+  border: none;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
   user-select: none;
 }
 
 .game-card:hover,
-.game-card:focus {
-  transform: translateY(-6px) scale(1.05);
-  box-shadow:
-    0 16px 32px rgb(102 90 255 / 0.6),
-    0 6px 12px rgb(102 90 255 / 0.5);
+.game-card:focus-visible {
   outline: none;
+  box-shadow: 0 6px 20px rgb(132 112 255 / 0.8);
+  transform: scale(1.05);
 }
 
 .game-icon {
-  width: 100%;
-  aspect-ratio: 1 / 1;
+  width: 100px;
+  height: 100px;
+  border-radius: 14px;
+  flex-shrink: 0;
   object-fit: cover;
-  border-bottom: 1px solid #4a47a8;
-  border-radius: 16px 16px 0 0;
 }
 
 .game-info {
-  padding: 0.75rem 1rem;
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  flex-grow: 1;
+  min-width: 0;
 }
 
 .game-title {
-  margin: 0;
   font-weight: 700;
   font-size: 1.1rem;
-  color: #a6a0ff;
-  text-shadow: 0 1px 4px rgb(102 90 255 / 0.5);
+  margin: 0 0 6px 0;
+  color: #dcdcff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .game-desc {
-  margin: 0.5rem 0 0;
   font-size: 0.85rem;
-  color: #ccc;
-  flex-grow: 1;
+  color: #aaa;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* --- Модалка --- */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(20, 16, 48, 0.9);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 3000;
-}
-
-.modal.hidden {
-  display: none;
-}
-
 .modal-content {
-  background: #2a265f;
+  background: #222249;
   border-radius: 20px;
   padding: 1.5rem 1.5rem 2rem;
   max-width: 350px;
-  width: 90%;
+  width: 100%;
   text-align: center;
-  box-shadow: 0 8px 24px rgb(102 90 255 / 0.8);
+  box-shadow: 0 8px 24px rgb(102 90 255 / 0.5);
   position: relative;
-  color: #ccc;
+  color: #ddd;
 }
 
 .modal-close {
+  color: #6c63ff;
+  font-size: 1.5rem;
   position: absolute;
   top: 12px;
-  right: 12px;
+  right: 16px;
   background: transparent;
   border: none;
-  font-size: 28px;
-  font-weight: 600;
-  color: #a6a0ff;
   cursor: pointer;
-  transition: color 0.3s ease;
 }
 
 .modal-close:hover {
-  color: #fff;
+  color: #9186ff;
 }
 
-#modal-icon {
-  width: 120px;
-  height: 120px;
-  border-radius: 24px;
-  margin-bottom: 1rem;
-  object-fit: cover;
-  box-shadow: 0 0 15px rgb(102 90 255 / 0.7);
-}
-
-#modal-title {
-  margin: 0 0 0.5rem;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #b3afff;
-}
-
-#modal-description {
-  font-size: 1rem;
-  color: #ddd;
-  margin-bottom: 1rem;
-}
-
-/* --- Кнопки модалки --- */
-.modal-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
+/* --- Кнопки в модалке --- */
 .modal-buttons button#install-btn {
   background: #6c63ff;
   color: #fff;
   border: none;
-  border-radius: 12px;
-  padding: 12px 24px;
-  font-size: 1.1rem;
-  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: 14px;
+  font-weight: 600;
   cursor: pointer;
+  margin-right: 10px;
   transition: background-color 0.3s ease;
 }
 
 .modal-buttons button#install-btn:hover {
-  background: #836fff;
+  background: #4a3aff;
 }
 
 .modal-buttons button#ipa-btn {
-  background: transparent;
-  border: 2px solid #6c63ff;
-  border-radius: 12px;
-  padding: 10px 20px;
-  color: #6c63ff;
-  font-size: 1.1rem;
-  font-weight: 700;
+  background: #444;
+  color: #ccc;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 14px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 .modal-buttons button#ipa-btn:hover {
-  background: #6c63ff;
-  color: #fff;
+  background: #666;
 }
 
-/* --- Прогрессбар --- */
+/* --- Прогресс-бар --- */
 .progress-bar {
+  background: #444;
+  border-radius: 8px;
+  margin-top: 12px;
   height: 10px;
-  width: 100%;
-  background: #443fc6;
-  border-radius: 6px;
   overflow: hidden;
-  margin: 0 auto;
-  max-width: 320px;
-}
-
-.progress-bar.hidden {
-  display: none;
 }
 
 .progress-fill {
+  background: #6c63ff;
   height: 100%;
-  background: #a0a0ff;
-  width: 0;
+  width: 0%;
   transition: width 0.3s ease;
 }
 
-/* --- Нижняя панель навигации --- */
+/* --- Нижняя навигация --- */
 .bottom-nav {
   position: fixed;
-  bottom: 0;
+  bottom: 30px; /* поднята выше */
   left: 0;
   width: 100%;
-  height: 56px;
-  background: #1a1640;
-  box-shadow: 0 -2px 8px rgb(102 90 255 / 0.6);
+  height: 50px; /* чуть меньше */
+  background: #3a32b8;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  z-index: 1000;
-  border-top: 1px solid #443fc6;
+  box-shadow: 0 -3px 6px rgb(0 0 0 / 0.3);
+  z-index: 2000;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  padding: 0 12px;
 }
 
-/* Уменьшенный размер кнопок */
 .bottom-nav .nav-btn {
+  background: transparent;
+  border: none;
+  color: #b5b5ff;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: none;
-  background: transparent;
-  color: #aaa;
+  font-size: 11px; /* уменьшен размер */
+  font-weight: 600;
   cursor: pointer;
-  padding: 6px 12px;
-  font-size: 13px;
-  max-width: 80px;
+  padding: 4px 2px 2px;
   transition: color 0.3s ease;
   user-select: none;
-  outline-offset: 2px;
-}
-
-.bottom-nav .nav-btn:focus,
-.bottom-nav .nav-btn:hover {
-  color: #b3afff;
-}
-
-.bottom-nav .nav-btn.active {
-  color: #a6a0ff;
+  gap: 2px;
+  min-width: 50px;
 }
 
 .bottom-nav .nav-btn .nav-icon {
-  font-size: 20px;
+  font-size: 20px; /* чуть меньше */
   line-height: 1;
 }
 
-.bottom-nav .nav-text {
-  margin-top: 2px;
-  font-weight: 600;
-  letter-spacing: 0.03em;
+.bottom-nav .nav-btn.active {
+  color: #dadcff;
 }
 
-/* Для тач устройств чуть больше */
-@media (hover: none) {
-  .bottom-nav .nav-btn {
-    padding: 10px 14px;
-    font-size: 14px;
-  }
-  .bottom-nav .nav-btn .nav-icon {
-    font-size: 24px;
-  }
-}
-
-/* --- Стили для поиска --- */
-#search-page {
-  padding-top: 1rem;
-}
-
-#search-input {
-  width: 100%;
-  padding: 10px 14px;
-  font-size: 1rem;
-  border-radius: 12px;
-  border: none;
-  background: #3a376c;
-  color: #eee;
-  box-shadow: inset 0 2px 6px rgb(102 90 255 / 0.8);
-  margin-bottom: 1rem;
-}
-
-#search-input::placeholder {
-  color: #bbb;
-}
-
-#search-results {
-  max-height: calc(100vh - 150px);
-  overflow-y: auto;
-}
-
-/* Сделать scrollbar в темных цветах */
-#search-results::-webkit-scrollbar {
-  width: 8px;
-}
-#search-results::-webkit-scrollbar-thumb {
-  background: #6c63ff;
+.bottom-nav .nav-btn:focus-visible {
+  outline-offset: 2px;
+  outline: 2px solid #9186ff;
   border-radius: 8px;
-}
-#search-results::-webkit-scrollbar-track {
-  background: transparent;
 }
